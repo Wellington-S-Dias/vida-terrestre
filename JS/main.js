@@ -3,10 +3,10 @@ const secoes = [
         titulo: "Animais",
         texto: "O mundo é repleto de animais diversos, cada um com seu papel no equilíbrio da vida.",
         videos: [
-            "./Assets/vids/animal-1.mp4",
-            "./Assets/vids/animal-2.mp4",
-            "./Assets/vids/animal-3.mp4",
-            "./Assets/vids/animal-4.mp4"
+            "https://res.cloudinary.com/bsgaagkl/video/upload/v1787455984/animal-1.mp4",
+            "https://res.cloudinary.com/bsgaagkl/video/upload/v1787456254/animal-2.mp4",
+            "https://res.cloudinary.com/bsgaagkl/video/upload/v1787456252/animal-3.mp4",
+            "https://res.cloudinary.com/bsgaagkl/video/upload/v1787456233/animal-4.mp4"
         ]
     },
 
@@ -14,10 +14,10 @@ const secoes = [
         titulo: "Paisagens",
         texto: "Poucos param para perceber as belezas naturais da Terra e tudo aquilo que elas sustentam.",
         videos: [
-            "./Assets/vids/landscape-1.mp4",
-            "./Assets/vids/landscape-2.mp4",
-            "./Assets/vids/landscape-3.mp4",
-            "./Assets/vids/landscape-4.mp4"
+            "https://res.cloudinary.com/bsgaagkl/video/upload/v1787456646/landscape-1.mp4",
+            "https://res.cloudinary.com/bsgaagkl/video/upload/v1787456642/landscape-2.mp4",
+            "https://res.cloudinary.com/bsgaagkl/video/upload/v1787456645/landscape-3.mp4",
+            "https://res.cloudinary.com/bsgaagkl/video/upload/v1787456659/landscape-4.mp4"
         ]
     },
 
@@ -25,10 +25,10 @@ const secoes = [
         titulo: "Habitats",
         texto: "Cada espécie depende de um habitat capaz de oferecer as condições necessárias para sua sobrevivência.",
         videos: [
-            "./Assets/vids/habitat-1.mp4",
-            "./Assets/vids/habitat-2.mp4",
-            "./Assets/vids/habitat-3.mp4",
-            "./Assets/vids/habitat-4.mp4"
+            "https://res.cloudinary.com/bsgaagkl/video/upload/v1787460405/habitat-1.mp4",
+            "https://res.cloudinary.com/bsgaagkl/video/upload/v1787456724/habitat-2.mp4",
+            "https://res.cloudinary.com/bsgaagkl/video/upload/v1787456725/habitat-3.mp4",
+            "https://res.cloudinary.com/bsgaagkl/video/upload/v1787461210/habitat-4.mp4"
         ]
     },
 
@@ -36,10 +36,10 @@ const secoes = [
         titulo: "Conservação",
         texto: "Preservar a vida terrestre é garantir que todas essas formas de vida continuem existindo no futuro.",
         videos: [
-            "./Assets/vids/deforestation-1.mp4",
-            "./Assets/vids/deforestation-2.mp4",
-            "./Assets/vids/deforestation-3.mp4",
-            "./Assets/vids/deforestation-4.mp4"
+            "https://res.cloudinary.com/bsgaagkl/video/upload/v1787456622/deforestation-1.mp4",
+            "https://res.cloudinary.com/bsgaagkl/video/upload/v1787459834/deforestation-2.mp4",
+            "https://res.cloudinary.com/bsgaagkl/video/upload/v1787462626/deforestation-3.mp4",
+            "https://res.cloudinary.com/bsgaagkl/video/upload/v1787460454/deforestation-4.mp4"
         ]
     }
 ];
