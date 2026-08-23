@@ -1,6 +1,3 @@
-
-Jullia te amo
-
 <p align="center">
   <img src="images/Logo_fox.png" alt="Logo Vida Terrestre" width="220">
 </p>
