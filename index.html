@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/png" href="./Assets/images/favicon_Fox.png">
+    <link rel="stylesheet" href="./Css/layout.css">
+
+    <title>Vida Terrestre</title>
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="header-logo">
+            <img src="./Assets/images/Logo_fox.png" alt="Logo Vida Terrestre">
+        </div>
+
+        <nav>
+            <a href="#">Início</a>
+            <a href="#">Explorar</a>
+            <a href="#">Impacto</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-video-container">
+
+                <video class="hero-video active" muted playsinline></video>
+
+                <video class="hero-video" muted playsinline></video>
+
+            </div>
+
+
+            <div class="hero-overlay"></div>
+
+
+            <div class="hero-content">
+
+                <img
+                    class="hero-logo"
+                    src="./Assets/images/Logo_fox.png"
+                    alt="Logo Vida Terrestre"
+                >
+
+                <h1 class="hero-title">
+                    Vida Terrestre
+                </h1>
+
+                <p class="hero-text">
+                    O mundo é habitado por uma diversidade extraordinária de espécies.
+                </p>
+
+            </div>
+
+
+            <div class="slide-info">
+
+                <span class="slide-number">
+                    01
+                </span>
+
+                <div class="slide-progress">
+                    <div class="slide-progress-bar"></div>
+                </div>
+
+                <span class="slide-total">
+                    04
+                </span>
+
+            </div>
+
+
+            <div class="scroll-indicator">
+
+                <span>EXPLORAR</span>
+
+                <span>↓</span>
+
+            </div>
+
+        </section>
+
+
+        <section class="explanation">
+
+            <section class="life-section">
+
+                <div class="life-text">
+
+                    <span class="section-label">
+                        01 — VIDA TERRESTRE
+                    </span>
+
+                    <h2>
+                        A vida que nos cerca
+                    </h2>
+
+                    <p>
+                        A biodiversidade terrestre é formada por milhares
+                        de espécies e ecossistemas que dependem uns dos outros.
+                    </p>
+
+                </div>
+
+
+                <div class="stats-slider">
+
+                    <button
+                        class="slider-button prev"
+                        aria-label="Anterior"
+                    >
+                        ←
+                    </button>
+
+
+                    <div class="stat-card">
+
+                        <span class="stat-number">
+                            0
+                        </span>
+
+                        <span class="stat-title">
+                            ESPÉCIES
+                        </span>
+
+                        <span class="stat-description">
+                            cadastradas
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="slider-button next"
+                        aria-label="Próximo"
+                    >
+                        →
+                    </button>
+
+
+                    <div class="slider-dots">
+
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <script src="./Js/main.js"></script>
+    <script src="./Js/slider.js"></script>
+
+</body>
+
+</html>
