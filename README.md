@@ -1,6 +1,7 @@
 <p align="center">
-  <img src="Assets/logo/logo.png" alt="Logo Vida Terrestre" width="250">
+  <img src="images/Logo_fox.png" alt="Logo Vida Terrestre" width="250">
 </p>
+
 # Vida Terrestre
 
 Plataforma web educativa voltada à conscientização, preservação e valorização da biodiversidade terrestre.
