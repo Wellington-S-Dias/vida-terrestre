@@ -133,18 +133,17 @@ Vida-Terrestre/
 │
 ├── Assets/
 │   ├── images/
-│   ├── icons/
-│   └── fonts/
+│   └── vids/
 │
 ├── CSS/
-│   └── style.css
+│   └── layout.css
 │
 ├── JS/
 │   └── main.js
+│   └── slider.js
 │
 ├── index.html
-├── README.md
-└── ...
+└── README.md
 ```
 
 ---
