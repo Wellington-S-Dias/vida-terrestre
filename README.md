@@ -5,15 +5,15 @@
 <h1 align="center">🌎 Vida Terrestre</h1>
 
 <p align="center">
-  <strong>Conhecimento, biodiversidade e conservação em um só lugar.</strong>
+  <strong>Educação, biodiversidade e conservação dos ecossistemas terrestres.</strong>
 </p>
 
 <p align="center">
-  Plataforma web educativa dedicada à fauna, aos habitats e à preservação dos ecossistemas terrestres brasileiros.
+Plataforma web educativa dedicada à pesquisa, divulgação e conscientização sobre a fauna, os habitats e a conservação dos ecossistemas terrestres brasileiros.
 </p>
 
 <p align="center">
-  <a href="https://wellington-s-dias.github.io/vida-terrestre/">🌐 Acessar o projeto</a>
+  <a href="https://wellingtons-dias.github.io/Vida-Terrestre/">🌐 Acessar o projeto</a>
   ·
   <a href="#-sobre-o-projeto">Sobre</a>
   ·
@@ -24,66 +24,82 @@
 
 ---
 
-## 🦊 Sobre o projeto
+## Sobre o projeto
 
 O **Vida Terrestre** é uma plataforma web educativa desenvolvida como parte do **Projeto Integrador do curso de Desenvolvimento Web da Faculdade Senac Criciúma**.
 
-O projeto foi criado com o objetivo de aproximar as pessoas da biodiversidade brasileira por meio de uma experiência visual, interativa e informativa.
+O projeto foi desenvolvido com o objetivo de ampliar o acesso a informações sobre a biodiversidade brasileira por meio de uma experiência digital informativa, interativa e acessível.
 
-A plataforma apresenta conteúdos relacionados à **fauna, habitats, biodiversidade e conservação ambiental**, buscando tornar o conhecimento sobre os ecossistemas terrestres mais acessível e interessante.
+A plataforma apresenta conteúdos relacionados à **fauna, habitats, biodiversidade e conservação ambiental**, com ênfase inicial nas espécies e nos ecossistemas brasileiros.
 
-Além da proposta educativa, o projeto procura incentivar uma reflexão sobre a importância da preservação da natureza e do papel da sociedade na conservação da biodiversidade.
-
----
-
-## 🌱 Objetivos
-
-O **Vida Terrestre** busca:
-
-* 🐾 Promover a conscientização sobre a biodiversidade brasileira.
-* 🌳 Apresentar informações sobre espécies e seus habitats.
-* 🌎 Incentivar a preservação dos ecossistemas terrestres.
-* 📚 Facilitar o acesso a informações ambientais.
-* 🔎 Estimular a pesquisa e a curiosidade sobre a fauna.
-* 💡 Utilizar a tecnologia como ferramenta de educação ambiental.
-* ♻️ Contribuir para a conscientização relacionada ao desenvolvimento sustentável.
+Além da finalidade educativa, o projeto busca promover a conscientização sobre a importância da preservação ambiental e da participação da sociedade na conservação da biodiversidade.
 
 ---
 
-## 🌍 ODS 15 — Vida Terrestre
+## Objetivos
 
-O projeto está alinhado ao **Objetivo de Desenvolvimento Sustentável 15 (ODS 15)** da **Organização das Nações Unidas (ONU)**.
+O **Vida Terrestre** tem como objetivos:
+
+* Promover a conscientização sobre a biodiversidade brasileira.
+* Apresentar informações sobre espécies, habitats e ecossistemas.
+* Incentivar a preservação dos ecossistemas terrestres.
+* Facilitar o acesso a informações relacionadas ao meio ambiente.
+* Estimular o interesse pela pesquisa e pelo conhecimento da fauna brasileira.
+* Utilizar a tecnologia como instrumento de educação ambiental.
+* Contribuir para a disseminação de conhecimentos relacionados ao desenvolvimento sustentável.
+
+---
+
+## ODS 15 — Vida Terrestre
+
+O projeto está alinhado ao **Objetivo de Desenvolvimento Sustentável 15 (ODS 15)**, estabelecido pela **Organização das Nações Unidas (ONU)**.
 
 A ODS 15 tem como foco:
 
 > **Proteger, restaurar e promover o uso sustentável dos ecossistemas terrestres, gerir de forma sustentável as florestas, combater a desertificação, deter e reverter a degradação da terra e deter a perda de biodiversidade.**
 
-O **Vida Terrestre** utiliza a tecnologia e a educação como ferramentas para contribuir com esse objetivo, apresentando informações que podem ajudar a ampliar o conhecimento e a conscientização sobre a biodiversidade e sua preservação.
+O **Vida Terrestre** utiliza a tecnologia e a educação como instrumentos de apoio à conscientização ambiental, disponibilizando informações destinadas a ampliar o conhecimento sobre a biodiversidade e a importância de sua preservação.
 
 ---
 
-## ✨ Funcionalidades
+## Funcionalidades
 
-A plataforma foi desenvolvida para proporcionar uma experiência interativa e visual.
+A plataforma foi desenvolvida com foco em uma experiência digital organizada, interativa e informativa.
 
 Entre os principais recursos estão:
 
-* 🐾 **Exploração da fauna brasileira**
-* 🔎 **Sistema de pesquisa de espécies**
-* 🌳 **Informações sobre habitats**
-* 🎥 **Conteúdo visual e vídeos**
-* 📊 **Dados sobre biodiversidade**
-* 🌎 **Conteúdo relacionado à conservação ambiental**
-* 📱 **Interface adaptada para diferentes dispositivos**
-* 🎨 **Identidade visual inspirada na natureza e na biodiversidade**
+* **Exploração da fauna brasileira**
+* **Sistema de pesquisa de espécies**
+* **Informações sobre habitats**
+* **Conteúdo visual e audiovisual**
+* **Dados relacionados à biodiversidade**
+* **Conteúdos relacionados à conservação ambiental**
+* **Interface adaptada a diferentes dispositivos**
+* **Identidade visual relacionada à natureza e à biodiversidade**
 
 > 🚧 Novas funcionalidades e conteúdos ainda estão sendo desenvolvidos.
 
 ---
 
-## 🛠️ Tecnologias
+## Funcionalidades planejadas
 
-O projeto foi desenvolvido utilizando tecnologias fundamentais para o desenvolvimento web:
+Como parte do planejamento e da evolução da plataforma, estão previstas funcionalidades destinadas a ampliar os recursos informativos, interativos e educativos do projeto. Algumas propostas ainda se encontram em fase de análise ou dependem da evolução técnica da aplicação.
+
+* **Notícias e acontecimentos atuais:** desenvolvimento de uma seção destinada à apresentação de notícias e informações recentes relacionadas ao meio ambiente e à biodiversidade.
+* **Espaço colaborativo sobre a fauna:** possibilidade de criação de uma área na qual os usuários possam publicar fotografias e informações sobre animais, incluindo habitat, locais de observação, características e situação de conservação, além de interagir com outras publicações.
+* **Sistema de inventário e cartas:** implementação de um sistema de gamificação baseado em cartas de espécies, inventário e pontuação, com o objetivo de incentivar a exploração dos conteúdos da plataforma.
+* **Mapa interativo da fauna:** desenvolvimento de um mapa capaz de apresentar informações sobre espécies associadas à região selecionada pelo usuário.
+* **Seção de espécies ameaçadas de extinção:** criação de uma área específica para apresentar espécies ameaçadas, sua distribuição, características e principais fatores de risco.
+* **Foco na fauna brasileira:** manutenção da fauna brasileira como principal recorte temático durante a fase inicial de desenvolvimento.
+* **Interface limpa e organizada:** priorização de uma apresentação visual objetiva, com organização das informações e redução de elementos que possam comprometer a compreensão do conteúdo.
+
+> Algumas dessas funcionalidades constituem propostas futuras e poderão ser implementadas de acordo com a viabilidade técnica e a evolução do projeto.
+
+---
+
+## Tecnologias
+
+O projeto utiliza as seguintes tecnologias e ferramentas:
 
 | Tecnologia       | Utilização                              |
 | ---------------- | --------------------------------------- |
@@ -96,65 +112,66 @@ O projeto foi desenvolvido utilizando tecnologias fundamentais para o desenvolvi
 
 ---
 
-## 🎨 Identidade visual
+## Identidade visual
 
-A identidade do **Vida Terrestre** foi desenvolvida para transmitir uma conexão visual com a natureza.
+A identidade visual do **Vida Terrestre** foi desenvolvida com o propósito de estabelecer uma relação visual com a natureza e a biodiversidade.
 
-A interface utiliza elementos inspirados em:
+A interface utiliza elementos visuais inspirados em:
 
-* 🌿 Vegetação
-* 🐾 Fauna
-* 🌎 Ecossistemas
-* 🌳 Florestas
-* 💧 Elementos naturais
+* Vegetação
+* Fauna
+* Ecossistemas
+* Florestas
+* Elementos naturais
 
-O objetivo é transformar o conteúdo ambiental em uma experiência mais visual e envolvente, evitando aquela experiência acadêmica maravilhosa de abrir um site e encontrar 17 parágrafos em Arial 12.
+O objetivo é apresentar o conteúdo ambiental de maneira visual, organizada e adequada à proposta educativa da plataforma.
 
 ---
 
-## 📂 Estrutura do projeto
+## Estrutura do projeto
 
 ```text
 Vida-Terrestre/
 │
 ├── Assets/
 │   ├── images/
-│   └── vids/
+│   ├── icons/
+│   └── fonts/
 │
 ├── CSS/
-│   └── layout.css
+│   └── style.css
 │
 ├── JS/
 │   └── main.js
-│   ├── slider.js
 │
 ├── index.html
-└── README.md
+├── README.md
+└── ...
 ```
 
 ---
 
-## 🚀 Acesso ao projeto
+## Acesso ao projeto
 
-O projeto está disponível online através do **GitHub Pages**.
+O projeto está disponível para acesso por meio do **GitHub Pages**.
 
 <p align="center">
   <a href="https://wellingtons-dias.github.io/Vida-Terrestre/">
-    <strong>🌐 VISITAR VIDA TERRESTRE</strong>
+    <strong>ACESSAR O PROJETO</strong>
   </a>
 </p>
 
 ---
 
-## 📈 Status do projeto
+## Status do projeto
 
-🚧 **Em desenvolvimento**
+**Em desenvolvimento.**
 
-O projeto encontra-se em desenvolvimento contínuo e pode receber novas funcionalidades, melhorias visuais, conteúdos e otimizações.
+O projeto encontra-se em desenvolvimento e poderá receber novas funcionalidades, conteúdos, aprimoramentos de interface e otimizações ao longo de sua evolução.
 
 ---
 
-## 👥 Equipe
+## Equipe
 
 Projeto desenvolvido como atividade acadêmica do **curso de Desenvolvimento Web da Faculdade Senac Criciúma**.
 
@@ -167,7 +184,7 @@ Projeto desenvolvido como atividade acadêmica do **curso de Desenvolvimento Web
 
 ---
 
-## 🎓 Contexto acadêmico
+## Contexto acadêmico
 
 **Projeto Integrador — Desenvolvimento Web**
 
@@ -179,20 +196,16 @@ Projeto desenvolvido como atividade acadêmica do **curso de Desenvolvimento Web
 
 ---
 
-## 📚 Finalidade
+## Finalidade
 
-Este projeto foi desenvolvido **exclusivamente para fins educacionais e acadêmicos**, como parte das atividades do curso de Desenvolvimento Web.
+Este projeto foi desenvolvido **para fins educacionais e acadêmicos**, como parte das atividades do curso de Desenvolvimento Web.
 
-Seu desenvolvimento busca aplicar conhecimentos de **HTML, CSS, JavaScript, controle de versão, publicação web e desenvolvimento de interfaces**, combinando tecnologia e educação ambiental.
+Seu desenvolvimento tem como finalidade aplicar conhecimentos relacionados a **HTML, CSS, JavaScript, controle de versão, publicação web e desenvolvimento de interfaces**, integrando tecnologia, desenvolvimento web e educação ambiental.
 
 ---
 
 <p align="center">
-  🌎 <strong>Vida Terrestre</strong>
+  <strong>Vida Terrestre</strong>
   <br>
-  <i>Conhecer é o primeiro passo para preservar.</i>
-</p>
-
-<p align="center">
-  Desenvolvido com 💚 pela equipe Vida Terrestre.
+  Educação e conscientização para a conservação da biodiversidade.
 </p>
