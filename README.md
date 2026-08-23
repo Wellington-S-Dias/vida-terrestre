@@ -90,8 +90,6 @@ Como parte do planejamento e da evolução da plataforma, estão previstas funci
 * **Sistema de inventário e cartas:** implementação de um sistema de gamificação baseado em cartas de espécies, inventário e pontuação, com o objetivo de incentivar a exploração dos conteúdos da plataforma.
 * **Mapa interativo da fauna:** desenvolvimento de um mapa capaz de apresentar informações sobre espécies associadas à região selecionada pelo usuário.
 * **Seção de espécies ameaçadas de extinção:** criação de uma área específica para apresentar espécies ameaçadas, sua distribuição, características e principais fatores de risco.
-* **Foco na fauna brasileira:** manutenção da fauna brasileira como principal recorte temático durante a fase inicial de desenvolvimento.
-* **Interface limpa e organizada:** priorização de uma apresentação visual objetiva, com organização das informações e redução de elementos que possam comprometer a compreensão do conteúdo.
 
 > Algumas dessas funcionalidades constituem propostas futuras e poderão ser implementadas de acordo com a viabilidade técnica e a evolução do projeto.
 
