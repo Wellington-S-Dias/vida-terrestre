@@ -13,7 +13,7 @@ Plataforma web educativa dedicada à pesquisa, divulgação e conscientização 
 </p>
 
 <p align="center">
-  <a href="https://wellingtons-dias.github.io/Vida-Terrestre/">🌐 Acessar o projeto</a>
+  <a href="https://wellingtons-dias.github.io/vida-terrestre/">🌐 Acessar o projeto</a>
   ·
   <a href="#-sobre-o-projeto">Sobre</a>
   ·
@@ -153,7 +153,7 @@ Vida-Terrestre/
 O projeto está disponível para acesso por meio do **GitHub Pages**.
 
 <p align="center">
-  <a href="https://wellington-s-dias.github.io/Vida-Terrestre/">
+  <a href="https://wellington-s-dias.github.io/vida-terrestre/">
     <strong>ACESSAR O PROJETO</strong>
   </a>
 </p>
