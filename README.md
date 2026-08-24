@@ -153,7 +153,7 @@ Vida-Terrestre/
 O projeto está disponível para acesso por meio do **GitHub Pages**.
 
 <p align="center">
-  <a href="https://wellingtons-dias.github.io/Vida-Terrestre/">
+  <a href="https://wellington-s-dias.github.io/Vida-Terrestre/">
     <strong>ACESSAR O PROJETO</strong>
   </a>
 </p>
