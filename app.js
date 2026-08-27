@@ -1,9 +1,10 @@
-/*const http=require('http')
+/*
+const http=require('http')
 const url=require('url')
 
 var nome
 var cadUser
-var cadPassword             Ainda to fazendo
+var cadPassword             
 
 var callback=function(req,res){
     res.setHeader('Access-Control-Allow-Origin','*')
@@ -12,4 +13,4 @@ var callback=function(req,res){
 
     if(rota.pathname='/login')
 }
-    */
+*/
