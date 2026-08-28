@@ -1,0 +1,629 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+
+/* =========================================
+   VARIÁVEIS
+========================================= */
+
+:root {
+    --light-green: #7b9407;
+    --medium-green: #1F5C3A;
+    --dark-green: #172815;
+}
+
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #111;
+    color: white;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+    position: relative;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+}
+
+
+/* VÍDEOS */
+
+.hero-video-container {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 0;
+
+    overflow: hidden;
+}
+
+
+.hero-video {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    opacity: 0;
+
+    transition: opacity 1.2s ease-in-out;
+}
+
+
+.hero-video.active {
+    opacity: 1;
+}
+
+
+/* OVERLAY */
+
+.hero-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.4);
+
+    z-index: 1;
+}
+
+
+/* CONTEÚDO */
+
+.hero-content {
+    position: absolute;
+
+    z-index: 2;
+
+    top: 40%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 90%;
+
+    text-align: center;
+}
+
+
+.hero-logo {
+    width: 30%;
+    height: auto;
+
+    display: block;
+
+    object-fit: contain;
+
+    margin: 0 auto -5px;
+}
+
+
+.hero-title {
+    font-size: clamp(3rem, 7vw, 7rem);
+
+    line-height: 1;
+
+    margin: 0;
+
+    font-family: 'DM Serif Display', serif;
+
+    color: var(--light-green);
+}
+
+
+.hero-text {
+    max-width: 650px;
+
+    margin: 10px auto 0;
+
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+
+    line-height: 1.5;
+
+    font-family: 'Nunito', sans-serif;
+}
+
+
+/* =========================================
+   SLIDER DO HERO
+========================================= */
+
+.slide-info {
+    position: absolute;
+
+    bottom: 50px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    z-index: 3;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+}
+
+
+.slide-progress {
+    width: 150px;
+    height: 2px;
+
+    background: rgba(255, 255, 255, 0.3);
+
+    overflow: hidden;
+}
+
+
+.slide-progress-bar {
+    width: 0%;
+    height: 100%;
+
+    background: white;
+
+    transition: width 0.1s linear;
+}
+
+
+/* =========================================
+   INDICADOR DE SCROLL
+========================================= */
+
+.scroll-indicator {
+    position: absolute;
+
+    bottom: 45px;
+    right: 50px;
+
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    opacity: 0.8;
+}
+
+
+.scroll-arrow {
+    font-size: 20px;
+
+    animation:
+        scrollAnimation 1.5s infinite ease-in-out;
+}
+
+
+@keyframes scrollAnimation {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================
+   CONTEÚDO
+========================================= */
+
+.content {
+    min-height: 100vh;
+
+    padding: 150px 10%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    background: #111;
+}
+
+
+.content-dark {
+    background: #171717;
+}
+
+
+.section-label {
+    margin-bottom: 25px;
+
+    font-size: 13px;
+
+    letter-spacing: 3px;
+
+    opacity: 0.6;
+}
+
+
+.content h2 {
+    max-width: 800px;
+
+    font-size: clamp(3rem, 6vw, 6rem);
+
+    line-height: 1;
+
+    margin-bottom: 30px;
+}
+
+
+.content p {
+    max-width: 650px;
+
+    font-size: 1.2rem;
+
+    line-height: 1.7;
+
+    opacity: 0.7;
+}
+
+
+/* =========================================
+   SEÇÃO VIDA TERRESTRE
+========================================= */
+
+.life-section {
+    min-height: 100vh;
+
+    padding: 120px 10%;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    align-items: center;
+
+    gap: 80px;
+
+    background: #111;
+}
+
+
+.life-text {
+    max-width: 650px;
+}
+
+
+.life-text h2 {
+    font-size: clamp(3rem, 6vw, 6rem);
+
+    line-height: 0.95;
+
+    margin: 20px 0 30px;
+
+    font-family: 'DM Serif Display', serif;
+
+    color: var(--light-green);
+}
+
+
+.life-text p {
+    max-width: 600px;
+
+    font-size: 1.15rem;
+
+    line-height: 1.7;
+
+    opacity: 0.65;
+
+    font-family: 'Nunito', sans-serif;
+}
+
+
+/* =========================================
+   SLIDER DE ESTATÍSTICAS
+========================================= */
+
+.stats-slider {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 20px;
+
+    padding-bottom: 50px;
+}
+
+
+.stat-card {
+    width: min(420px, 100%);
+
+    min-height: 420px;
+
+    padding: 50px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    background: rgba(255, 255, 255, 0.04);
+
+    backdrop-filter: blur(10px);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    opacity: 1;
+
+    transform: translateX(0);
+
+    transition:
+        opacity 0.45s ease,
+        transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+.stat-number {
+    font-size: clamp(4rem, 8vw, 7rem);
+
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+
+.stat-title {
+    margin-top: 20px;
+
+    font-size: 1.1rem;
+
+    letter-spacing: 3px;
+}
+
+
+.stat-description {
+    margin-top: 10px;
+
+    opacity: 0.55;
+}
+
+
+/* =========================================
+   BOTÕES DO SLIDER
+========================================= */
+
+.slider-button {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.slider-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+
+    transform: scale(1.08);
+}
+
+
+/* =========================================
+   DOTS
+========================================= */
+
+.slider-dots {
+    position: absolute;
+
+    bottom: 0;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+
+    gap: 8px;
+}
+
+
+.dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.3);
+
+    transition:
+        width 0.3s ease,
+        background 0.3s ease;
+}
+
+
+.dot.active {
+    width: 24px;
+
+    border-radius: 10px;
+
+    background: white;
+}
+
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media (max-width: 768px) {
+
+    .header {
+        height: 70px;
+
+        padding: 0 20px;
+    }
+
+
+    .header nav {
+        display: none;
+    }
+
+
+    .header-logo img {
+        width: 38px;
+        height: 38px;
+    }
+
+
+    .hero-logo {
+        width: 80px;
+        height: 80px;
+    }
+
+
+    .hero-title {
+        font-size: clamp(2.8rem, 13vw, 5rem);
+    }
+
+
+    .hero-text {
+        font-size: 1rem;
+
+        padding: 0 15px;
+    }
+
+
+    .slide-info {
+        bottom: 30px;
+    }
+
+
+    .slide-progress {
+        width: 100px;
+    }
+
+
+    .scroll-indicator {
+        right: 20px;
+
+        bottom: 30px;
+    }
+
+
+    .content {
+        padding: 100px 8%;
+    }
+
+
+    .life-section {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+
+        padding: 100px 7%;
+    }
+
+
+    .stat-card {
+        min-height: 320px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .life-section {
+        padding: 80px 6%;
+    }
+
+
+    .stats-slider {
+        gap: 10px;
+    }
+
+
+    .slider-button {
+        width: 40px;
+        height: 40px;
+
+        font-size: 16px;
+    }
+
+
+    .stat-card {
+        min-height: 280px;
+
+        padding: 30px 20px;
+    }
+
+}
