@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/Logo_fox.png" alt="Logo Vida Terrestre" width="220">
+  <img src="images/Arara Azul(Logo Padrão).png" alt="Logo Vida Terrestre" width="220">
 </p>
 
 <h1 align="center">🌎 Vida Terrestre</h1>
