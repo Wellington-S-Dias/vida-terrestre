@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+:root {
+    --light-green: #7b9407;
+    --medium-green: #1F5C3A;
+    --dark-green: #172815;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #111;
+    color: white;
+    height: 100%;
+}
+
+.search{
+    background-color: var(--dark-green);
+    border: 2px solid var(--medium-green);
+    border-radius: 5px;
+    width: 100%;
+}
