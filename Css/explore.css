@@ -8,7 +8,7 @@
 
 * {
     margin: 0;
-    padding: 0;
+    padding: 10px;
     box-sizing: border-box;
 }
 
@@ -26,8 +26,18 @@ body {
 }
 
 .search{
+    padding: 10px;
     background-color: var(--dark-green);
     border: 2px solid var(--medium-green);
     border-radius: 5px;
     width: 100%;
+    color: white;
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+h1{
+     font-family: 'DM Serif Display', serif;
+     letter-spacing: 2px;
 }

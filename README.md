@@ -201,6 +201,12 @@ Seu desenvolvimento tem como finalidade aplicar conhecimentos relacionados a **H
 
 ---
 
+## Ideias
+
+- Deixar o Header Fixo na página de explorar
+- Pensar em uma paleta de cores fixa pro site
+-
+
 <p align="center">
   <strong>Vida Terrestre</strong>
   <br>
