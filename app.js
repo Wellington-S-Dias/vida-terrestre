@@ -4,7 +4,7 @@ const url=require('url')
 var nome
 var cadUser
 var cadPassword  
-var email           
+//var email           
 
 var callback=function(req,res){
     res.setHeader('Access-Control-Allow-Origin','*')
@@ -24,10 +24,10 @@ var callback=function(req,res){
     }else if(rota.pathname='/cadastro'){
         res.writeHead(200,{'Content-Type':'Text/plain; charset=utf-8'})
 
-        nome=dados.nickName // caso precise
+        nome=dados.nome 
         cadUser=dados.user
         cadPassword=dados.password
-        email=dados.email
+        //email=dados.email    caso precise
         res.end(nome+' cadastrado com sucesso!')
 
     }else if(rota.pathname='/newPassword'){
