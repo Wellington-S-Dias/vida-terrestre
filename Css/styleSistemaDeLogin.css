@@ -1,0 +1,49 @@
+body{
+    margin: 0;
+    height: 100vh;
+
+    background-color: black;
+    color: aliceblue;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-container{
+    height: 30vh;
+    width: 400px;
+    background-color: rgba(2, 44, 44, 0.7);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    padding: 10px;
+    border-radius: 10px;
+}
+.login-container a{
+    position: relative;
+    text-decoration: none;
+
+    color: aliceblue;
+}
+.login-container a::after{
+    content: "";
+    position: absolute;
+
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+
+    background-color: aliceblue;
+
+    transition: width 0.3s ease;
+}
+.login-container a:hover::after{
+    width: 100%;
+}
+.login-container input{
+    margin-bottom: 10px;
+}
