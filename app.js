@@ -11,7 +11,7 @@ var callback=function(req,res){
     var rota=url.parse(req.url,true)
     var dados=url.parse(req.url,true).query
 
-    if(rota.pathname='/login'){
+    if(rota.pathname=='/login'){
         if(cadUser==dados.user && cadPassword==dados.password){  // 'DADOS' depois pode trocar caso precise
             res.writeHead(200,{'Content-Type':'Text/plain; charset=utf-8'})
 
@@ -21,7 +21,7 @@ var callback=function(req,res){
 
             res.end('User ou Password incorretos')
         }
-    }else if(rota.pathname='/cadastro'){
+    }else if(rota.pathname=='/cadastro'){
         res.writeHead(200,{'Content-Type':'Text/plain; charset=utf-8'})
 
         nome=dados.nome 
@@ -30,7 +30,7 @@ var callback=function(req,res){
         //email=dados.email    caso precise
         res.end(nome+' cadastrado com sucesso!')
 
-    }else if(rota.pathname='/newPassword'){
+    }else if(rota.pathname=='/newPassword'){
         res.writeHead(200,{'Content-Type':'Text/plain; charset=utf-8'})
 
         // faço depois 
