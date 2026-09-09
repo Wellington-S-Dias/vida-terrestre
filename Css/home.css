@@ -9,6 +9,46 @@
     --light-green: #7b9407;
     --medium-green: #1F5C3A;
     --dark-green: #172815;
+
+     /* Backgrounds */
+
+  --bg-primary: #0B0F0D;
+  --bg-secondary: #101814;
+  --bg-tertiary: #16221B;
+  --bg-card: #17231C;
+
+
+  /* Brand */
+
+  --primary: #2474D3;
+  --primary-hover: #4A9CFF;
+  --primary-dark: #124A91;
+
+  --secondary: #6E9400;
+  --secondary-hover: #9ABD1B;
+  --secondary-dark: #3F5700;
+
+  --accent: #F5C518;
+
+
+  /* Text */
+
+  --text-primary: #F5F7F6;
+  --text-secondary: #AAB5AE;
+  --text-muted: #6F7D74;
+
+
+  /* Borders */
+
+  --border: #26352C;
+  --border-light: #33443A;
+
+
+  /* Status */
+
+  --success: #58B368;
+  --warning: #F5C518;
+  --danger: #E05252;
 }
 
 
