@@ -1,17 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
     --light-green: #7b9407;
     --medium-green: #1F5C3A;
     --dark-green: #172815;
+
+     /* Backgrounds */
+
+  --bg-primary: #0B0F0D;
+  --bg-secondary: #101814;
+  --bg-tertiary: #16221B;
+  --bg-card: #17231C;
+
+
+  /* Brand */
+
+  --primary: #2474D3;
+  --primary-hover: #4A9CFF;
+  --primary-dark: #124A91;
+
+  --secondary: #6E9400;
+  --secondary-hover: #9ABD1B;
+  --secondary-dark: #3F5700;
+
+  --accent: #F5C518;
+
+
+  /* Text */
+
+  --text-primary: #F5F7F6;
+  --text-secondary: #AAB5AE;
+  --text-muted: #6F7D74;
+
+
+  /* Borders */
+
+  --border: #26352C;
+  --border-light: #33443A;
+
+
+  /* Status */
+
+  --success: #58B368;
+  --warning: #F5C518;
+  --danger: #E05252;
 }
-
-
 
 html {
     scroll-behavior: smooth;
 }
-
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -20,20 +57,41 @@ body {
     height: 100%;
 }
 
+/* FUNDO DO BIOMA */
+.biome-background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+
+/* CAMADA ESCURA */
+.biome-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
 h1{
      font-family: 'DM Serif Display', serif;
      letter-spacing: 2px;
-     padding: 25px;
+     padding-top: 120px;
+     padding-left: 30px;
+     font-family: 'poppins', sans-serif;
 }
 
 .header {
-    position: relative;
+    position: fixed;
     top: 0;
     left: 0;
     height: 80px;
+    width: 100%;
     padding: 0 50px;
     display: flex;
     align-items: center;
+    z-index: 1000;
 }
 
 .header-logo {
@@ -69,4 +127,14 @@ h1{
 
 .header nav a:hover {
     opacity: 1;
+}
+#searchInput{
+    padding-left: 10px;
+    margin-left: 25px;
+    width: 90%;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
 }
