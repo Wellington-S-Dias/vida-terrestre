@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 /* =========================================
    VARIÁVEIS
@@ -9,6 +8,46 @@
     --light-green: #7b9407;
     --medium-green: #1F5C3A;
     --dark-green: #172815;
+
+     /* Backgrounds */
+
+  --bg-primary: #0B0F0D;
+  --bg-secondary: #101814;
+  --bg-tertiary: #16221B;
+  --bg-card: #17231C;
+
+
+  /* Brand */
+
+  --primary: #2474D3;
+  --primary-hover: #4A9CFF;
+  --primary-dark: #124A91;
+
+  --secondary: #6E9400;
+  --secondary-hover: #9ABD1B;
+  --secondary-dark: #3F5700;
+
+  --accent: #F5C518;
+
+
+  /* Text */
+
+  --text-primary: #F5F7F6;
+  --text-secondary: #AAB5AE;
+  --text-muted: #6F7D74;
+
+
+  /* Borders */
+
+  --border: #26352C;
+  --border-light: #33443A;
+
+
+  /* Status */
+
+  --success: #58B368;
+  --warning: #F5C518;
+  --danger: #E05252;
 }
 
 
@@ -52,6 +91,22 @@ body {
     height: 100vh;
 
     overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 30px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #11111173 60%,
+        #111 100%
+    );
+    z-index: 2;
+    pointer-events: none;
 }
 
 
@@ -143,7 +198,7 @@ body {
 
     margin: 0;
 
-    font-family: 'DM Serif Display', serif;
+    font-family: 'poppins', serif;
 
     color: var(--light-green);
 }
@@ -158,7 +213,7 @@ body {
 
     line-height: 1.5;
 
-    font-family: 'Nunito', sans-serif;
+    font-family: 'inter', sans-serif;
 }
 
 
@@ -347,7 +402,7 @@ body {
 
     margin: 20px 0 30px;
 
-    font-family: 'DM Serif Display', serif;
+    font-family: 'poppins', serif;
 
     color: var(--light-green);
 }
@@ -362,7 +417,7 @@ body {
 
     opacity: 0.65;
 
-    font-family: 'Nunito', sans-serif;
+    font-family: 'inter', sans-serif;
 }
 
 

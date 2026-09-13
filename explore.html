@@ -1,39 +1,159 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="./images/Arara Azul (Logo Padrão).png">
-    <link rel="stylesheet" href="./Css/explore.css">
-    <link rel="stylesheet" href="./Css/header.css">
-    <title>Vida Terrestre</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="./images/Arara-Azul(Logo-Principal).png">
+  <link rel="stylesheet" href="./Css/explore.css">
+  <title>Vida Terrestre</title>
 </head>
 <body>
 
-    <header class="header">
+  <!-- Cabeçalho -->
+  <header class="header">
+    <div class="header-logo">
+      <img src="./images/Arara-Azul(Logo-Principal).png" alt="Logo Vida Terrestre">
+    </div>
+    <nav>
+      <a href="#">Início</a>
+      <a href="#">Explorar</a>
+      <a href="#">Impacto</a>
+    </nav>
+  </header>
 
-        <div class="header-logo">
-            <img src="./images/Arara Azul (Logo Padrão).png" alt="Logo Vida Terrestre">
+  <!-- Vídeo de Fundo -->
+  <video id="video-bg-1" class="video-bg active" autoplay muted loop playsinline>
+    <source src="https://res.cloudinary.com/bsgaagkl/video/upload/v1789307866/floresta-chovendo.mp4" type="video/mp4">
+  </video>
+<video id="video-bg-2" class="video-bg" autoplay muted loop playsinline></video>
+
+  <!-- Conteúdo Principal -->
+  <main class="content">
+    <h1>Explorar Espécies</h1>
+
+    <!-- Barra de Pesquisa -->
+    <div class="search-box">
+      <img src="./images/lupa.png" alt="Buscar" class="search-icon">
+      <input type="search" id="searchInput" placeholder="Pesquisar por Nome...">
+    </div>
+
+    <!-- Títulos dos Filtros -->
+    <div class="info-container">
+      <p class="info-select1">Região</p>
+      <p class="info-select2">Tipo de animal</p>
+      <p class="info-select3">Status de Conservação</p>
+    </div>
+
+    <!-- Filtros Customizados -->
+    <div class="select-container">
+
+      <!-- Filtro 1: Região -->
+      <div class="custom-select-container">
+        <div class="select-button">
+          <span class="selected-value">Selecione uma Região</span>
+          <span class="arrow">▼</span>
         </div>
+        <ul class="select-options">
+          <li data-value="">Todas</li>
+          <li data-value="amazonia">Amazônia</li>
+          <li data-value="cerrado">Cerrado</li>
+          <li data-value="caatinga">Caatinga</li>
+          <li data-value="pantanal">Pantanal</li>
+        </ul>
+      </div>
 
-        <nav>
-            <a href="#">Início</a>
-            <a href="#">Explorar</a>
-            <a href="#">Impacto</a>
-        </nav>
+      <!-- Filtro 2: Tipo -->
+      <div class="custom-select-container">
+        <div class="select-button">
+          <span class="selected-value">Selecione um Tipo</span>
+          <span class="arrow">▼</span>
+        </div>
+        <ul class="select-options">
+          <li data-value="">Todos</li>
+          <li data-value="mamifero">Mamífero</li>
+          <li data-value="ave">Ave</li>
+          <li data-value="anfibio">Anfíbio</li>
+          <li data-value="reptil">Réptil</li>
+          <li data-value="peixe">Peixe</li>
+        </ul>
+      </div>
 
-    </header>
+      <!-- Filtro 3: Status -->
+      <div class="custom-select-container">
+        <div class="select-button">
+          <span class="selected-value">Selecione um Status</span>
+          <span class="arrow">▼</span>
+        </div>
+        <ul class="select-options">
+          <li data-value="">Todas</li>
+          <li data-value="pouco-preocupante">Pouco preocupante</li>
+          <li data-value="preocupante">Preocupante</li>
+          <li data-value="em-perigo">Em perigo</li>
+        </ul>
+      </div>
 
-    <h1>Explorar Vida Terrestre</h1>
-    <input type="search" class="search" placeholder="Pesquise por uma Espécie...">
+    </div>
 
+    <!-- Botões de Biomas -->
+    <div class="biome-buttons">
+      <button class="biome-btn active" data-biome="amazonia" data-video="https://res.cloudinary.com/bsgaagkl/video/upload/v1789307866/floresta-chovendo.mp4" data-logo="./images/Onça-Pintada (Amazônia).png">
+        <svg class="biome-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.4 19 2c1 2 2 4.1 2 9 0 4.9-4 9-10 9z"/>
+          <path d="M11 20v-8"/>
+        </svg>
+        Amazônia
+      </button>
 
+      <button class="biome-btn" data-biome="cerrado" data-video="https://res.cloudinary.com/bsgaagkl/video/upload/v1789319145/cerrado.mp4" data-logo="./images/Tamanduá-Bandeira(Cerrado).png">
+        <svg class="biome-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21v-5"/>
+          <path d="M12 16L8 12"/>
+          <path d="M12 14l4-3"/>
+          <circle cx="7" cy="11" r="3"/>
+          <circle cx="16" cy="10" r="4"/>
+          <circle cx="11" cy="7" r="4"/>
+        </svg>
+        Cerrado
+      </button>
 
+      <button class="biome-btn" data-biome="caatinga" data-video="https://res.cloudinary.com/bsgaagkl/video/upload/v1789319155/caatinga.mp4" data-logo="./images/(Caatinga).png">
+        <svg class="biome-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v18"/>
+          <path d="M7 8v4a2 2 0 0 0 2 2h3"/>
+          <path d="M17 10v3a2 2 0 0 1-2 2h-3"/>
+        </svg>
+        Caatinga
+      </button>
 
+      <button class="biome-btn" data-biome="mata-atlantica" data-video="https://res.cloudinary.com/bsgaagkl/video/upload/v1789320018/mataatlantica.mp4" data-logo="./images/Mico-Leão-Dourado(Mata Atlântica).png">
+        <svg class="biome-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m8 3 4 8 5-5 5 15H2L8 3z"/>
+          <path d="M12 13v8"/>
+        </svg>
+        Mata Atlântica
+      </button>
 
+      <button class="biome-btn" data-biome="pantanal" data-video="https://res.cloudinary.com/bsgaagkl/video/upload/v1789319961/pantanal.mp4" data-logo="./images/Tuiuiú(Pantanal).png">
+        <svg class="biome-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="12" cy="11" rx="9" ry="5"/>
+          <path d="M12 11l6-4"/>
+          <path d="M2 17c4 2 8 2 10 0s6-2 10 0"/>
+        </svg>
+        Pantanal
+      </button>
 
+      <button class="biome-btn" data-biome="pampa" data-video="https://res.cloudinary.com/bsgaagkl/video/upload/v1789319964/pampa.mp4" data-logo="./images/Veado-Campeiro (Pampa).png">
+        <svg class="biome-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 20c4-4 8-1 12-5s6-3 8-1"/>
+          <path d="M2 15c5-2 7 1 11-3s7-1 9 1"/>
+          <path d="M4 22h16"/>
+        </svg>
+        Pampa
+      </button>
+    </div>
+  </main>
 
-    <script src="./JS/header.js"></script>
-    
+  <script src="./JS/select-options.js"></script>
+  <script src="./JS/troca-de-bioma.js"></script>
 </body>
 </html>
