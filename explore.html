@@ -74,7 +74,6 @@
           <li data-value="ave">Ave</li>
           <li data-value="anfibio">Anfíbio</li>
           <li data-value="reptil">Réptil</li>
-          <li data-value="peixe">Peixe</li>
         </ul>
       </div>
 
@@ -87,7 +86,7 @@
         <ul class="select-options">
           <li data-value="">Todas</li>
           <li data-value="pouco-preocupante">Pouco preocupante</li>
-          <li data-value="preocupante">Preocupante</li>
+          <li data-value="preocupante">Vulnerável</li>
           <li data-value="em-perigo">Em perigo</li>
         </ul>
       </div>
@@ -151,9 +150,77 @@
         Pampa
       </button>
     </div>
+
+    <!-- Cards dos Animais -->
+    <div id="cards-container" class="animal-cards">
+      
+    </div>
   </main>
+
+
+
+  <div id="animalModal" class="modal-overlay hidden" aria-hidden="true">
+  <div class="modal-content">
+    <!-- Botão de Fechar -->
+    <span id="close-btn" class="close-btn">&times;</span>
+    
+    <!-- Lado Esquerdo: Imagem -->
+    <div class="image-modal">
+      <img id="modal-img" src="" alt="Imagem do animal">
+    </div>
+
+    <!-- Lado Direito: Informações -->
+    <section class="modal-info">
+      <h1 id="modal-title">Nome do Animal</h1>
+      <p id="modal-scientific" class="scientific-name">Nome científico</p>
+      <span id="modal-status" class="status-badge em-perigo">Status</span>
+
+      <!-- Navegação por Abas -->
+      <div class="others-info">
+        <button class="tab-btn active">Informações</button>
+        <button class="tab-btn">Curiosidades</button>
+        <button class="tab-btn">Ameaças</button>
+      </div>
+
+      <!-- Grade de Informações (2 colunas no CSS) -->
+      <div class="text-info">
+        <div class="info-item">
+          <h3>Habitat</h3>
+          <p id="modal-habitat">Habitat do bicho</p>
+        </div>
+
+        <div class="info-item">
+          <h3>Comportamento</h3>
+          <p id="modal-behavior">Comportamento do bicho</p>
+        </div>
+
+        <div class="info-item">
+          <h3>Distribuição</h3>
+          <p id="modal-distribution">Distribuição do bicho</p>
+        </div>
+
+        <div class="info-item">
+          <h3>Curiosidades</h3>
+          <p id="modal-curiosity">Curiosidade sobre o bicho</p>
+        </div>
+
+        <div class="info-item">
+          <h3>Alimentação</h3>
+          <p id="modal-diet">Alimentação do bicho</p>
+        </div>
+
+        <div class="info-item">
+          <h3>Principais Ameaças</h3>
+          <p id="modal-threats">Principais ameaças ao bicho</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+</div>
 
   <script src="./JS/select-options.js"></script>
   <script src="./JS/troca-de-bioma.js"></script>
+  <script src="./JS/modal.js"></script>
 </body>
 </html>

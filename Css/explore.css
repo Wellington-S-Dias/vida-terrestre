@@ -271,8 +271,9 @@ input[type="search"]::-webkit-search-cancel-button {
 .info-container {
   display: flex;
   gap: 20px;
-  max-width: 830px;
+  width: 100%;
   margin-bottom: 8px;
+  justify-content: center;
 }
 
 .info-container p {
@@ -286,8 +287,9 @@ input[type="search"]::-webkit-search-cancel-button {
   display: flex;
   align-items: center;
   gap: 20px;
-  max-width: 830px;
+  width: 100%;
   margin-bottom: 30px;
+  justify-content: center;
 }
 
 .custom-select-container {
@@ -399,6 +401,7 @@ body[data-biome="pampa"] .select-options { background: rgba(15, 20, 10, 0.88); }
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .biome-btn {
@@ -459,4 +462,215 @@ body[data-biome="pampa"] .select-options { background: rgba(15, 20, 10, 0.88); }
 /* Ícone fica preto quando o botão correspondente está ativo */
 .biome-btn.active .biome-icon {
   stroke: #000000;
+}
+
+/* ==========================================================================
+    8. CARDS DOS ANIMAIS
+   ========================================================================== */
+.animal-cards{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 20px;
+}
+
+.card {
+  width: 250px;
+  height: auto;
+  background-color: var(--Cards, #062020);
+  border: 1px solid var(--Borda, rgba(255, 255, 255, 0.2));
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-image-section {
+  position: relative;
+  width: 100%;
+  height: 150px;
+}
+
+.card-image-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, var(--Cards, #062020) 100%);
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+.card-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-info h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--Texto, #E1E6E1);
+}
+
+.scientific-name {
+  margin: 4px 0 12px 0;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--Texto-secundario, #7A9997);
+}
+
+.status-badge {
+  align-self: flex-start;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #000;
+}
+
+.status-badge.pouco-preocupante {
+  background-color: #06D6A0;
+}
+
+.status-badge.vulneravel {
+  background-color: #FFD166;
+}
+
+.status-badge.em-perigo {
+  background-color: #EF476F;
+}
+
+/* ==========================================================================
+    9. MODAL DOS ANIMAIS
+   ========================================================================== */
+/* 1. O Fundo Escuro que cobre a tela inteira */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75); /* Fundo bem escuro e semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Fica por cima de tudo na tela */
+}
+
+/* 2. A Caixinha do Modal (Onde fica a foto + infos) */
+.modal-content {
+  background-color: var(--Inputs); /* Tom escuro levemente esverdeado igual ao do print */
+  color: #ffffff;
+  width: 90%;
+  max-width: 1000px;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex; /* Coloca o Lado Esquerdo (Foto) e Lado Direito (Infos) LADO A LADO */
+  gap: 24px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* 3. Botão de Fechar ("X") */
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 28px;
+  color: #a0aec0;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #ffffff;
+}
+
+/* 4. Lado Esquerdo: A Foto */
+.image-modal {
+  width: 40%; /* Ocupa 40% da largura do modal */
+  flex-shrink: 0; /* Impede a foto de "encolher" */
+}
+
+.image-modal img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Garante que a foto preencha a área sem esticar */
+  border-radius: 12px;
+}
+
+/* 5. Lado Direito: Informações */
+.modal-info {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-info h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.scientific-name {
+  font-style: italic;
+  color: #a0aec0;
+  margin: 4px 0 12px 0;
+  font-size: 14px;
+}
+
+/* 6. Navegação por Abas */
+.others-info {
+  display: flex;
+  gap: 20px;
+  border-bottom: 1px solid #1e2d32;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  color: #a0aec0;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.tab-btn.active {
+  color: #38bdf8; /* Azul claro para indicar aba ativa */
+  border-bottom: 2px solid #38bdf8;
+  font-weight: bold;
+}
+
+/* 7. Grade de Informações (2 Colunas) */
+.text-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Cria 2 colunas de tamanhos iguais */
+  gap: 16px 20px;
+}
+
+.info-item h3 {
+  font-size: 13px;
+  color: #e2e8f0;
+  margin: 0 0 4px 0;
+}
+
+.info-item p {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 8. A Classe mágica que esconde o modal */
+.hidden {
+  display: none !important;
 }
