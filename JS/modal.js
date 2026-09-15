@@ -6,7 +6,7 @@ const animaisDoBanco = [
     nomeCientifico: "Phantera Onca",
     status: "Vulnerável",
     statusClass: "vulneravel", // Classe CSS usada para a cor
-    imagem: "https://imgs.search.brave.com/...",
+    imagem: "https://imgs.search.brave.com/fG96lF3FkaFDPYTezpjAW-GGXjif6DKM-AzC2PRLxAI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wZXRj/b25lY3RhZG8uY29t/LmJyL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDE5LzEwL29uY2Et/cGludGFkYS1hbWF6/b25pYS5qcGc",
     habitat: "Florestas tropicais, Cerrado e Pantanal",
     comportamento: "Solitária e territorial",
     distribuicao: "Amazônia, Pantanal, Cerrado e Mata Atlântica",
@@ -20,13 +20,27 @@ const animaisDoBanco = [
     nomeCientifico: "Hydrochoerus hydrochaeris",
     status: "Pouco Preocupante",
     statusClass: "pouco-preocupante",
-    imagem: "caminho/para/capivara.jpg",
+    imagem: "https://imgs.search.brave.com/gSvSuRRpFu1fau-kq9JRfXqPsaIA4ccJLLnbXBcAnDs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvY2Fw/eWJhcmEtcGljdHVy/ZXMtNDRkOTJ4cjlt/NGp0cnNwaC5qcGc",
     habitat: "Áreas próximas a rios e lagos.",
     comportamento: "Sociável, vive em bandos.",
     distribuicao: "Por toda a América do Sul.",
     curiosidade: "É o maior roedor do mundo.",
     alimentacao: "Herbívora (capim e vegetação aquática).",
     ameacas: "Perda de habitat e caça."
+  },
+  {
+  id: 3,
+  nome: "Mico-Leão-Dourado",
+  nomeCientifico: "Leontopithecus rosalia",
+  status: "Em Perigo",
+  statusClass: "em-perigo",
+  imagem: "https://imgs.search.brave.com/fLUkI6yVEcI99vTq5LN7HC8b8I2G4I5em6ZUU9XNAiw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/aW5mb2VzY29sYS5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MTgvMDMvbWljby1s/ZSVDMyVBM28tZG91/cmFkb18xNTk4Mzg0/OTAtMTAwMHg3NTAu/anBn",
+  habitat: "Mata Atlântica (florestas tropicais de baixada).",
+  comportamento: "Diurno, sociável, vive em pequenos grupos familiares.",
+  distribuicao: "Exclusivo da Bacia do Rio São João, no Rio de Janeiro.",
+  curiosidade: "Os machos ajudam ativamente a criar os filhotes e os carregam nas costas.",
+  alimentacao: "Onívora (frutas, néctar, gomas de árvores, insetos e pequenos répteis).",
+  ameacas: "Desmatamento, fragmentação da Mata Atlântica e tráfico de animais."
   }
 ];
 
@@ -35,6 +49,11 @@ const containerCards = document.getElementById('cards-container');
 const modal = document.getElementById('animalModal');
 const closeBtn = document.getElementById('close-btn');
 
+
+// 2. AQUI ESTÁ O SEGREDO: Reseta a classe base e aplica a classe de cor dinâmica
+  
+
+  
 // Elementos do modal para preencher
 const modalImg = document.getElementById('modal-img');
 const modalTitle = document.getElementById('modal-title');
@@ -52,9 +71,10 @@ const modalThreats = document.getElementById('modal-threats');
 // Agora ela recebe o OBJETO do animal diretamente!
 function openModal(animal) {
   modalImg.src = animal.imagem;
-  modalTitle.textContent = animal.nome;
+  modalTitle.textContent = animal.nome; modalStatus.className = `status-badge ${animal.statusClass}`;
   modalScientific.textContent = animal.nomeCientifico;
   modalStatus.textContent = animal.status;
+  modalStatus.className = `status-badge ${animal.statusClass}`;
   modalHabitat.textContent = animal.habitat;
   modalBehavior.textContent = animal.comportamento;
   modalDistribution.textContent = animal.distribuicao;
