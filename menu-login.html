@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso ao Sistema - Vida Terrestre</title>
+    <link rel="stylesheet" href="Css/sistema-login.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <img src="images/Arara-Azul(Logo-Principal).png" alt="Logotipo Arara-Azul">
+
+        <h1>Bem-vindo de volta!</h1>
+
+        <form action="/login" method="post" id="login-form">
+            <div class="input-group">
+                <label for="username">Usuário:</label>
+                <input type="text" name="username" id="username" placeholder="Digite seu nome de usuário" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Senha:</label>
+                <input type="password" name="password" id="password" placeholder="Digite sua senha de acesso" required>
+            </div>
+
+            <button type="submit">Entrar</button>
+
+            <p class="signup-link">
+                Ainda não tem uma conta? <a href="cadastro.html">Cadastre-se aqui</a>
+            </p>
+        </form>
+    </div>
+
+    <script src="JS/menu-login.js"></script>
+</body>
+</html>

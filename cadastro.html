@@ -1,38 +1,43 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="Css/styleSistemaDeLogin.css">
+    <title>Criar Conta - Fauna Brasileira</title>
+
+    <link rel="stylesheet" href="./Css/sistema-login.css">
 </head>
 <body>
-    <div class="login-container">
-        <img src="images/Arara-Azul(Logo-Principal).png" alt="">
-        <h1>Cadastro</h1>
-        <form action="/cadastro" method="get" id="cadastroForm">
-            <div class="input-group">
-                <label for="nome">Nome: </label>
-                <input type="text" name="nome" id='nome' placeholder="Digite seu nome" required>
+
+    <div class="container-cadastro">
+        <img src="images/Arara-Azul(Logo-Principal).png" alt="Logotipo Arara-Azul">
+
+        <h1>Criar Conta</h1>
+
+        <form action="/register" method="post" id="formulario-cadastro">
+            <div class="grupo-entrada">
+                <label for="nome">Nome Completo:</label>
+                <input type="text" name="nome" id="nome" placeholder="Digite seu nome completo" required>
             </div>
-            <div class="input-group">
-                <label for="user">Usuário: </label>
-                <input type="text" name='user' id="user" placeholder="Digite o usuário" required>
+
+            <div class="grupo-entrada">
+                <label for="usuario">Nome de Usuário:</label>
+                <input type="text" name="usuario" id="usuario" placeholder="Escolha um nome de usuário" required>
             </div>
-            <div class="input-group">
-                <label for="password">Senha: </label>
-                <input type="password" name='password' id="password" placeholder="Digite a sua senha" required>
+
+            <div class="grupo-entrada">
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha" placeholder="Crie uma senha segura" required>
             </div>
-            <!--<div class="input-group">
-                <label for="email">Email: </label>             SE TIVER EMAIL
-                <input type="text" name="user" id="email" placeholder="Digite se email" required>
-            </div> -->
+
             <button type="submit">Cadastrar</button>
         </form>
-        <p class="link-cadastro">
-            Já tem conta? <a href="menuLogin.html">Faça Login</a>
+
+        <p class="link-login">
+            Já possui uma conta? <a href="menu-login.html">Faça login aqui</a>
         </p>
     </div>
+
     <script src="JS/cadastro.js"></script>
 </body>
 </html>
