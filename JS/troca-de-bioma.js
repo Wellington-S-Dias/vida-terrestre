@@ -2,49 +2,77 @@ document.addEventListener('DOMContentLoaded', () => {
     const biomeButtons = document.querySelectorAll('.biome-btn');
     const logoImg = document.querySelector('.header-logo img');
 
-  // Seleciona os dois vídeos de fundo
     let activeVideo = document.getElementById('video-bg-1');
     let nextVideo = document.getElementById('video-bg-2');
 
+    if (!biomeButtons.length) return;
+
+    let isTransitioning = false;
+
     biomeButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        biomeButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
+        button.addEventListener('click', () => {
+            if (button.classList.contains('active') || isTransitioning) return;
 
-        const biome = button.getAttribute('data-biome');
-        const newVideoSrc = button.getAttribute('data-video');
-        const newLogoSrc = button.getAttribute('data-logo');
+            const biome = button.getAttribute('data-biome');
+            const newVideoSrc = button.getAttribute('data-video');
+            const newLogoSrc = button.getAttribute('data-logo');
 
-        document.body.setAttribute('data-biome', biome);
+            isTransitioning = true;
 
-      // Troca da Logo com fade
-        if (newLogoSrc && logoImg && logoImg.getAttribute('src') !== newLogoSrc) {
-        logoImg.style.opacity = '0';
-        setTimeout(() => {
-            logoImg.src = newLogoSrc;
-            logoImg.style.opacity = '1';
-        }, 150);
-        }
+            // Atualiza classe ativa dos botões
+            biomeButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
 
-      // Troca de vídeo com Crossfade (Sem flash branco)
-        if (newVideoSrc && activeVideo.querySelector('source')?.src !== newVideoSrc) {
-        // Prepara o próximo vídeo em segundo plano
-        nextVideo.src = newVideoSrc;
-        nextVideo.load();
+            // Atualiza atributo no body para estilização via CSS
+            if (biome) {
+                document.body.setAttribute('data-biome', biome);
+            }
 
-        nextVideo.play().then(() => {
-          // Faz a troca de visibilidade via CSS
-            nextVideo.classList.add('active');
-            activeVideo.classList.remove('active');
+            // Troca suave do Logo
+            if (newLogoSrc && logoImg && logoImg.getAttribute('src') !== newLogoSrc) {
+                logoImg.style.transition = 'opacity 0.15s ease';
+                logoImg.style.opacity = '0';
 
-          // Inverte as referências para a próxima troca
-            const temp = activeVideo;
-            activeVideo = nextVideo;
-            nextVideo = temp;
-        }).catch(() => {
-          // Previne falhas se o navegador barrar a reprodução automática
+                setTimeout(() => {
+                    logoImg.src = newLogoSrc;
+                    logoImg.style.opacity = '1';
+                }, 150);
+            }
+
+            // Troca suave dos Vídeos de Fundo (Crossfade)
+            if (newVideoSrc && activeVideo && nextVideo) {
+                const currentSrc = activeVideo.src || activeVideo.querySelector('source')?.src;
+
+                if (currentSrc !== newVideoSrc) {
+                    nextVideo.src = newVideoSrc;
+                    nextVideo.load();
+
+                    const handleCanPlay = () => {
+                        nextVideo.removeEventListener('canplay', handleCanPlay);
+
+                        nextVideo.play().then(() => {
+                            nextVideo.classList.add('active');
+                            activeVideo.classList.remove('active');
+
+                            // Inverte a referência dos vídeos
+                            const temp = activeVideo;
+                            activeVideo = nextVideo;
+                            nextVideo = temp;
+
+                            isTransitioning = false;
+                        }).catch(error => {
+                            console.error('Error playing biome video:', error);
+                            isTransitioning = false;
+                        });
+                    };
+
+                    nextVideo.addEventListener('canplay', handleCanPlay);
+                } else {
+                    isTransitioning = false;
+                }
+            } else {
+                isTransitioning = false;
+            }
         });
-        }
-    });
     });
 });

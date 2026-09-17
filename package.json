@@ -1,0 +1,25 @@
+{
+  "name": "vida-terrestre",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r   <img src=\"images/Arara-Azul(Logo-Principal).png\" alt=\"Logo Vida Terrestre\" width=\"220\">\r </p>",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wellington-S-Dias/vida-terrestre.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Wellington-S-Dias/vida-terrestre/issues"
+  },
+  "homepage": "https://github.com/Wellington-S-Dias/vida-terrestre#readme",
+  "dependencies": {
+    "mysql2": "^3.24.4"
+  }
+}

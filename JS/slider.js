@@ -1,177 +1,101 @@
-const estatisticas = [
-
+const statistics = [
     {
-        numero: 742,
-        titulo: "ESPÉCIES",
-        descricao: "cadastradas"
+        number: 742,
+        title: "ESPÉCIES",
+        description: "cadastradas"
     },
-
     {
-        numero: 18,
-        titulo: "HABITATS",
-        descricao: "registrados"
+        number: 18,
+        title: "HABITATS",
+        description: "registrados"
     },
-
     {
-        numero: 6,
-        titulo: "BIOMAS",
-        descricao: "representados"
+        number: 6,
+        title: "BIOMAS",
+        description: "representados"
     },
-
     {
-        numero: 35,
-        titulo: "ECOSSISTEMAS",
-        descricao: "catalogados"
+        number: 35,
+        title: "ECOSSISTEMAS",
+        description: "catalogados"
     }
-
 ];
 
+document.addEventListener('DOMContentLoaded', () => {
+    const statNumber = document.querySelector('.stat-number');
+    const statTitle = document.querySelector('.stat-title');
+    const statDescription = document.querySelector('.stat-description');
+    const prevButton = document.querySelector('.slider-button.prev');
+    const nextButton = document.querySelector('.slider-button.next');
+    const statCard = document.querySelector('.stat-card');
+    const dots = document.querySelectorAll('.dot');
 
-const statNumber =
-    document.querySelector(".stat-number");
+    if (!statCard) return;
 
-const statTitle =
-    document.querySelector(".stat-title");
+    let currentStatIndex = 0;
+    let isAnimating = false;
 
-const statDescription =
-    document.querySelector(".stat-description");
+    function showStatistic(direction = 'next') {
+        if (isAnimating) return;
+        isAnimating = true;
 
-const prevButton =
-    document.querySelector(".slider-button.prev");
+        const stat = statistics[currentStatIndex];
+        const offset = direction === 'next' ? '-40px' : '40px';
 
-const nextButton =
-    document.querySelector(".slider-button.next");
+        statCard.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+        statCard.style.opacity = '0';
+        statCard.style.transform = `translateX(${offset})`;
 
-const statCard =
-    document.querySelector(".stat-card");
+        setTimeout(() => {
+            if (statNumber) statNumber.textContent = stat.number;
+            if (statTitle) statTitle.textContent = stat.title;
+            if (statDescription) statDescription.textContent = stat.description;
 
-const dots =
-    document.querySelectorAll(".dot");
+            statCard.style.transition = 'none';
+            statCard.style.transform = `translateX(${direction === 'next' ? '40px' : '-40px'})`;
 
+            statCard.offsetHeight; // Reflow limpo sem flickering
 
-let statAtual = 0;
+            statCard.style.transition = 'opacity 0.45s ease, transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)';
+            statCard.style.opacity = '1';
+            statCard.style.transform = 'translateX(0)';
 
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentStatIndex);
+            });
 
-/* =========================================
-   MOSTRAR ESTATÍSTICA
-========================================= */
+            setTimeout(() => {
+                isAnimating = false;
+            }, 450);
+        }, 250);
+    }
 
-function mostrarEstatistica(direcao = "next") {
-
-    const stat =
-        estatisticas[statAtual];
-
-
-    const deslocamento =
-        direcao === "next"
-            ? "-40px"
-            : "40px";
-
-
-    /* Saída */
-
-    statCard.style.opacity = "0";
-
-    statCard.style.transform =
-        `translateX(${deslocamento})`;
-
-
-    setTimeout(() => {
-
-        /* Atualiza conteúdo */
-
-        statNumber.textContent =
-            stat.numero;
-
-        statTitle.textContent =
-            stat.titulo;
-
-        statDescription.textContent =
-            stat.descricao;
-
-
-        /* Posiciona o card do outro lado */
-
-        statCard.style.transition = "none";
-
-        statCard.style.transform =
-            `translateX(${
-                direcao === "next"
-                    ? "40px"
-                    : "-40px"
-            })`;
-
-
-        statCard.offsetWidth;
-
-
-        /* Entrada */
-
-        statCard.style.transition =
-            "opacity 0.45s ease, transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)";
-
-        statCard.style.opacity = "1";
-
-        statCard.style.transform =
-            "translateX(0)";
-
-
-        /* Atualiza os indicadores */
-
-        dots.forEach((dot, index) => {
-
-            dot.classList.toggle(
-                "active",
-                index === statAtual
-            );
-
+    if (nextButton) {
+        nextButton.addEventListener('click', () => {
+            if (isAnimating) return;
+            currentStatIndex = (currentStatIndex + 1) % statistics.length;
+            showStatistic('next');
         });
-
-    }, 250);
-}
-
-
-/* =========================================
-   PRÓXIMA ESTATÍSTICA
-========================================= */
-
-nextButton.addEventListener("click", () => {
-
-    statAtual++;
-
-
-    if (statAtual >= estatisticas.length) {
-        statAtual = 0;
     }
 
-
-    mostrarEstatistica("next");
-
-});
-
-
-/* =========================================
-   ESTATÍSTICA ANTERIOR
-========================================= */
-
-prevButton.addEventListener("click", () => {
-
-    statAtual--;
-
-
-    if (statAtual < 0) {
-        statAtual =
-            estatisticas.length - 1;
+    if (prevButton) {
+        prevButton.addEventListener('click', () => {
+            if (isAnimating) return;
+            currentStatIndex = (currentStatIndex - 1 + statistics.length) % statistics.length;
+            showStatistic('prev');
+        });
     }
 
+    // Clique nos dots de navegação direta
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            if (isAnimating || index === currentStatIndex) return;
+            const direction = index > currentStatIndex ? 'next' : 'prev';
+            currentStatIndex = index;
+            showStatistic(direction);
+        });
+    });
 
-    mostrarEstatistica("prev");
-
+    // Inicialização da primeira estatística
+    showStatistic('next');
 });
-
-
-/* =========================================
-   INICIALIZAÇÃO
-========================================= */
-
-mostrarEstatistica();
