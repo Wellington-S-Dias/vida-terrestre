@@ -12,9 +12,7 @@
     opacity: 0;
     transform: translateY(-20px);
     pointer-events: none;
-    transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .header.active {
@@ -38,22 +36,21 @@
     object-fit: contain;
 }
 
-.header nav {
+.nav-menu {
     display: flex;
     gap: 30px;
     font-family: 'Nunito', sans-serif;
     margin-left: 530px;
 }
 
-.header nav a {
-    color: white;
+.nav-menu a {
+    color: #ffffff;
     text-decoration: none;
     font-size: 15px;
     opacity: 0.8;
     transition: opacity 0.3s ease;
-
 }
 
-.header nav a:hover {
+.nav-menu a:hover {
     opacity: 1;
 }

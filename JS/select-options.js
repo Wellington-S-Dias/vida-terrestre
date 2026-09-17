@@ -1,77 +1,72 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Seleciona TODOS os containers de select da página
-  const customSelects = document.querySelectorAll('.custom-select-container');
+    const customSelects = document.querySelectorAll('.custom-select-container');
 
-  customSelects.forEach(container => {
-    const selectButton = container.querySelector('.select-button');
-    const selectOptions = container.querySelector('.select-options');
-    const selectedValue = container.querySelector('.selected-value');
-    const options = container.querySelectorAll('li');
+    if (!customSelects.length) return;
 
-    if (!selectButton || !selectOptions) return;
+    // Helper para fechar todos os menus abertos
+    const closeAllSelects = () => {
+        customSelects.forEach(container => {
+            const button = container.querySelector('.select-button');
+            const options = container.querySelector('.select-options');
 
-    // Clique no botão do select
-    selectButton.addEventListener('click', (e) => {
-      e.stopPropagation(); // Impede que o clique no document feche o menu imediatamente
+            if (button) button.classList.remove('active');
+            if (options) options.classList.remove('show');
+        });
+    };
 
-      // Fecha todos os OUTROS selects antes de abrir o atual
-      customSelects.forEach(otherContainer => {
-        if (otherContainer !== container) {
-          const otherButton = otherContainer.querySelector('.select-button');
-          const otherOptions = otherContainer.querySelector('.select-options');
-          
-          if (otherButton) otherButton.classList.remove('active');
-          if (otherOptions) otherOptions.classList.remove('show');
-        }
-      });
-
-      // Alterna o estado do select clicado
-      selectButton.classList.toggle('active');
-      selectOptions.classList.toggle('show');
-    });
-
-    // Clique em uma opção da lista
-    options.forEach(option => {
-      option.addEventListener('click', () => {
-        if (selectedValue) {
-          selectedValue.textContent = option.textContent;
-        }
-
-        selectButton.classList.remove('active');
-        selectOptions.classList.remove('show');
-
-        // Captura o valor selecionado
-        const valor = option.getAttribute('data-value') || '';
-        
-        // Notifica outros scripts sobre a mudança no filtro
-        container.dispatchEvent(new CustomEvent('selectChange', {
-          detail: { value: valor, text: option.textContent }
-        }));
-      });
-    });
-  });
-
-  // Fecha qualquer select aberto ao clicar fora da área
-  document.addEventListener('click', () => {
     customSelects.forEach(container => {
-      const button = container.querySelector('.select-button');
-      const options = container.querySelector('.select-options');
+        const selectButton = container.querySelector('.select-button');
+        const selectOptions = container.querySelector('.select-options');
+        const selectedValue = container.querySelector('.selected-value');
+        const options = container.querySelectorAll('li');
 
-      if (button) button.classList.remove('active');
-      if (options) options.classList.remove('show');
+        if (!selectButton || !selectOptions) return;
+
+        // Abrir / Fechar menu do select
+        selectButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+
+            const isCurrentlyShow = selectOptions.classList.contains('show');
+
+            // Fecha outros selects abertos antes de alternar o atual
+            closeAllSelects();
+
+            if (!isCurrentlyShow) {
+                selectButton.classList.add('active');
+                selectOptions.classList.add('show');
+            }
+        });
+
+        // Seleção de opções
+        options.forEach(option => {
+            option.addEventListener('click', (event) => {
+                event.stopPropagation();
+
+                const optionText = option.textContent.trim();
+                const value = option.getAttribute('data-value') || optionText;
+
+                if (selectedValue) {
+                    selectedValue.textContent = optionText;
+                }
+
+                closeAllSelects();
+
+                // Emite evento customizado para escuta externa
+                container.dispatchEvent(new CustomEvent('selectChange', {
+                    bubbles: true,
+                    detail: { value, text: optionText }
+                }));
+            });
+        });
     });
-  });
 
-  // Suporte à tecla ESC para fechar menus abertos
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      customSelects.forEach(container => {
-        const button = container.querySelector('.select-button');
-        const options = container.querySelector('.select-options');
+    // Fechar ao clicar fora da área dos selects
+    document.addEventListener('click', closeAllSelects);
 
-        if (button) button.classList.remove('active');
-        if (options) options.classList.remove('show');
-      });
-    }
-  });
+    // Fechar ao pressionar a tecla ESC
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeAllSelects();
+        }
+    });
 });
