@@ -1,101 +1,133 @@
-const statistics = [
-    {
-        number: 742,
-        title: "ESPÉCIES",
-        description: "cadastradas"
-    },
-    {
-        number: 18,
-        title: "HABITATS",
-        description: "registrados"
-    },
-    {
-        number: 6,
-        title: "BIOMAS",
-        description: "representados"
-    },
-    {
-        number: 35,
-        title: "ECOSSISTEMAS",
-        description: "catalogados"
-    }
-];
-
 document.addEventListener('DOMContentLoaded', () => {
-    const statNumber = document.querySelector('.stat-number');
-    const statTitle = document.querySelector('.stat-title');
-    const statDescription = document.querySelector('.stat-description');
-    const prevButton = document.querySelector('.slider-button.prev');
-    const nextButton = document.querySelector('.slider-button.next');
-    const statCard = document.querySelector('.stat-card');
-    const dots = document.querySelectorAll('.dot');
 
-    if (!statCard) return;
+    const videos = document.querySelectorAll('.hero-video');
 
-    let currentStatIndex = 0;
-    let isAnimating = false;
+    const titulo = document.querySelector('.hero-title');
+    const texto = document.querySelector('.hero-text');
 
-    function showStatistic(direction = 'next') {
-        if (isAnimating) return;
-        isAnimating = true;
+    const numeroSlide = document.querySelector('.slide-number');
+    const totalSlides = document.querySelector('.slide-total');
+    const barraProgresso = document.querySelector('.slide-progress-bar');
 
-        const stat = statistics[currentStatIndex];
-        const offset = direction === 'next' ? '-40px' : '40px';
 
-        statCard.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
-        statCard.style.opacity = '0';
-        statCard.style.transform = `translateX(${offset})`;
-
-        setTimeout(() => {
-            if (statNumber) statNumber.textContent = stat.number;
-            if (statTitle) statTitle.textContent = stat.title;
-            if (statDescription) statDescription.textContent = stat.description;
-
-            statCard.style.transition = 'none';
-            statCard.style.transform = `translateX(${direction === 'next' ? '40px' : '-40px'})`;
-
-            statCard.offsetHeight; // Reflow limpo sem flickering
-
-            statCard.style.transition = 'opacity 0.45s ease, transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)';
-            statCard.style.opacity = '1';
-            statCard.style.transform = 'translateX(0)';
-
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentStatIndex);
-            });
-
-            setTimeout(() => {
-                isAnimating = false;
-            }, 450);
-        }, 250);
+    if (!videos.length) {
+        return;
     }
 
-    if (nextButton) {
-        nextButton.addEventListener('click', () => {
-            if (isAnimating) return;
-            currentStatIndex = (currentStatIndex + 1) % statistics.length;
-            showStatistic('next');
-        });
+
+    const slides = [
+        {
+            video: '',
+            titulo: 'A vida que existe aqui',
+            texto: 'Conheça a biodiversidade brasileira e descubra a importância de proteger nossos ecossistemas.'
+        },
+        {
+            video: '',
+            titulo: 'Conheça nossa fauna',
+            texto: 'Explore espécies, características e habitats dos animais encontrados no Brasil.'
+        },
+        {
+            video: '',
+            titulo: 'Descubra os biomas',
+            texto: 'Conheça a diversidade de ambientes que formam a vida terrestre brasileira.'
+        },
+        {
+            video: '',
+            titulo: 'Proteja a vida terrestre',
+            texto: 'Informação e conhecimento são passos importantes para a conservação da natureza.'
+        }
+    ];
+
+
+    let slideAtual = 0;
+
+    const duracaoSlide = 7000;
+
+
+    totalSlides.textContent =
+        String(slides.length).padStart(2, '0');
+
+
+    function atualizarSlide() {
+
+        const slide = slides[slideAtual];
+
+        titulo.textContent = slide.titulo;
+
+        texto.textContent = slide.texto;
+
+        numeroSlide.textContent =
+            String(slideAtual + 1).padStart(2, '0');
+
+
+        if (slide.video) {
+
+            const videoAtual = videos[slideAtual % videos.length];
+
+            videoAtual.src = slide.video;
+
+            videoAtual.load();
+
+            videoAtual.play().catch(() => {});
+
+        }
+
     }
 
-    if (prevButton) {
-        prevButton.addEventListener('click', () => {
-            if (isAnimating) return;
-            currentStatIndex = (currentStatIndex - 1 + statistics.length) % statistics.length;
-            showStatistic('prev');
-        });
+
+    function iniciarProgresso() {
+
+        const inicio = Date.now();
+
+
+        function atualizar() {
+
+            const decorrido = Date.now() - inicio;
+
+            const progresso =
+                Math.min(
+                    (decorrido / duracaoSlide) * 100,
+                    100
+                );
+
+
+            barraProgresso.style.width =
+                `${progresso}%`;
+
+
+            if (progresso < 100) {
+                requestAnimationFrame(atualizar);
+            }
+
+        }
+
+
+        requestAnimationFrame(atualizar);
+
     }
 
-    // Clique nos dots de navegação direta
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            if (isAnimating || index === currentStatIndex) return;
-            const direction = index > currentStatIndex ? 'next' : 'prev';
-            currentStatIndex = index;
-            showStatistic(direction);
-        });
-    });
 
-    // Inicialização da primeira estatística
-    showStatistic('next');
+    function proximoSlide() {
+
+        slideAtual =
+            (slideAtual + 1) % slides.length;
+
+
+        atualizarSlide();
+
+        iniciarProgresso();
+
+    }
+
+
+    atualizarSlide();
+
+    iniciarProgresso();
+
+
+    setInterval(
+        proximoSlide,
+        duracaoSlide
+    );
+
 });

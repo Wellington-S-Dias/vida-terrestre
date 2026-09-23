@@ -531,7 +531,21 @@ body[data-biome="pampa"] .select-options {
     transition: stroke 0.3s ease;
 }
 
-/* AMAZON */
+/* Nenhum */
+.biome-btn[data-biome=""] {
+    border-color: rgba(255, 255, 255);
+}
+
+.biome-btn[data-biome=""] .biome-icon {
+    stroke: #80B827;
+}
+
+.biome-btn[data-biome=""].active {
+    background: gray;
+    color: white;
+}
+
+/* Amazônia */
 .biome-btn[data-biome="amazonia"] {
     border-color: #80B827;
 }
@@ -545,7 +559,7 @@ body[data-biome="pampa"] .select-options {
     color: #000;
 }
 
-/* CERRADO */
+/* Cerrado */
 .biome-btn[data-biome="cerrado"] {
     border-color: #D4A373;
 }
@@ -559,7 +573,7 @@ body[data-biome="pampa"] .select-options {
     color: #000;
 }
 
-/* CAATINGA */
+/* Caatinga */
 .biome-btn[data-biome="caatinga"] {
     border-color: #E67E22;
 }
@@ -573,7 +587,7 @@ body[data-biome="pampa"] .select-options {
     color: #000;
 }
 
-/* ATLANTIC FOREST */
+/* Floresta-Amazônica */
 .biome-btn[data-biome="floresta-atlantica"] {
     border-color: #2ECC71;
 }
@@ -587,7 +601,7 @@ body[data-biome="pampa"] .select-options {
     color: #000;
 }
 
-/* PANTANAL */
+/* Pantânal */
 .biome-btn[data-biome="pantanal"] {
     border-color: #00D2D3;
 }
@@ -601,7 +615,7 @@ body[data-biome="pampa"] .select-options {
     color: #000;
 }
 
-/* PAMPA */
+/* Pampa */
 .biome-btn[data-biome="pampa"] {
     border-color: #AACC00;
 }
