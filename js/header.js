@@ -9,9 +9,9 @@ if (header) {
         }
     };
 
+    // Executa a checagem no carregamento inicial (caso a página recarregue rolada)
     handleScroll();
 
-    window.addEventListener('scroll', handleScroll, {
-        passive: true
-    });
+    // Evento de scroll com listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
 }

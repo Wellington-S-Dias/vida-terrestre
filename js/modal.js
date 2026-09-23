@@ -1,384 +1,139 @@
-const containerCartoes =
-    document.getElementById('cards-container');
+const cardsContainer = document.getElementById('cards-container');
+const animalModal = document.getElementById('animal-modal');
+const closeBtn = document.getElementById('close-modal-btn');
 
-const modalAnimal =
-    document.getElementById('animal-modal');
+const modalImg = document.getElementById('modal-image');
+const modalTitle = document.getElementById('modal-title');
+const modalScientific = document.getElementById('modal-scientific');
+const modalStatus = document.getElementById('modal-status');
+const modalHabitat = document.getElementById('modal-habitat');
+const modalBehavior = document.getElementById('modal-behavior');
+const modalDistribution = document.getElementById('modal-distribution');
+const modalDiet = document.getElementById('modal-diet');
+const modalThreats = document.getElementById('modal-threats');
 
-const botaoFechar =
-    document.getElementById('close-modal-btn');
+// Função para abrir o modal preenchendo os dados
+function openModal(animal) {
+    if (!animalModal) return;
 
-const imagemModal =
-    document.getElementById('modal-image');
+    // Mapeamento dinâmico dos dados vindos do banco (suporta snake_case e camelCase)
+    const nomeCientifico = animal.nome_cientifico || animal.nomeCientifico || '';
+    const statusClass = animal.status_class || animal.statusClass || animal.status_categoria || '';
 
-const tituloModal =
-    document.getElementById('modal-title');
+    if (modalImg) modalImg.src = animal.imagem || '';
+    if (modalTitle) modalTitle.textContent = animal.nome || 'Animal';
+    if (modalScientific) modalScientific.textContent = nomeCientifico;
 
-const cientificoModal =
-    document.getElementById('modal-scientific');
-
-const statusModal =
-    document.getElementById('modal-status');
-
-const habitatModal =
-    document.getElementById('modal-habitat');
-
-const comportamentoModal =
-    document.getElementById('modal-behavior');
-
-const biomaModal =
-    document.getElementById('modal-biome');
-
-const alimentacaoModal =
-    document.getElementById('modal-diet');
-
-const ameacasModal =
-    document.getElementById('modal-threats');
-
-let animais = [];
-let filtroRegiao = '';
-let filtroBioma = '';
-let filtroTipo = '';
-let filtroStatus = '';
-let textoPesquisa = '';
-
-function abrirModal(animal) {
-    if (!modalAnimal) return;
-
-    if (imagemModal) {
-        imagemModal.src = animal.imagem || '';
+    if (modalStatus) {
+        modalStatus.textContent = animal.status || 'Não informado';
+        modalStatus.className = `status-badge ${statusClass}`.trim();
     }
 
-    if (tituloModal) {
-        tituloModal.textContent =
-            animal.nome || 'Animal';
-    }
+    if (modalHabitat) modalHabitat.textContent = animal.habitat || 'Não informado';
+    if (modalBehavior) modalBehavior.textContent = animal.comportamento || 'Não informado';
+    if (modalDistribution) modalDistribution.textContent = animal.distribuicao || 'Não informado';
+    if (modalDiet) modalDiet.textContent = animal.alimentacao || 'Não informado';
+    if (modalThreats) modalThreats.textContent = animal.ameacas || 'Não informado';
 
-    if (cientificoModal) {
-        cientificoModal.textContent =
-            animal.nome_cientifico || '';
-    }
-
-    if (statusModal) {
-        statusModal.textContent =
-            animal.status || 'Não informado';
-
-        statusModal.className =
-            `status-badge ${(animal.status_class || '').trim()}`;
-    }
-
-    if (habitatModal) {
-        habitatModal.textContent =
-            animal.habitat || 'Não informado';
-    }
-
-    if (comportamentoModal) {
-        comportamentoModal.textContent =
-            animal.comportamento || 'Não informado';
-    }
-
-    if (biomaModal) {
-        biomaModal.textContent =
-            animal.bioma || 'Não informado';
-    }
-
-    if (alimentacaoModal) {
-        alimentacaoModal.textContent =
-            animal.alimentacao || 'Não informado';
-    }
-
-    if (ameacasModal) {
-        ameacasModal.textContent =
-            animal.ameacas || 'Não informado';
-    }
-
-    modalAnimal.classList.remove('hidden');
-    modalAnimal.setAttribute(
-        'aria-hidden',
-        'false'
-    );
+    // Exibe o modal
+    animalModal.classList.remove('hidden');
+    animalModal.setAttribute('aria-hidden', 'false');
 }
 
-function fecharModal() {
-    if (!modalAnimal) return;
+// Renderiza os cards e adiciona os eventos de clique
+function renderCards(animals) {
+    if (!cardsContainer) return;
 
-    modalAnimal.classList.add('hidden');
+    cardsContainer.innerHTML = '';
 
-    modalAnimal.setAttribute(
-        'aria-hidden',
-        'true'
-    );
-}
+    animals.forEach(animal => {
+        const card = document.createElement('div');
+        card.classList.add('card');
 
-function renderizarCartoes(listaAnimais) {
-    if (!containerCartoes) return;
+        const nomeCientifico = animal.nome_cientifico || animal.nomeCientifico || '';
+        const statusClass = animal.status_class || animal.statusClass || animal.status_categoria || '';
 
-    containerCartoes.innerHTML = '';
-
-    if (!listaAnimais.length) {
-        containerCartoes.innerHTML =
-            '<p class="mensagem-sem-resultados">Nenhum animal encontrado.</p>';
-
-        return;
-    }
-
-    listaAnimais.forEach(animal => {
-        const cartao =
-            document.createElement('div');
-
-        cartao.classList.add('card');
-
-        cartao.dataset.id =
-            animal.id || '';
-
-        cartao.innerHTML = `
+        card.innerHTML = `
             <div class="card-image-section">
-                <img
-                    src="${animal.imagem || 'images/placeholder.jpg'}"
-                    alt="Fotografia de ${animal.nome || 'animal'}"
+                <img 
+                    src="${animal.imagem || 'placeholder.jpg'}" 
+                    alt="${animal.nome || 'Animal'}" 
                     class="card-image"
                 >
             </div>
-
             <div class="card-info">
                 <h3>${animal.nome || 'Nome desconhecido'}</h3>
-
-                <p class="scientific-name">
-                    ${animal.nome_cientifico || ''}
-                </p>
-
-                <span class="status-badge ${animal.status_class || ''}">
+                <p class="scientific-name">${nomeCientifico}</p>
+                <span class="status-badge ${statusClass}">
                     ${animal.status || 'Não informado'}
                 </span>
             </div>
         `;
 
-        cartao.addEventListener(
-            'click',
-            () => abrirModal(animal)
-        );
-
-        containerCartoes.appendChild(cartao);
-    });
-}
-
-function normalizar(valor) {
-    return (valor || '')
-        .toString()
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
-}
-
-function normalizar(valor) {
-    return (valor || '')
-        .toString()
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
-}
-
-function aplicarFiltros() {
-    const animaisFiltrados = animais.filter(animal => {
-
-        const nome = normalizar(animal.nome);
-        const nomeCientifico = normalizar(animal.nome_cientifico);
-        const status = normalizar(animal.status_class);
-        const regiao = normalizar(animal.regiao);
-        const bioma = normalizar(animal.bioma);
-        const tipo = normalizar(animal.tipo);
-
-        const correspondePesquisa =
-            !textoPesquisa ||
-            nome.includes(normalizar(textoPesquisa)) ||
-            nomeCientifico.includes(normalizar(textoPesquisa));
-
-        const correspondeStatus =
-            !filtroStatus ||
-            status === normalizar(filtroStatus);
-
-        const correspondeRegiao =
-            !filtroRegiao ||
-            regiao.includes(normalizar(filtroRegiao));
-
-        const correspondeBioma =
-            !filtroBioma ||
-            bioma.includes(normalizar(filtroBioma));
-
-        const correspondeTipo =
-            !filtroTipo ||
-            tipo === normalizar(filtroTipo);
-
-        return (
-            correspondePesquisa &&
-            correspondeStatus &&
-            correspondeRegiao &&
-            correspondeBioma &&
-            correspondeTipo
-        );
-    });
-
-    console.log('Região:', filtroRegiao);
-    console.log('Tipo:', filtroTipo);
-    console.log('Resultados:', animaisFiltrados);
-
-    renderizarCartoes(animaisFiltrados);
-}
-
-async function buscarAnimais() {
-    if (!containerCartoes) return;
-
-    try {
-        const resposta =
-            await fetch('http://localhost:3000/animais');
-
-        if (!resposta.ok) {
-            throw new Error(
-                `Erro HTTP: ${resposta.status}`
-            );
-        }
-
-        animais = await resposta.json();
-
-        aplicarFiltros();
-    } catch (erro) {
-        console.error(
-            'Erro ao carregar animais:',
-            erro
-        );
-
-        containerCartoes.innerHTML =
-            '<p class="mensagem-sem-resultados">Não foi possível carregar os dados dos animais.</p>';
-    }
-}
-
-function configurarPesquisa() {
-    const entradaPesquisa =
-        document.getElementById('search-input');
-
-    if (!entradaPesquisa) return;
-
-    entradaPesquisa.addEventListener(
-        'input',
-        () => {
-            textoPesquisa =
-                entradaPesquisa.value
-                    .toLowerCase()
-                    .trim();
-
-            aplicarFiltros();
-        }
-    );
-}
-
-function configurarSelects() {
-    const selects = document.querySelectorAll('.custom-select-container');
-
-    selects.forEach((select, index) => {
-
-        select.addEventListener('selectChange', (event) => {
-
-            const valor = event.detail.value || '';
-
-            if (index === 0) {
-                filtroRegiao = valor;
-            }
-
-            if (index === 1) {
-                filtroTipo = valor;
-            }
-
-            if (index === 2) {
-                filtroStatus = valor;
-            }
-
-            aplicarFiltros();
+        // Clique no card abre o modal
+        card.addEventListener('click', () => {
+            openModal(animal);
         });
 
+        cardsContainer.appendChild(card);
     });
 }
 
-function configurarBotoesBioma() {
-    const botoes =
-        document.querySelectorAll('.biome-btn');
+// Busca os animais na API do backend
+async function fetchAnimals() {
+    if (!cardsContainer) return;
 
-    botoes.forEach(botao => {
-        botao.addEventListener(
-            'click',
-            () => {
-                filtroBioma =
-                    botao.dataset.biome || '';
+    try {
+        const response = await fetch('http://localhost:3000/animais');
 
-                aplicarFiltros();
-            }
-        );
-    });
-}
-
-function configurarAbas() {
-    const botoesAbas =
-        document.querySelectorAll('.tab-btn');
-
-    const paineisAbas =
-        document.querySelectorAll('.tab-pane');
-
-    botoesAbas.forEach(botao => {
-        botao.addEventListener(
-            'click',
-            () => {
-                const aba =
-                    botao.dataset.tab;
-
-                botoesAbas.forEach(item => {
-                    item.classList.remove('active');
-                });
-
-                paineisAbas.forEach(painel => {
-                    painel.classList.remove('active');
-                });
-
-                botao.classList.add('active');
-
-                const painel =
-                    document.getElementById(
-                        `tab-${aba}`
-                    );
-
-                if (painel) {
-                    painel.classList.add('active');
-                }
-            }
-        );
-    });
-}
-
-document.addEventListener(
-    'DOMContentLoaded',
-    () => {
-        configurarPesquisa();
-        configurarSelects();
-        configurarBotoesBioma();
-        configurarAbas();
-
-        if (botaoFechar) {
-            botaoFechar.addEventListener(
-                'click',
-                fecharModal
-            );
+        if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
         }
 
-        if (modalAnimal) {
-            modalAnimal.addEventListener(
-                'click',
-                evento => {
-                    if (
-                        evento.target === modalAnimal
-                    ) {
-                        fecharModal();
-                    }
-                }
-            );
-        }
-
-        buscarAnimais();
+        const animals = await response.json();
+        renderCards(animals);
+    } catch (error) {
+        console.error('Erro ao carregar animais:', error);
+        cardsContainer.innerHTML = '<p>Não foi possível carregar os dados dos animais.</p>';
     }
-);
+}
+
+// Fechamento do Modal
+if (animalModal) {
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            animalModal.classList.add('hidden');
+            animalModal.setAttribute('aria-hidden', 'true');
+        });
+    }
+
+    window.addEventListener('click', (event) => {
+        if (event.target === animalModal) {
+            animalModal.classList.add('hidden');
+            animalModal.setAttribute('aria-hidden', 'true');
+        }
+    });
+}
+
+// Alternância entre as abas (Tabs)
+const tabButtons = document.querySelectorAll('.tab-btn');
+
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const tabPanes = document.querySelectorAll('.tab-pane');
+
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabPanes.forEach(pane => pane.classList.remove('active'));
+
+        button.classList.add('active');
+
+        const tabId = `tab-${button.dataset.tab}`;
+        const targetTab = document.getElementById(tabId);
+        
+        if (targetTab) {
+            targetTab.classList.add('active');
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', fetchAnimals);

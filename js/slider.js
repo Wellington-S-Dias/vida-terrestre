@@ -1,13 +1,33 @@
+const statistics = [
+    {
+        number: 742,
+        title: "ESPÉCIES",
+        description: "cadastradas"
+    },
+    {
+        number: 18,
+        title: "HABITATS",
+        description: "registrados"
+    },
+    {
+        number: 6,
+        title: "BIOMAS",
+        description: "representados"
+    },
+    {
+        number: 35,
+        title: "ECOSSISTEMAS",
+        description: "catalogados"
+    }
+];
+
 document.addEventListener('DOMContentLoaded', () => {
-    const statCard = document.querySelector('.stat-card');
-
-    if (!statCard) return;
-
     const statNumber = document.querySelector('.stat-number');
     const statTitle = document.querySelector('.stat-title');
     const statDescription = document.querySelector('.stat-description');
     const prevButton = document.querySelector('.slider-button.prev');
     const nextButton = document.querySelector('.slider-button.next');
+    const statCard = document.querySelector('.stat-card');
     const dots = document.querySelectorAll('.dot');
 
     if (!statCard) return;
