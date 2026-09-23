@@ -1,0 +1,81 @@
+========================================
+       GIT - VIDA TERRESTRE
+========================================
+
+VERIFICAR GIT
+git --version
+
+CONFIGURAR IDENTIDADE
+git config --global user.name "Seu Nome"
+git config --global user.email "seu@email.com"
+
+BAIXAR PROJETO
+git clone https://github.com/Wellington-S-Dias/vida-terrestre.git
+cd vida-terrestre
+
+VER STATUS
+git status
+
+ATUALIZAR
+git pull
+
+SALVAR ALTERAÇÕES
+git add .
+git commit -m "Descrição da alteração"
+git push
+
+SE O PUSH FOR REJEITADO
+git pull --rebase
+git push
+
+----------------------------------------
+
+BRANCH
+
+VER BRANCH
+git branch
+
+CRIAR BRANCH
+git checkout -b feature/nome
+
+TROCAR DE BRANCH
+git checkout main
+git checkout feature/nome
+
+ENVIAR BRANCH NOVA
+git push -u origin feature/nome
+
+----------------------------------------
+
+GITHUB / REMOTE
+
+VER REMOTE
+git remote -v
+
+CORRIGIR REMOTE
+git remote set-url origin URL_DO_REPOSITORIO
+
+----------------------------------------
+
+DESFAZER
+
+DESFAZER ALTERAÇÃO LOCAL
+git restore arquivo
+
+TIRAR DO STAGING
+git restore --staged arquivo
+
+CANCELAR MERGE
+git merge --abort
+
+----------------------------------------
+
+STASH
+
+GUARDAR ALTERAÇÕES
+git stash push -u -m "backup"
+
+RECUPERAR
+git stash pop
+
+----------------------------------------

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta - Fauna Brasileira</title>
+
+    <link rel="stylesheet" href="./Css/sistema-login.css">
+</head>
+<body>
+
+    <div class="container-cadastro">
+        <img src="images/Arara-Azul(Logo-Principal).png" alt="Logotipo Arara-Azul">
+
+        <h1>Criar Conta</h1>
+
+        <form action="/register" method="post" id="formulario-cadastro">
+            <div class="grupo-entrada">
+                <label for="nome">Nome Completo:</label>
+                <input type="text" name="nome" id="nome" placeholder="Digite seu nome completo" required>
+            </div>
+
+            <div class="grupo-entrada">
+                <label for="usuario">Nome de Usuário:</label>
+                <input type="text" name="usuario" id="usuario" placeholder="Escolha um nome de usuário" required>
+            </div>
+
+            <div class="grupo-entrada">
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha" placeholder="Crie uma senha segura" required>
+            </div>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        <p class="link-login">
+            Já possui uma conta? <a href="menu-login.html">Faça login aqui</a>
+        </p>
+    </div>
+
+    <script src="JS/cadastro.js"></script>
+</body>
+</html>
