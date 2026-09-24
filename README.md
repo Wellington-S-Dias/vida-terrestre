@@ -14,12 +14,6 @@ Plataforma web educativa dedicada à pesquisa, divulgação e conscientização 
 
 <p align="center">
   <a href="https://wellington-s-dias.github.io/vida-terrestre/">🌐 Acessar o projeto</a>
-  ·
-  <a href="#-sobre-o-projeto">Sobre</a>
-  ·
-  <a href="#-tecnologias">Tecnologias</a>
-  ·
-  <a href="#-equipe">Equipe</a>
 </p>
 
 ---

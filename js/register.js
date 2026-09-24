@@ -61,7 +61,7 @@ if (formLogin) {
 
                 if (dados.trim() === 'ok') {
                     window.location.href =
-                        './home.html';
+                        './index.html';
                 } else {
                     alert(dados);
                 }
