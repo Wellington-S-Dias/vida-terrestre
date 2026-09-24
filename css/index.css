@@ -1,0 +1,493 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+/* =========================================
+    1. VARIÁVEIS E CONFIGURAÇÕES
+   ========================================= */
+
+:root {
+    /* =========================
+        FUNDOS
+    ========================= */
+    --bg-main: #000D0C;
+    --bg-dark: #021F1C;
+    --bg-card: #082420;
+    --bg-card-light: #1B281B;
+
+
+    /* =========================
+        AZUL - IDENTIDADE / ARARA
+    ========================= */
+    --blue-dark: #001728;
+    --blue: #093D6C;
+    --blue-primary: #0B72C9;
+    --cyan: #5D91A6;
+
+
+    /* =========================
+        VERDE - NATUREZA / ODS 15
+    ========================= */
+    --green-dark: #173A24;
+    --green-primary: #80B827;
+    --light-green: #A8D52A;
+    --green: #76C442;
+
+
+    /* =========================
+        STATUS / DESTAQUES
+    ========================= */
+    --yellow: #F2B900;
+
+
+    /* =========================
+        TEXTOS
+    ========================= */
+    --text-primary: #D8EAF2;
+    --text-secondary: #93AEB9;
+
+
+    /* =========================
+        BORDAS
+    ========================= */
+    --border: rgba(93, 145, 166, 0.35);
+}
+
+/* =========================================
+    2. RESET E BASE
+   ========================================= */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #111111;
+    color: var(--text-primary);
+}
+
+/* =========================================
+    3. HERO
+   ========================================= */
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* =========================================
+    4. VÍDEOS DE FUNDO
+   ========================================= */
+
+.hero-video-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    z-index: 0;
+}
+
+.hero-video.active {
+    opacity: 1;
+}
+
+/* =========================================
+    5. SOBREPOSIÇÃO ESCURA
+   ========================================= */
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* =========================================
+    6. CONTEÚDO PRINCIPAL
+   ========================================= */
+
+.hero-content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    z-index: 10;
+}
+
+.hero-logo {
+    width: 40%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    float: right;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 7vw, 7rem);
+    line-height: 1;
+    margin-top: 30vh;
+    font-family: 'playfair display', serif;
+    color: var(--blue-primary);
+}
+
+.hero-text {
+    max-width: 650px;
+    padding-top: 10px;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    line-height: 1.5;
+    font-family: 'Inter', sans-serif;
+}
+
+/* =========================================
+    7. BOTÕES
+   ========================================= */
+.nav-btns {
+    display: flex;
+    gap: 15px;
+    justify-content: left;
+    padding-left: 70px;
+    margin-top: 65vh;
+    position: relative;
+    z-index: 10;
+}
+
+.nav-btns a {
+    text-decoration: none;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.explore {
+    width: 20%;
+    height: 8vh;
+    background: #0B72C9;
+    color: var(--text-primary);
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(11, 114, 201, 0.6);
+}
+
+.explore:hover{
+    background: #1688E8;
+    box-shadow:
+        0 0 10px rgba(11, 114, 201, 0.8),
+        0 0 25px rgba(11, 114, 201, 0.5);
+    transform: translateY(-2px);
+    transition: 0.3s ease;
+}
+
+.map {
+    width: 15%;
+    height: 8vh; /* importante */
+    border-radius: 10px;
+    background: none;
+    color: var(--text-primary);
+    font-size: 20px;
+    border: 2px solid var(--text-secondary);
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.map:hover{
+    background: none;
+    box-shadow:
+        0 0 10px var(--text-secondary),
+        0 0 25px var(--text-secondary);
+    transform: translateY(-2px);
+    transition: 0.3s ease;
+}
+
+/* =========================================
+    8. INFORMAÇÕES DO SLIDE
+   ========================================= */
+
+.slide-info {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 10;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.slide-progress {
+    width: 150px;
+    height: 2px;
+    background: var(--blue-dark);
+    overflow: hidden;
+}
+
+.slide-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--blue);
+    transition: width 0.1s linear;
+}
+
+.slide-number{
+    color: var(--cyan);
+}
+
+.slide-total{
+    color: var(--cyan);
+}
+
+
+/* =========================================
+    9. INDICADOR DE ROLAGEM
+   ========================================= */
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 45px;
+    right: 50px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    opacity: 0.8;
+}
+
+.scroll-arrow {
+    font-size: 20px;
+    animation: scrollAnimation 1.5s infinite ease-in-out;
+}
+
+@keyframes scrollAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+    10. TRANSIÇÃO ESCURA NO FINAL
+   ========================================= */
+
+.hero::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 30px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(17, 17, 17, 0.45) 60%,
+        #111111 100%
+    );
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* =========================================
+    11. SOBRE O PROJETO
+   ========================================= */
+.about{
+    margin: 40px 80px 0;
+}
+
+.top{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.about-text{
+    flex: 1;
+}
+
+.about-text-section{
+    display: flex;
+    align-items: center;
+    color: var(--blue-primary);
+}
+
+.about-text-section hr {
+    width: 80px;
+    margin-left: -80px;
+    border: none;
+    border-top: 2px solid var(--blue-primary);
+}
+
+.about-text-titulo h1 {
+    font-size: 5rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+.about-text-titulo{
+    font-size: 3rem;
+    font-family: 'playfair display', serif;
+}
+
+
+.about-text-titulo h2{
+    color: var(--blue-primary);
+    font-family: 'playfair display', serif;
+    font-weight: normal;
+}
+
+.about-text-info{
+    padding-top: 10px;
+    line-height: 1.2;
+    font-size: 20px;
+}
+
+.about-content{
+    width: auto;
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.circles{
+    width: 75px;
+    height: 75px;
+    border-radius: 50px;
+    background-color: #1688E8;
+    display: flex;
+    align-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    line-height: 1.2;
+    font-size: 15px;
+}
+
+.about img {
+    width: 100%;
+    height: 180px; /* Ou a altura desejada */
+    object-fit: cover;
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+}
+
+.separate{
+    width: 2px;
+    height: 55vh;
+    border: none;
+    background-color: var(--text-secondary);
+    flex-shrink: 0;
+}
+
+/* =========================================
+    12. RESPONSIVIDADE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .header {
+        height: 70px;
+        padding: 0 20px;
+    }
+
+    .header nav {
+        display: none;
+    }
+
+    .header-logo img {
+        width: 38px;
+        height: 38px;
+    }
+
+    .hero-logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    .hero-title {
+        font-size: clamp(2.8rem, 13vw, 5rem);
+    }
+
+    .hero-text {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+
+    .slide-info {
+        bottom: 30px;
+    }
+
+    .slide-progress {
+        width: 100px;
+    }
+
+    .scroll-indicator {
+        right: 20px;
+        bottom: 30px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .life-section {
+        padding: 80px 6%;
+    }
+
+    .stats-slider {
+        gap: 10px;
+    }
+
+    .slider-button {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .stat-card {
+        min-height: 280px;
+        padding: 30px 20px;
+    }
+}
