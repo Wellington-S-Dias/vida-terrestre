@@ -2,6 +2,7 @@ const http = require('http');
 const url = require('url');
 const mysql = require('mysql2');
 const Usuarios=require('./database/Usuarios')
+const Animais=require('./database/Animais')
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -28,9 +29,7 @@ async function callback(req, res) {
     const rota =url.parse(req.url, true);
 
     if (req.method == 'OPTIONS') {
-        res.writeHead(204, {'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods':'GET, POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type'
-        });
-
+        res.writeHead(204);
         res.end();
 
         return;
@@ -59,7 +58,7 @@ async function callback(req, res) {
                     res.end(JSON.stringify(message))
                 })
             })
-        }else if(rota.pathname=='login'){
+        }else if(rota.pathname=='/login'){
             req.on('end',()=>{
                 res.writeHead(200,{'Content-Type':'application/json'})
                 var usuario=JSON.parse(body)
