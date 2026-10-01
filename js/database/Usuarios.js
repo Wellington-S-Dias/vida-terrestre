@@ -16,9 +16,9 @@ class Usuarios{
     static async addUsuario(usuario,callback){
 
         const connection=Usuarios.connect()
-        var {name,username,password}=usuario
+        var {name,email,password}=usuario
 
-        if(!name||!username||!password){
+        if(!name||!email||!password){
             return callback({'error':'Preencha todos os campo corretamente'})
         }
 
@@ -28,6 +28,31 @@ class Usuarios{
             if(error) throw error
 
             callback({'message':'Usuário cadastrado com sucesso!'})
+        })
+        connection.end()
+    }
+
+    static login(usuario,callback){
+        
+        const connection=Usuarios.connect()
+        var {email,password}=usuario
+        
+        if(!email||!password){
+            return callback({'error':'Preencha todos os campos corretamente'})
+        }
+        var sql='select email,password from usuario where email=?'
+        connection.query(sql,email,(error,results)=>{
+            if(error)throw error
+            
+            if(results.length==0){
+                return callback({'error':'Usuário não Cadastrado'})
+            }
+            var user=results[0]
+            const passwordVali=bcrypt.compareSync(usuario.password,user.password)
+            if(user.email==usuario.email && passwordVali){
+                return callback({'message':'Logado com sucesso!'})
+            }
+            return callback({'error':'Usuário ou senha incorreta'})
         })
         connection.end()
     }
