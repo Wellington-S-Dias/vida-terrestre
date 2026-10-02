@@ -33,10 +33,8 @@ async function carregarAnimais() {
     }
 }
 
-
 function aplicarFiltros() {
     const animaisFiltrados = animais.filter(animal => {
-
         const nome = normalizar(animal.nome);
         const nomeCientifico = normalizar(animal.nome_cientifico);
         const status = normalizar(animal.status_class);
@@ -44,32 +42,30 @@ function aplicarFiltros() {
         const bioma = normalizar(animal.bioma);
         const tipo = normalizar(animal.tipo);
 
-
         const correspondePesquisa =
             !textoPesquisa ||
             nome.includes(normalizar(textoPesquisa)) ||
             nomeCientifico.includes(normalizar(textoPesquisa));
 
-
         const correspondeStatus =
             !filtroStatus ||
+            filtroStatus === "todas" ||
             status === normalizar(filtroStatus);
-
 
         const correspondeRegiao =
             !filtroRegiao ||
+            filtroRegiao === "todas" ||
             regiao.includes(normalizar(filtroRegiao));
-
 
         const correspondeBioma =
             !filtroBioma ||
+            filtroBioma === "todos" ||
             bioma.includes(normalizar(filtroBioma));
-
 
         const correspondeTipo =
             !filtroTipo ||
+            filtroTipo === "todas" ||
             tipo === normalizar(filtroTipo);
-
 
         return (
             correspondePesquisa &&
@@ -79,7 +75,6 @@ function aplicarFiltros() {
             correspondeTipo
         );
     });
-
 
     renderCards(animaisFiltrados);
 }
