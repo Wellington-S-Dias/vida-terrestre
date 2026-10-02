@@ -84,9 +84,9 @@ INSERT INTO animais (`nome`, `nome_cientifico`, `status`, `status_class`, `tipo`
 drop table usuario;
 
 create table usuario(
-	id int primary key auto_increment,
+	  id int primary key auto_increment,
     name varchar(50) not null,
-    username varchar(50) not null,
+    email varchar(255) not null,
     password varchar(255) not null
 );
 
