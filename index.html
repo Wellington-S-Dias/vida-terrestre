@@ -6,28 +6,27 @@
     <link rel="icon" type="image/png" href="./images/Arara-Azul(Logo-Principal).png">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/index.css">
-    <title>Vida Terrestre - Início</title>
+    <title>Vida Terrestre</title>
 </head>
 
 <body>
     <header class="header">
-        <div class="header-logo"><img src="./images/Arara-Azul(Logo-Principal).png" alt="Logotipo Vida Terrestre"></div>
+        <div class="header-logo"><a href="#main" style='text-decoration: none; cursor: pointer;'><img src="./images/Arara-Azul(Logo-Principal).png" alt="Logotipo Vida Terrestre"></a></div>
 
         <nav class="nav-menu">
-            <a href="index.html">Início</a>
-
             <a href="explore.html">Explorar</a>
 
-            <a href="#">Impacto</a>
+            <a href="login.html"><span style="color: #0B72C9; cursor: pointer; text-decoration: none; font-weight: 2em;"><b>Entrar</b></span></a>
+
         </nav>
     </header>
 
-    <main>
+    <main id="main">
         <section class="hero">
             <div class="hero-video-container">
-                <video class="hero-video active" muted playsinline></video>
+                <video class="hero-video active" muted playsinline preload="auto"></video>
 
-                <video class="hero-video" muted playsinline></video>
+                <video class="hero-video" muted playsinline preload="auto"></video>
             </div>
 
             <div class="hero-overlay"></div>
@@ -54,20 +53,16 @@
                 <span>↓</span>
             </div>
 
-            <div class="nav-btns">
-                <a href="explore.html" class="explore">Explorar Espécies</a>
-                <a href="#" class="map">Mapa da Fauna</a>
-            </div>
+
         
         </section>
 
         
         <section class="about">
-            <img src="./images/arara.jpg" alt="arara">
             <div class="top">
                 <div class="about-text">
                     <div class="about-text-section">
-                    <hr> <h2>about o Projeto</h2>
+                    <hr> <h2>Sobre o projeto</h2>
                     </div>
 
                     <div class="about-text-titulo">
@@ -82,89 +77,139 @@
                     </div>
                 </div>
 
-                <hr class="separar">
+                <hr class="separate">
 
                 <div class="about-content">
                     <div class="content">
-                        <div class="circles"></div>
-                        <p class="teste">Conheça a biodiversidade<br>
+                        <div class="circles">
+                            <img src="./images/icons/bio.png" alt="">
+                        </div>
+                        <p><span><b>Conheça a biodiversidade</b></span><br>
                         Explore espécies, biomas e <br>habitats brasileiros.</p>
                     </div>
 
                     <div class="content">
-                        <div class="circles"></div>
-                        <p>Aprenda e se informe<br>
+                        <div class="circles">
+                            <img src="./images/icons/aprender.png" alt="">
+                        </div>
+                        <p><span><b>Aprenda e se informe</b></span><br>
                         Acesse conteúdos aducativos, <br>notícias e curiosidades.</p>
                     </div>
 
                     <div class="content">
-                        <div class="circles"></div>
-                        <p>Participe da comunidade<br>
+                        <div class="circles">
+                            <img src="./images/icons/comunidade.png" alt="">
+                        </div>
+                        <p><span><b>Participe da comunidade</b></span><br>
                         Compartilhe registros, interaja <br>e faça parte dessa causa.</p>
                     </div>
 
                     <div class="content">
-                        <div class="circles"></div>
-                        <p>Faça a diferença<br>
+                        <div class="circles">
+                            <img src="./images/icons/cuidar.png" alt="">
+                        </div>
+                        <p><span><b>Faça a diferença</b></span><br>
                         Cada ação conta. Juntos podemos <br>proteger o que é nosso</p>
                     </div>
 
                 </div>
                     
-                <div class="about-image">
-                        
-                </div>
             </div>
 
-            <h1>oque vc encontra aqui?</h1>
+            <div class="about-text-section">
+            <hr> <h1>o que você encontra aqui?</h1>
+            </div>
 
             <div class="about-card-section">
-                <div class="about-card">
-                    <img src="" alt="">
-                    <h1></h1>
-                    <p></p>
-                    <a href=""></a>
-                    <img src="" alt="">
+                <div class="about-cards">
+                    <div class="about-cards-img">
+                        <img src="./images/icons/especies.png" alt="Ícone de Espécies">
+                    </div>
+                    <h1>Espécies</h1>
+                        <p>Descubra animais e plantas únicos da fauna e flora brasileira.</p>
+    
+                    <div class="arrow-page">
+                        <a href="explore.html">
+                            <img src="./images/icons/seta-direita.png" alt="Seta">
+                        </a>
+                    </div>
+
+    <!-- Adicione a imagem de fundo aqui -->
+                    <img src="./images/bg-about-card-1.webp" alt="" class="bg-card-img">
                 </div>
 
-                <div class="about-card">
-                    <img src="" alt="">
-                    <h1></h1>
-                    <p></p>
-                    <a href=""></a>
-                    <img src="" alt="">
+                <div class="about-cards">
+                    <div class="about-cards-img">
+                        <img src="./images/icons/biomas.png" alt="Ícone de Biomas">
+                    </div>
+                    <h1>Biomas</h1>
+                        <p>Descubra sobre os Biomas do território brasileiro.</p>
+    
+                    <div class="arrow-page">
+                        <a href="explore.html">
+                            <img src="./images/icons/seta-direita.png" alt="Seta">
+                        </a>
+                    </div>
+
+    <!-- Adicione a imagem de fundo aqui -->
+                    <img src="./images/bg-about-card-2.webp" alt="" class="bg-card-img-2">
                 </div>
 
-                <div class="about-card">
-                    <img src="" alt="">
-                    <h1></h1>
-                    <p></p>
-                    <a href=""></a>
-                    <img src="" alt="">
+                <div class="about-cards">
+                    <div class="about-cards-img">
+                        <img src="./images/icons/conservacao.png" alt="Ícone de Conservação">
+                    </div>
+                    <h1>Conservação</h1>
+                        <p>Saiba como ajudar a conservar o planeta.</p>
+    
+                    <div class="arrow-page">
+                        <a href="explore.html">
+                            <img src="./images/icons/seta-direita.png" alt="Seta">
+                        </a>
+                    </div>
 
-                </div>
-                <div class="about-card">
-                    <img src="" alt="">
-                    <h1></h1>
-                    <p></p>
-                    <a href=""></a>
-                    <img src="" alt="">
-                </div>
-
-                <div class="about-card">
-                    <img src="" alt="">
-                    <h1></h1>
-                    <p></p>
-                    <a href=""></a>
-                    <img src="" alt="">
+    <!-- Adicione a imagem de fundo aqui -->
+                    <img src="./images/bg-about-card-3.webp" alt="" class="bg-card-img">
                 </div>
 
+                <div class="about-cards">
+                    <div class="about-cards-img">
+                        <img src="./images/icons/noticias.png" alt="Ícone de Notícias">
+                    </div>
+                    <h1>Notícias</h1>
+                        <p>Descubra as últimas notícias sobre a vida selvagem no Brasil.</p>
+    
+                    <div class="arrow-page">
+                        <a href="explore.html">
+                            <img src="./images/icons/seta-direita.png" alt="Seta">
+                        </a>
+                    </div>
+
+    <!-- Adicione a imagem de fundo aqui -->
+                    <img src="./images/bg-about-card-4.webp" alt="" class="bg-card-img-2">
+                </div>
+
+                <div class="about-cards">
+                    <div class="about-cards-img">
+                        <img src="./images/icons/comunidade-verde.png" alt="Ícone de Comunidade">
+                    </div>
+                    <h1>Comunidade</h1>
+                        <p>Participe da nossa comunidade.</p>
+    
+                    <div class="arrow-page">
+                        <a href="explore.html">
+                            <img src="./images/icons/seta-direita.png" alt="Seta">
+                        </a>
+                    </div>
+
+    <!-- Adicione a imagem de fundo aqui -->
+                    <img src="./images/bg-about-card-5.webp" alt="" class="bg-card-img">
+                </div>
             </div>
         </section>
     </main>
 
+
     <script src="./js/home.js"></script>
-    <script src="./js/header.js"></script>
 
 </body>
-</html>
