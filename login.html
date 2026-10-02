@@ -3,35 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acesso ao Sistema - Vida Terrestre</title>
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="icon" type="image/png" href="./images/Arara-Azul(Logo-Principal).png">
+    <title>Vida Terrestre - login/cadastro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/header.css">
 </head>
 
 <body>
-    <div class="login-container">
-        <img src="./images/Arara-Azul(Logo-Principal).png" alt="Logotipo Arara-Azul">
+    <header class="header">
+        <div class="header-logo">
+            <img src="./images/Arara-Azul(Logo-Principal).png" alt="Logotipo Vida Terrestre">
+        </div>
 
-        <h1>Bem-vindo de volta!</h1>
+        <nav class="nav-menu">
 
-        <form action="/login" method="post" id="login-form">
-            <div class="input-group">
-                <label for="username">Usuário:</label>
-                <input type="text" name="username" id="username" placeholder="Digite seu nome de usuário" required>
+            <a href="index.html">Início</a>
+
+            <a href="explore.html">Explorar</a>
+            
+        </nav>
+    </header>
+
+    <div class="hero-overlay"></div>
+
+    <main class="login-page">
+        <div class="login-left">
+            <section class="login-text">
+                <h1>Conecte-se com <br> a natureza</h1>
+                <p>
+                    Acesse sua conta para salvar seus registros, <br>
+                    participar da comunidade, acompanhar <br>
+                    seu progresso e muito mais.
+                </p>
+            </section>
+            
+            <div class="cardgrid">
+                <div class="info-card">
+                    <img src="./images/icons/camera.png" alt="">
+                    <p>Compartilhe <br>suas fotos</p>
+                </div>
+
+                <div class="info-card">
+                    <img src="./images/icons/estrela.png" alt="">
+                    <p>Conquiste pontos e cards</p>
+                </div>
+
+                <div class="info-card">
+                    <img src="./images/icons/comunidade-azul.png" alt="">
+                    <p>Participe da comunidade</p>
+                </div>
             </div>
+        </div>
 
-            <div class="input-group">
-                <label for="password">Senha:</label>
-                <input type="password" name="password" id="password" placeholder="Digite sua senha de acesso" required>
+        <div class="login-right">
+            <div class="login-card">
+                <img src="./images/Arara-Azul(Logo-Principal).png" alt="Logo" class="card-logo">
+
+                <!-- Alternador de Abas -->
+                <div class="tab-container">
+                    <div class="glider"></div>
+                    <button class="tab-btn active" onclick="switchTab('entrar', this)">Entrar</button>
+                    <button class="tab-btn" onclick="switchTab('cadastrar', this)">Cadastrar</button>
+                </div>
+
+                <!-- Container do Slider (Transição Suave) -->
+                <div class="forms-wrapper">
+                    <div class="forms-slider" id="formsSlider">
+                        <!-- Card de Login -->
+                        <div id="card-entrar" class="card-form">
+                            <form onsubmit="event.preventDefault();">
+                                <input class="inp-info" type="email" placeholder="E-mail" required>
+                                <input class="inp-info" type="password" placeholder="Senha" required>
+
+                                <div class="checkbox-row">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="lembra">
+                                        <span>Lembrar de mim</span>
+                                    </label>
+                                    <a href="#" class="forgot-pass">Esqueceu a senha?</a>
+                                </div>
+                                
+                                <button class="btn-primary" type="submit">Entrar</button>
+
+                                <div class="divider">
+                                    <span>ou</span>
+                                </div>
+
+                                <button type="button" class="btn-outline">Continuar com o Google</button>
+                                <button type="button" class="btn-outline">Continuar com o Github</button>
+                            </form>
+                        </div>
+
+                        <!-- Card de Cadastro -->
+                        <div id="card-cadastrar" class="card-form">
+                            <form onsubmit="event.preventDefault();">
+                                <input class="inp-info" type="text" placeholder="Nome completo" required>
+                                <input class="inp-info" type="email" placeholder="E-mail" required>
+                                <input class="inp-info" type="password" placeholder="Senha" required>
+                                <input class="inp-info" type="password" placeholder="Confirme a senha" required>
+
+                                <label class="checkbox terms">
+                                    <input type="checkbox" name="termos" required>
+                                    <span>Li e aceito os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a></span>
+                                </label>
+
+                                <button class="btn-primary" type="submit">Cadastrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <button type="submit">Entrar</button>
-
-            <p class="signup-link">
-                Ainda não tem uma conta? <a href="register.html">Cadastre-se aqui</a>
-            </p>
-        </form>
-    </div>
+        </div>
+    </main>
 
     <script src="./js/login.js"></script>
+    <script src="./js/loginChange.js"></script>
 </body>
 </html>
