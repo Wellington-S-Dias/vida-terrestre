@@ -312,17 +312,25 @@ body {
 /* Container principal com o gradiente de fundo e borda */
 .about-card-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
+    margin: 40px 70px;
     width: 100%;
 }
 
 .about-cards {
+    flex: 0 0 320px; /* Força cada card a ter 320px de largura fixa */
+    width: 300px;
+    height: 40vh;
     position: relative;
-    background: rgb(6, 32, 25); 
+    background: linear-gradient(
+        180deg, 
+        #00060a 0%,    /* Início logo após o vídeo (Azul escuro) */
+        #00060a 40%,   /* Fim da área "Sobre o projeto" (Continua Azul) */
+        #01090a 75%,   /* Início do título "O que você encontra aqui" (Verde transicionado) */
+        #09271a 100%   /* Base dos cards (Verde floresta escuro) */
+    );
     border: 1px solid rgba(22, 138, 74);
     border-radius: 16px;
     padding: 24px;
