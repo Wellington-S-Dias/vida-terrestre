@@ -71,10 +71,10 @@
                 <div class="forms-wrapper">
                     <div class="forms-slider" id="formsSlider">
                         <!-- Card de Login -->
-                        <div id="card-entrar" class="card-form">
-                            <form onsubmit="event.preventDefault();">
-                                <input class="inp-info" type="email" placeholder="E-mail" required>
-                                <input class="inp-info" type="password" placeholder="Senha" required>
+                        <div id="card-entrar" class="card-form" >
+                            <form id="form_Login" class="login-form">
+                                <input id="email_L" class="inp-info" type="email" placeholder="E-mail" required>
+                                <input id="password_L" class="inp-info" type="password" placeholder="Senha" required>
 
                                 <div class="checkbox-row">
                                     <label class="checkbox">
@@ -97,14 +97,14 @@
 
                         <!-- Card de Cadastro -->
                         <div id="card-cadastrar" class="card-form">
-                            <form onsubmit="event.preventDefault();">
-                                <input class="inp-info" type="text" placeholder="Nome completo" required>
-                                <input class="inp-info" type="email" placeholder="E-mail" required>
-                                <input class="inp-info" type="password" placeholder="Senha" required>
-                                <input class="inp-info" type="password" placeholder="Confirme a senha" required>
+                            <form id="form_Cadastro">
+                                <input class="inp-info" id="name_C" type="text" placeholder="Nome completo" required>
+                                <input class="inp-info" id="email_C" type="email" placeholder="E-mail" required>
+                                <input class="inp-info" id="password_C" type="password" placeholder="Senha" required>
+                                <input class="inp-info" id="password2_C" type="password" placeholder="Confirme a senha" required>
 
                                 <label class="checkbox terms">
-                                    <input type="checkbox" name="termos" required>
+                                    <input id="termos" type="checkbox" name="termos" required>
                                     <span>Li e aceito os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a></span>
                                 </label>
 
@@ -117,7 +117,7 @@
         </div>
     </main>
 
-    <script src="./js/login.js"></script>
     <script src="./js/loginChange.js"></script>
+    <script src="./js/login.js"></script>
 </body>
 </html>
