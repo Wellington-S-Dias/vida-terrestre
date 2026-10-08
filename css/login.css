@@ -323,8 +323,21 @@ body {
     font-size: 0.88rem;
     cursor: pointer;
     transition: background 0.3s;
+    display: flex;
+    align-items: center;       /* Alinha verticalmente no centro */
+    justify-content: center;   /* Centraliza tudo horizontalmente dentro do botão */
+    gap: 10px;                 /* Espaço entre a imagem e o texto */
+    text-decoration: none;
 }
 
 .btn-outline:hover {
     background-color: rgba(11, 114, 201, 0.15);
+}
+
+.google{
+    width: 10%;
+}
+
+.github{
+    width: 12%;
 }
