@@ -68,6 +68,14 @@ async function callback(req, res) {
                     res.end(JSON.stringify(message))
                 })
             })
+        }else if(rota.pathname=='/newPasswor'){
+            req.on('end',()=>{
+                res.writeHead(200,{'Content-Type':'application/json'}) //fazer depois
+                var senha=JSON.parse(body)
+                Usuarios.newPassword(senha,(message)=>{
+                    res.end(JSON.stringify(message))
+                })
+            })
         }
     }
 }

@@ -56,4 +56,10 @@ class Usuarios{
         })
         connection.end()
     }
+
+    static newPassword(senha,callback){
+        
+        const connection=Usuarios.connect()
+        
+    }
 }module.exports=Usuarios
