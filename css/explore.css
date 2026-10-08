@@ -4,29 +4,18 @@
    1. VARIABLES AND RESET
    ========================================================================== */
 :root {
-    --bg-dark: rgb(2, 10, 9);
-    --filter-area: #051F20;
-    --inputs-bg: rgba(8, 37, 38, 0.5);
-    --card-bg: rgba(8, 37, 38);
+    --bg-primary: #0f1416;
+    --inputs-bg: #082526cc;
+    --card-bg: #082526;
     --active-color: #80B827;
-    --border-color: rgba(255, 255, 255, 0.2);
+    --border-color: #ffffff33;
 
-    --bg-main: #000D0C;
-    --bg-card: #082420;
-    --bg-card-light: #1B281B;
-
-    --blue-dark: #001728;
-    --blue: #093D6C;
-    --blue-primary: #0B72C9;
-    --cyan: #5D91A6;
+    --primary-color: #0B72C9;
 
     --text-primary: #D8EAF2;
-    --text-secondary: #93AEB9;
+    --text-secondary: #cbdee6;
 
-    --green: #76C442;
-    --yellow: #F2B900;
-
-    --border: rgba(93, 145, 166, 0.35);
+    --border: #5d91a659;
 }
 
 *, *::before, *::after {
@@ -46,14 +35,7 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
-}
-
-h1{
-    text-shadow:
-        1px 1px 2px #000,
-        -1px -1px 2px #000,
-        1px -1px 2px #000,
-        -1px 1px 2px #000;
+    background-color: var(--bg-primary);
 }
 
 /* ==========================================================================
@@ -63,9 +45,9 @@ h1{
 /* AMAZON & DEFAULT */
 body[data-biome="amazonia"],
 body[data-biome="default"] {
-    --blue-primary: #35C759;
+    --primary-color: #35C759;
     --active-color: #80B827;
-    --inputs-bg: rgba(8, 37, 38, 0.6);
+    --inputs-bg: rgba(8, 37, 38, 0.8);
     --card-bg: rgba(8, 37, 38);
     --border-color: rgba(128, 184, 39, 0.4);
 }
@@ -77,9 +59,9 @@ body[data-biome="default"]::before {
 
 /* CAATINGA */
 body[data-biome="caatinga"] {
-    --blue-primary: #E59A45;
+    --primary-color: #E59A45;
     --active-color: #E67E22;
-    --inputs-bg: rgba(45, 25, 10, 0.6);
+    --inputs-bg: rgba(45, 25, 10, 0.8);
     --card-bg: rgb(45, 25, 10);
     --border-color: rgba(230, 126, 34, 0.4);
 }
@@ -90,9 +72,9 @@ body[data-biome="caatinga"]::before {
 
 /* CERRADO */
 body[data-biome="cerrado"] {
-    --blue-primary: #D9B84A;
+    --primary-color: #D9B84A;
     --active-color: #D4A373;
-    --inputs-bg: rgba(40, 30, 15, 0.6);
+    --inputs-bg: rgba(40, 30, 15, 0.8);
     --card-bg: rgba(40, 30, 15);
     --border-color: rgba(212, 163, 115, 0.4);
 }
@@ -102,23 +84,23 @@ body[data-biome="cerrado"]::before {
 }
 
 /* ATLANTIC FOREST */
-body[data-biome="floresta-atlantica"] {
-    --blue-primary: #35B8A0;
+body[data-biome="mata-atlantica"] {
+    --primary-color: #35B8A0;
     --active-color: #2ECC71;
-    --inputs-bg: rgba(10, 45, 25, 0.6);
+    --inputs-bg: rgba(10, 45, 25, 0.8);
     --card-bg: rgba(10, 45, 25);
     --border-color: rgba(46, 204, 113, 0.4);
 }
 
-body[data-biome="floresta-atlantica"]::before {
+body[data-biome="mata-atlantica"]::before {
     background: rgba(5, 25, 15, 0.3);
 }
 
 /* PAMPA */
 body[data-biome="pampa"] {
-    --blue-primary: #8FAE4D;
+    --primary-color: #8FAE4D;
     --active-color: #AACC00;
-    --inputs-bg: rgba(30, 35, 15, 0.6);
+    --inputs-bg: rgba(30, 35, 15, 0.8);
     --card-bg: rgba(30, 35, 15);
     --border-color: rgba(170, 204, 0, 0.4);
 }
@@ -129,9 +111,9 @@ body[data-biome="pampa"]::before {
 
 /* PANTANAL */
 body[data-biome="pantanal"] {
-    --blue-primary: #4BA9D8;
+    --primary-color: #4BA9D8;
     --active-color: #00D2D3;
-    --inputs-bg: rgba(5, 40, 50, 0.6);
+    --inputs-bg: rgba(5, 40, 50, 0.8);
     --card-bg: rgba(5, 40, 50);
     --border-color: rgba(0, 210, 211, 0.4);
 }
@@ -173,7 +155,7 @@ body::before {
    5. MAIN CONTENT
    ========================================================================== */
 .main-content {
-    padding: 100px 40px 40px 40px;
+    padding: 40px 40px 40px 40px;
     min-height: 100vh;
     width: 100%;
     flex: 1;
@@ -187,11 +169,190 @@ body::before {
 }
 
 /* ==========================================================================
-   6. SEARCH BOX
-   ========================================================================== */
+    6. SEARCH BOX */
+.input-area{
+    width: 100%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    background: rgba(20, 25, 20, 0.45);
+    backdrop-filter: blur(18px) saturate(120%);
+    -webkit-backdrop-filter: blur(18px) saturate(120%);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.input-area h1 {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    text-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.8),
+        0 0 25px rgba(0, 0, 0, 0.4);
+}
+
+.input-area p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-top: 8px;
+
+    text-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.input-filter{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-filtros{
+    background: var(--primary-color);
+    border-radius: 12px;
+    border: none;
+    width: 10%;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Overlay escuro de fundo */
+.filter-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 99;
+}
+.filter-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Painel Lateral (Drawer) */
+.filter-drawer {
+    position: fixed;
+    top: 0;
+    right: -360px;
+    width: 340px;
+    height: 100vh;
+    background-color: var(--bg-secondary, #1a2225);
+    color: var(--text-primary, #ffffff);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
+}
+.filter-drawer.open {
+    right: 0;
+}
+
+/* Estilos internos do Drawer */
+.drawer-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color, #2c373c);
+}
+.btn-fechar {
+    background: none;
+    border: none;
+    color: var(--text-secondary, #a0acaf);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.drawer-body {
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.filtro-titulo {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-secondary, #a0acaf);
+}
+
+.select-dark {
+    width: 100%;
+    padding: 10px 12px;
+    background-color: var(--bg-input, #242e32);
+    color: var(--text-primary, #ffffff);
+    border: 1px solid var(--border-color, #2c373c);
+    border-radius: 8px;
+    outline: none;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Footer com Ações */
+.drawer-footer {
+    padding: 20px;
+    border-top: 1px solid var(--border-color, #2c373c);
+    display: flex;
+    gap: 12px;
+}
+.btn-principal {
+    flex: 1;
+    padding: 12px;
+    background-color: var(--primary-green, #2a5c45);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.btn-secundario {
+    padding: 12px;
+    background: transparent;
+    color: var(--text-secondary, #a0acaf);
+    border: 1px solid var(--border-color, #2c373c);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.badge-contador:not(:empty) {
+    background: var(--inputs-bg);
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 11px;
+}   
+
 .search-box {
     position: relative;
-    width: 100%;
+    width: 80%;
     display: flex;
     align-items: center;
     margin-bottom: 25px;
@@ -236,195 +397,6 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 /* ==========================================================================
-   7. FILTER LABELS AND SELECT PANELS
-   ========================================================================== */
-.filter-labels {
-    display: flex;
-    gap: 20px;
-    width: 100%;
-    margin-bottom: 8px;
-    justify-content: center;
-}
-
-.filter-label {
-    font-size: 14px;
-    color: var(--text-primary);
-    margin: 0;
-    width: 250px;
-}
-
-.select-container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-    margin-bottom: 30px;
-    justify-content: center;
-}
-
-.custom-select-container {
-    position: relative;
-    width: 250px;
-}
-
-.select-button {
-    background: var(--inputs-bg);
-    color: var(--text-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 12px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    backdrop-filter: blur(8px);
-    transition: all 0.3s ease;
-}
-
-.select-button:hover,
-.select-button.active {
-    border-color: rgba(255, 255, 255, 0.6);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
-}
-
-.arrow {
-    font-size: 0.75rem;
-    transition: transform 0.3s ease;
-}
-
-.select-button.active .arrow {
-    transform: rotate(180deg);
-}
-
-.select-options {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    width: 100%;
-    background: rgba(10, 20, 20, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 6px 0;
-    margin: 0;
-    list-style: none;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    display: none;
-    z-index: 100;
-}
-
-body[data-biome="caatinga"] .select-options {
-    background: rgba(25, 15, 8, 0.88);
-}
-
-body[data-biome="cerrado"] .select-options {
-    background: rgba(20, 16, 10, 0.88);
-}
-
-body[data-biome="pantanal"] .select-options {
-    background: rgba(5, 20, 28, 0.88);
-}
-
-body[data-biome="floresta-atlantica"] .select-options {
-    background: rgba(5, 22, 15, 0.88);
-}
-
-body[data-biome="pampa"] .select-options {
-    background: rgba(15, 20, 10, 0.88);
-}
-
-.select-options.show {
-    display: block;
-}
-
-.select-options li {
-    padding: 10px 16px;
-    color: var(--text-primary);
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
-}
-
-.select-options li:first-child {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.select-options li:last-child {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-/* Biome Hover Colors */
-.select-options li[data-value="todas"]:hover {
-    background: rgba(76, 94, 80, 0.25);
-    color: white;
-}
-
-.select-options li[data-value="norte"]:hover {
-    background: rgba(53, 199, 89, 0.25);
-    color: #72E58A;
-}
-
-.select-options li[data-value="nordeste"]:hover {
-    background: rgba(229, 154, 69, 0.25);
-    color: #F2B36F;
-}
-
-.select-options li[data-value="centro-oeste"]:hover {
-    background: rgba(217, 184, 74, 0.25);
-    color: #E8CE6A;
-}
-
-.select-options li[data-value="sudeste"]:hover {
-    background: rgba(46, 184, 160, 0.25);
-    color: #63D8C0;
-}
-
-.select-options li[data-value="sul"]:hover {
-    background: rgba(75, 169, 216, 0.25);
-    color: #79C8ED;
-}
-
-/* Animal Type Hover Colors */
-.select-options li[data-value="mamifero"]:hover {
-    background: rgba(181, 131, 90, 0.25);
-    color: #dfb288;
-}
-
-.select-options li[data-value="ave"]:hover {
-    background: rgba(52, 152, 219, 0.25);
-    color: #74c0fc;
-}
-
-.select-options li[data-value="anfibio"]:hover {
-    background: rgba(46, 204, 113, 0.25);
-    color: #69db7c;
-}
-
-.select-options li[data-value="reptil"]:hover {
-    background: rgba(241, 196, 15, 0.25);
-    color: #ffe066;
-}
-
-/* Conservation Status Hover Colors */
-.select-options li[data-value="pouco-preocupante"]:hover {
-    background: rgba(46, 204, 113, 0.25);
-    color: #8ce99a;
-}
-
-.select-options li[data-value="vulneravel"]:hover {
-    background: rgba(241, 196, 15, 0.25);
-    color: #ffd43b;
-}
-
-.select-options li[data-value="em-perigo"]:hover {
-    background: rgba(231, 76, 60, 0.25);
-    color: #ff8787;
-}
-
-/* ==========================================================================
     8. BIOME SWITCHER BUTTONS
    ========================================================================== */
 .biome-buttons {
@@ -460,15 +432,15 @@ body[data-biome="pampa"] .select-options {
 }
 
 /* Nenhum */
-.biome-btn[data-biome=""] {
+.biome-btn[data-biome="todos"] {
     border-color: rgba(255, 255, 255);
 }
 
-.biome-btn[data-biome=""] .biome-icon {
+.biome-btn[data-biome="todos"] .biome-icon {
     stroke: #80B827;
 }
 
-.biome-btn[data-biome=""].active {
+.biome-btn[data-biome="todos"].active {
     background: gray;
     color: white;
 }
@@ -516,15 +488,15 @@ body[data-biome="pampa"] .select-options {
 }
 
 /* Floresta-Amazônica */
-.biome-btn[data-biome="floresta-atlantica"] {
+.biome-btn[data-biome="mata-atlantica"] {
     border-color: #2ECC71;
 }
 
-.biome-btn[data-biome="floresta-atlantica"] .biome-icon {
+.biome-btn[data-biome="mata-atlantica"] .biome-icon {
     stroke: #2ECC71;
 }
 
-.biome-btn[data-biome="floresta-atlantica"].active {
+.biome-btn[data-biome="mata-atlantica"].active {
     background: #2ECC71;
     color: #000;
 }
@@ -565,13 +537,23 @@ body[data-biome="pampa"] .select-options {
    9. ANIMAL CARDS
    ========================================================================== */
 .animal-cards {
-    width: 100%;
+    width: 93%;
     height: auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
     padding-top: 20px;
+    background: rgba(20, 25, 20, 0.45);
+    backdrop-filter: blur(18px) saturate(120%);
+    border: 1px solid var(--border-color);
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
 }
 
 .card {
@@ -582,6 +564,7 @@ body[data-biome="pampa"] .select-options {
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    margin-bottom: 10px;
 }
 
 .card-image-section {
@@ -633,15 +616,23 @@ body[data-biome="pampa"] .select-options {
 }
 
 .status-badge.pouco-preocupante {
-    background-color: #06D6A0;
+    background-color: #4CAF50;
+}
+
+.status-badge.quase-ameacado {
+    background-color: #8BC34A;
 }
 
 .status-badge.vulneravel {
-    background-color: #FFD166;
+    background-color: #FFC107;
 }
 
 .status-badge.em-perigo {
-    background-color: #EF476F;
+    background-color: #FF7043;
+}
+
+.status-badge.critico {
+    background-color: #D32F2F;
 }
 
 /* ==========================================================================
