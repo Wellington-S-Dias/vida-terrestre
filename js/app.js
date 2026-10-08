@@ -25,6 +25,8 @@ function enviarJson(res, statusCode, dados) {
 }
 
 async function callback(req, res) {
+    res.setHeader('Access-Control-Allow-Origin','*')
+    res.setHeader('Access-Control-Allow-Headers','*')
     const rota =url.parse(req.url, true);
 
     if (req.method == 'OPTIONS') {
