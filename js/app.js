@@ -2,7 +2,6 @@ const http = require('http');
 const url = require('url');
 const mysql = require('mysql2');
 const Usuarios=require('./database/Usuarios')
-const Animais=require('./database/Animais')
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -34,7 +33,7 @@ async function callback(req, res) {
 
         return;
     }else if(req.method == 'GET'){
-        if(rota.pathname == '/animais'){
+        if(rota.pathname == '/animais_completos'){
             db.query('SELECT * FROM animais',(erro, resultados) =>{
                     if (erro) {console.error('Erro ao buscar animais:',erro);
                         enviarJson(res, 500, {erro:'Erro ao buscar animais'});
