@@ -52,6 +52,14 @@ body[data-biome="default"] {
     --border-color: rgba(128, 184, 39, 0.4);
 }
 
+body[data-biome="todos"] {
+    --primary-color: #35C759;
+    --active-color: #80B827;
+    --inputs-bg: rgba(8, 37, 38, 0.8);
+    --card-bg: rgba(8, 37, 38);
+    --border-color: rgba(128, 184, 39, 0.4);
+}
+
 body[data-biome="amazonia"]::before,
 body[data-biome="default"]::before {
     background: rgba(2, 10, 9, 0.25);
@@ -433,100 +441,110 @@ input[type="search"]::-webkit-search-cancel-button {
 
 /* Nenhum */
 .biome-btn[data-biome="todos"] {
-    border-color: rgba(255, 255, 255);
+    --biome-accent: #808080;
+    border-color: var(--biome-accent);
+    background: rgba(128, 128, 128, 0.18);
 }
 
 .biome-btn[data-biome="todos"] .biome-icon {
-    stroke: #80B827;
+    stroke: var(--biome-accent);
 }
 
 .biome-btn[data-biome="todos"].active {
-    background: gray;
+    background: #808080;
     color: white;
+    border-color: #808080;
 }
 
 /* Amazônia */
-.biome-btn[data-biome="amazonia"] {
-    border-color: #80B827;
-}
+.biome-btn[data-biome="amazonia"] { --biome-accent: #80B827; border-color: var(--biome-accent); background: rgba(128, 184, 39, 0.18); }
 
 .biome-btn[data-biome="amazonia"] .biome-icon {
-    stroke: #80B827;
+    stroke: var(--biome-accent);
 }
 
 .biome-btn[data-biome="amazonia"].active {
-    background: #80B827;
+    background: var(--biome-accent);
     color: #000;
 }
 
 /* Cerrado */
-.biome-btn[data-biome="cerrado"] {
-    border-color: #D4A373;
-}
+.biome-btn[data-biome="cerrado"] { --biome-accent: #D4A373; border-color: var(--biome-accent); background: rgba(212, 163, 115, 0.18); }
 
 .biome-btn[data-biome="cerrado"] .biome-icon {
-    stroke: #D4A373;
+    stroke: var(--biome-accent);
 }
 
 .biome-btn[data-biome="cerrado"].active {
-    background: #D4A373;
+    background: var(--biome-accent);
     color: #000;
 }
 
 /* Caatinga */
-.biome-btn[data-biome="caatinga"] {
-    border-color: #E67E22;
-}
+.biome-btn[data-biome="caatinga"] { --biome-accent: #E67E22; border-color: var(--biome-accent); background: rgba(230, 126, 34, 0.18); }
 
 .biome-btn[data-biome="caatinga"] .biome-icon {
-    stroke: #E67E22;
+    stroke: var(--biome-accent);
 }
 
 .biome-btn[data-biome="caatinga"].active {
-    background: #E67E22;
+    background: var(--biome-accent);
     color: #000;
 }
 
 /* Floresta-Amazônica */
-.biome-btn[data-biome="mata-atlantica"] {
-    border-color: #2ECC71;
-}
+.biome-btn[data-biome="mata-atlantica"] { --biome-accent: #2ECC71; border-color: var(--biome-accent); background: rgba(46, 204, 113, 0.18); }
 
 .biome-btn[data-biome="mata-atlantica"] .biome-icon {
-    stroke: #2ECC71;
+    stroke: var(--biome-accent);
 }
 
 .biome-btn[data-biome="mata-atlantica"].active {
-    background: #2ECC71;
+    background: var(--biome-accent);
     color: #000;
 }
 
 /* Pantânal */
-.biome-btn[data-biome="pantanal"] {
-    border-color: #00D2D3;
-}
+.biome-btn[data-biome="pantanal"] { --biome-accent: #00D2D3; border-color: var(--biome-accent); background: rgba(0, 210, 211, 0.18); }
 
 .biome-btn[data-biome="pantanal"] .biome-icon {
-    stroke: #00D2D3;
+    stroke: var(--biome-accent);
 }
 
 .biome-btn[data-biome="pantanal"].active {
-    background: #00D2D3;
+    background: var(--biome-accent);
     color: #000;
 }
 
 /* Pampa */
-.biome-btn[data-biome="pampa"] {
-    border-color: #AACC00;
-}
+.biome-btn[data-biome="pampa"] { --biome-accent: #AACC00; border-color: var(--biome-accent); background: rgba(170, 204, 0, 0.18); }
 
 .biome-btn[data-biome="pampa"] .biome-icon {
-    stroke: #AACC00;
+    stroke: var(--biome-accent);
 }
 
 .biome-btn[data-biome="pampa"].active {
-    background: #AACC00;
+    background: var(--biome-accent);
     color: #000;
+}
+
+@media (max-width: 700px) {
+    .main-content { width: 100%; padding: 0 16px 28px; }
+    .input-area { padding: 24px 16px; }
+    .input-area h1 { font-size: clamp(1.55rem, 7vw, 2.3rem); line-height: 1.2; }
+    .input-area p { font-size: .95rem; }
+    .input-filter { width: 100%; gap: 10px; }
+    .search-box { flex: 1; min-width: 0; }
+    .search-box input { min-width: 0; }
+    .btn-filtros { width: auto; min-width: 108px; padding: 0 12px; flex-shrink: 0; }
+    .biome-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(92px, 1fr)); gap: 10px; width: 100%; }
+    .biome-btn { width: 100%; height: 92px; border-radius: 14px; gap: 6px; font-size: .78rem; }
+    .animal-cards { width: 100%; padding: 14px; gap: 12px; }
+    .card { width: min(100%, 250px); }
+    .filter-drawer { width: min(340px, 92vw); }
+    .modal-content { width: calc(100% - 24px); max-height: 92dvh; overflow-y: auto; flex-direction: column; }
+    .modal-image-container, .modal-info { width: 100%; }
+    .modal-image-container { height: 220px; }
 }
 
 .biome-btn.active .biome-icon {
