@@ -28,13 +28,9 @@ body:has(.side-bar:focus-within) {
     flex-direction: column;
     align-items: center;
     gap: 32px;
-    z-index: 2147483647;
+    z-index: 100;
     background: rgba(2, 12, 16, 0.94);
     border-left: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.24);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    overflow-x: hidden;
     transition: width 0.28s ease;
 }
 
@@ -70,6 +66,7 @@ body:has(.side-bar:focus-within) {
 .nav-menu {
     width: 100%;
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
@@ -91,6 +88,10 @@ body:has(.side-bar:focus-within) {
     white-space: nowrap;
     opacity: 0.82;
     transition: opacity 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.entrar{
+    margin-top: auto;
 }
 
 .nav-menu a:hover,
