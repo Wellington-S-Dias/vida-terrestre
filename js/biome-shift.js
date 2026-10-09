@@ -20,12 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const novaFonteVideo = botao.getAttribute('data-video');
             const novaFonteLogo = botao.getAttribute('data-logo');
 
-            if (!novaFonteVideo) {
-                console.error('Esse botão não possui data-video!');
-                return;
-            }
-
-            estaTransicionando = true;
+            // A troca de tema não depende do carregamento do vídeo: URLs locais
+            // indisponíveis não podem bloquear os próximos cliques.
+            estaTransicionando = Boolean(novaFonteVideo && videoAtivo && proximoVideo);
 
             // =========================
             // BOTÃO ATIVO
@@ -41,9 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // BIOMA NO BODY
             // =========================
 
-            if (bioma) {
-                document.body.setAttribute('data-biome', bioma);
-            }
+            document.body.setAttribute('data-biome', bioma === 'todos' ? 'default' : (bioma || 'default'));
 
             // =========================
             // TROCAR LOGO
@@ -64,6 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // TROCAR VÍDEO
             // =========================
 
+            if (!novaFonteVideo || !videoAtivo || !proximoVideo) return;
+
             proximoVideo.src = novaFonteVideo;
 
             // Garante que o vídeo começa escondido
@@ -72,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             proximoVideo.load();
 
             const trocarVideo = () => {
+                window.clearTimeout(tempoLimiteVideo);
 
                 proximoVideo.removeEventListener(
                     'loadeddata',
@@ -103,14 +101,25 @@ document.addEventListener('DOMContentLoaded', () => {
                             erro
                         );
 
+                        window.clearTimeout(tempoLimiteVideo);
                         estaTransicionando = false;
                     });
             };
 
-            proximoVideo.addEventListener(
-                'loadeddata',
-                trocarVideo
-            );
+            const falhaVideo = () => {
+                window.clearTimeout(tempoLimiteVideo);
+                proximoVideo.removeEventListener('loadeddata', trocarVideo);
+                proximoVideo.removeEventListener('error', falhaVideo);
+                estaTransicionando = false;
+            };
+            proximoVideo.addEventListener('loadeddata', trocarVideo, { once: true });
+            proximoVideo.addEventListener('error', falhaVideo, { once: true });
+            // Safari e arquivos ausentes podem não emitir loadeddata/error.
+            const tempoLimiteVideo = window.setTimeout(() => {
+                proximoVideo.removeEventListener('loadeddata', trocarVideo);
+                proximoVideo.removeEventListener('error', falhaVideo);
+                estaTransicionando = false;
+            }, 8000);
 
         });
 
