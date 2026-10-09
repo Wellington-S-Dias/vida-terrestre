@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./images/Arara-Azul(Logo-Principal).png">
+    <title>Vida Terrestre - login/cadastro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/side-bar.css">
+</head>
+
+<body>
+    <header class="side-bar">
+        <div class="side-bar-logo">
+            <a href="index.html" aria-label="Vida Terrestre — início">
+            <img src="./images/Arara-Azul(Logo-Principal).png" alt="Logotipo Vida Terrestre">
+            </a>
+        </div>
+
+        <nav class="nav-menu">
+
+            <a href="index.html" aria-label="Início"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/></svg><span class="nav-label">Início</span></a>
+            <a href="explore.html" aria-label="Explorar"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5M8 10.8h5.6M10.8 8v5.6"/></svg><span class="nav-label">Explorar</span></a>
+            <a class="entrar" href="login.html" class="is-current" aria-label="Entrar" aria-current="page"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0z"/></svg><span class="nav-label">Entrar</span></a>
+            
+        </nav>
+    </header>
+
+    <div class="hero-overlay"></div>
+
+    <main class="login-page">
+        <div class="login-left">
+            <section class="login-text">
+                <h1>Conecte-se com <br> a natureza</h1>
+                <p>
+                    Acesse sua conta para salvar seus registros, <br>
+                    participar da comunidade, acompanhar <br>
+                    seu progresso e muito mais.
+                </p>
+            </section>
+            
+            <div class="cardgrid">
+                <div class="info-card">
+                    <img src="./images/icons/camera.png" alt="">
+                    <p>Compartilhe <br>suas fotos</p>
+                </div>
+
+                <div class="info-card">
+                    <img src="./images/icons/estrela.png" alt="">
+                    <p>Conquiste pontos e cards</p>
+                </div>
+
+                <div class="info-card">
+                    <img src="./images/icons/comunidade-azul.png" alt="">
+                    <p>Participe da comunidade</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-right">
+            <div class="login-card">
+                <img src="./images/Arara-Azul(Logo-Principal).png" alt="Logo" class="card-logo">
+
+                <!-- Alternador de Abas -->
+                <div class="tab-container">
+                    <div class="glider"></div>
+                    <button class="tab-btn active" onclick="switchTab('entrar', this)">Entrar</button>
+                    <button class="tab-btn" onclick="switchTab('cadastrar', this)">Cadastrar</button>
+                </div>
+
+                <!-- Container do Slider (Transição Suave) -->
+                <div class="forms-wrapper">
+                    <div class="forms-slider" id="formsSlider">
+                        <!-- Card de Login -->
+                        <div id="card-entrar" class="card-form" >
+                            <form id="form_Login" class="login-form">
+                                <input id="email_L" class="inp-info" type="email" placeholder="E-mail" required>
+                                <input id="password_L" class="inp-info" type="password" placeholder="Senha" required>
+
+                                <div class="checkbox-row">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="lembra">
+                                        <span>Lembrar de mim</span>
+                                    </label>
+                                    <a href="#" class="forgot-pass">Esqueceu a senha?</a>
+                                </div>
+                                
+                                <button class="btn-primary" type="submit">Entrar</button>
+
+                                <div class="divider">
+                                    <span>ou</span>
+                                </div>
+
+                                <a  class="btn-outline" href="/auth/google"><img src="/images/icons/google-icon.png" alt="Google" class="google">Continuar com o Google</a>
+                                <a  class="btn-outline" href="/auth/github"><img src="/images/icons/github-icon.png" alt="Github" class="github">Continuar com o Github</a>
+                            </form>
+                        </div>
+
+                        <!-- Card de Cadastro -->
+                        <div id="card-cadastrar" class="card-form">
+                            <form id="form_Cadastro">
+                                <input class="inp-info" id="name_C" type="text" placeholder="Nome completo" required>
+                                <input class="inp-info" id="email_C" type="email" placeholder="E-mail" required>
+                                <input class="inp-info" id="password_C" type="password" placeholder="Senha" required>
+                                <input class="inp-info" id="password2_C" type="password" placeholder="Confirme a senha" required>
+
+                                <label class="checkbox terms">
+                                    <input id="termos" type="checkbox" name="termos" required>
+                                    <span>Li e aceito os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a></span>
+                                </label>
+
+                                <button class="btn-primary" type="submit">Cadastrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./js/loginChange.js"></script>
+    <script src="./js/login.js"></script>
+</body>
+</html>
