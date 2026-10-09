@@ -10,12 +10,12 @@ body {
     transition: padding-right 0.28s ease;
 }
 
-body:has(.header:hover),
-body:has(.header:focus-within) {
+body:has(.side-bar:hover),
+body:has(.side-bar:focus-within) {
     padding-right: var(--sidebar-expanded);
 }
 
-.header {
+.side-bar {
     position: fixed;
     top: 0;
     right: 0;
@@ -38,12 +38,12 @@ body:has(.header:focus-within) {
     transition: width 0.28s ease;
 }
 
-.header:hover,
-.header:focus-within {
+.side-bar:hover,
+.side-bar:focus-within {
     width: var(--sidebar-expanded);
 }
 
-.header-logo {
+.side-bar-logo {
     width: 52px;
     min-width: 52px;
     height: 52px;
@@ -52,13 +52,13 @@ body:has(.header:focus-within) {
     justify-content: center;
 }
 
-.header-logo a {
+.side-bar-logo a {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.header-logo img {
+.side-bar-logo img {
     display: block;
     width: 46px;
     height: 46px;
@@ -120,18 +120,18 @@ body:has(.header:focus-within) {
     transition: width 0.22s ease, opacity 0.16s ease;
 }
 
-.header:hover .nav-label,
-.header:focus-within .nav-label {
+.side-bar:hover .nav-label,
+.side-bar:focus-within .nav-label {
     width: auto;
     opacity: 1;
 }
 
 @media (max-width: 600px) {
     body { padding-right: 0; padding-bottom: calc(82px + env(safe-area-inset-bottom)); }
-    body:has(.header:hover),
-    body:has(.header:focus-within) { padding-right: 0; }
+    body:has(.side-bar:hover),
+    body:has(.side-bar:focus-within) { padding-right: 0; }
 
-    .header {
+    .side-bar {
         top: auto;
         right: auto;
         bottom: calc(6px + env(safe-area-inset-bottom));
@@ -153,9 +153,9 @@ body:has(.header:focus-within) {
         overflow: visible;
     }
 
-    .header:hover,
-    .header:focus-within { width: calc(100% - 12px); }
-    .header-logo { display: none; }
+    .side-bar:hover,
+    .side-bar:focus-within { width: calc(100% - 12px); }
+    .side-bar-logo { display: none; }
     .nav-menu { width: 100%; flex-direction: row; align-items: center; justify-content: space-around; gap: 4px; }
     .nav-menu a {
         flex: 1 1 0;
