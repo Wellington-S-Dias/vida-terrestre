@@ -89,6 +89,22 @@ Como parte do planejamento e da evolução da plataforma, estão previstas funci
 
 ---
 
+## Importar imagens de animais
+
+O importador consulta observações licenciadas do iNaturalist, descarta fotos abaixo de 1200 × 700 px e mostra até seis candidatas por espécie. Por padrão, a galeria inclui apenas animais que ainda não têm imagem. Rode:
+
+```bash
+npm.cmd run importar:imagens
+```
+
+Abra a galeria HTML em `relatorios-imagens/`, escolha uma foto para cada animal com candidatas e use o botão para baixar `imagens-aprovadas.json`. Depois grave somente as imagens escolhidas:
+
+```powershell
+npm.cmd run importar:imagens -- --aplicar --selecoes "$env:USERPROFILE\Downloads\imagens-aprovadas.json"
+```
+
+Animais que já possuem imagem não aparecem na galeria. Para revisar/substituir também as imagens existentes, use `--forcar` tanto na busca quanto ao aplicar as seleções. O importador encontra a espécie pelo nome científico e taxon atual do iNaturalist; não usa o `taxon_id` do banco. Exige observação identificada exatamente como a espécie, qualidade de pesquisa, ao menos duas identificações, licença aceita e resolução alta. Aliases conhecidos: `Chelonoidis carbonaria` → `Chelonoidis carbonarius` e `Aburria jacutinga` → `Pipile jacutinga`. Registros sem correspondência são ignorados. Use `--limite 10` ou `--animal 1` para limitar a busca. A fonte, licença e crédito ficam nos campos `imagem_fonte` e `imagem_credito`. Falhas temporárias de rede são repetidas até quatro vezes.
+
 ## Tecnologias
 
 O projeto utiliza as seguintes tecnologias e ferramentas:
