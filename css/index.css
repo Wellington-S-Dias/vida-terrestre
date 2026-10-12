@@ -44,8 +44,8 @@ body {
     overflow: hidden;
 }
 /* =========================================
-    4. VÍDEOS DE FUNDO */
-.hero-video-container {
+    4. IMAGENS DE FUNDO */
+.hero-image-container {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -54,7 +54,7 @@ body {
     overflow: hidden;
 }
 
-.hero-video {
+.hero-image {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -66,7 +66,7 @@ body {
     z-index: 0;
 }
 
-.hero-video.active {
+.hero-image.active {
     opacity: 1;
 }
 /* =========================================
