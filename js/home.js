@@ -3,36 +3,28 @@ const sections = [
         title: "Animais",
         text: "O mundo é repleto de animais diversos, cada um com seu papel no equilíbrio da vida.",
         videos: [
-            "https://res.cloudinary.com/e6pxjome/video/upload/arara-azul_index.mp4",
-            "https://res.cloudinary.com/e6pxjome/video/upload/logo-guara_index.mp4",
-            "https://res.cloudinary.com/e6pxjome/video/upload/tuiuiu_index.mp4"
+            "https://res.cloudinary.com/fvbohhhk/video/upload/arara-azul_index.mp4"
         ]
     },
     {
         title: "Paisagens",
         text: "Poucos param para perceber as belezas naturais da Terra e tudo aquilo que elas sustentam.",
         videos: [
-            "./src/videos/amazonia(explore).mp4",
-            "./src/videos/mata-atlantica(explore).mp4",
-            "./src/videos/pantanal(explore).mp4"
+            "https://res.cloudinary.com/fvbohhhk/video/upload/lencois-maranhenses.mp4"
         ]
     },
     {
         title: "Habitats",
         text: "Cada espécie depende de um habitat capaz de oferecer as condições necessárias para sua sobrevivência.",
         videos: [
-            "./src/videos/cerrado(explore).mp4",
-            "./src/videos/pantanal(explore).mp4",
-            "./src/videos/caatinga(explore).mp4"
+            "https://res.cloudinary.com/fvbohhhk/video/upload/floresta-tropical.mp4"
         ]
     },
     {
         title: "Conservação",
         text: "Preservar a vida terrestre é garantir que todas essas formas de vida continuem existindo no futuro.",
         videos: [
-            "./src/videos/amazonia(explore).mp4",
-            "./src/videos/cerrado(explore).mp4",
-            "./src/videos/caatinga(explore).mp4"
+            "https://res.cloudinary.com/fvbohhhk/video/upload/reflorestamento.mp4"
         ]
     },
 ];
