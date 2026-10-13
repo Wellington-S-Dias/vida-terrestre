@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/Arara-Azul(Logo-Principal).png" alt="Logo Vida Terrestre" width="220">
+  <img src="src/images/Arara-Azul(Logo-Principal).png" alt="Logo Vida Terrestre" width="220">
 </p>
 
 <h1 align="center">🌎 Vida Terrestre</h1>
@@ -125,9 +125,9 @@ O objetivo é apresentar o conteúdo ambiental de maneira visual, organizada e a
 ```text
 Vida-Terrestre/
 │
-├── Assets/
+├── src/
 │   ├── images/
-│   └── vids/
+│   └── videos/
 │
 ├── CSS/
 │   └── layout.css
