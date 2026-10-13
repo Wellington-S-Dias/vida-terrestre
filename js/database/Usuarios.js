@@ -40,7 +40,7 @@ class Usuarios{
         if(!email||!password){
             return callback({'error':'Preencha todos os campos corretamente'})
         }
-        var sql='select email,password from usuario where email=?'
+        var sql='select name,email,password from usuario where email=?'
         connection.query(sql,email,(error,results)=>{
             if(error)throw error
             
@@ -50,7 +50,10 @@ class Usuarios{
             var user=results[0]
             const passwordVali=bcrypt.compareSync(usuario.password,user.password)
             if(user.email==usuario.email && passwordVali){
-                return callback({'message':'Logado com sucesso!'})
+                return callback({
+                    message: 'Logado com sucesso!',
+                    usuario: { name: user.name, email: user.email }
+                })
             }
             return callback({'error':'Usuário ou senha incorreta'})
         })

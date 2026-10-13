@@ -55,8 +55,11 @@ vida-terrestre/
 ├── JS/
 │   └── arquivos JavaScript
 │
-├── images/
-│   └── imagens utilizadas pelo projeto
+├── src/
+│   ├── images/
+│   │   └── imagens utilizadas pelo projeto
+│   └── videos/
+│       └── vídeos utilizados pelo projeto
 │
 └── Assets/
     └── arquivos locais e recursos do projeto

@@ -17,7 +17,7 @@ document.getElementById("form_Cadastro").addEventListener("submit", function(eve
         return;
     }
 
-    fetch("http://localhost:3000/cadastro", {
+    fetch('/cadastro', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -40,7 +40,7 @@ document.getElementById("form_Cadastro").addEventListener("submit", function(eve
         document.getElementById('password2_C').value = '';
         document.getElementById('termos').checked = false;
         alert(dados.message);
-        switchTab("entrar", document.getElementById("buttonEntr"));
+        switchTab('entrar', document.querySelector('.tab-btn'));
     });
 });
 
@@ -54,7 +54,7 @@ document.getElementById("form_Login").addEventListener("submit", function(event)
     var senha = document.getElementById('password_L').value;
 
 
-    fetch('http://localhost:3000/login', {
+    fetch('/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -73,7 +73,10 @@ document.getElementById("form_Login").addEventListener("submit", function(event)
 
         document.getElementById('email_L').value = '';
         document.getElementById('password_L').value = '';
-
-        alert(dados.message)
+        const account = dados.usuario?.name
+            ? dados.usuario
+            : { name: inmail.split('@')[0], email: inmail };
+        localStorage.setItem('vidaTerrestreUsuario', JSON.stringify(account));
+        window.location.href = 'conta.html';
     });
 });
