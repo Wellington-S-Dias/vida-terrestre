@@ -3,6 +3,8 @@
     if (!link) return;
 
     const storageKey = 'vidaTerrestreUsuario';
+    const defaultLinkMarkup = link.innerHTML;
+    let logoutButton = null;
     const currentUrl = new URL(window.location.href);
     if (currentUrl.searchParams.has('logout')) {
         localStorage.removeItem(storageKey);
@@ -20,7 +22,14 @@
     }
 
     function renderAccount(account) {
-        if (!account?.name) return;
+        if (!account?.name) {
+            link.href = 'login.html';
+            link.setAttribute('aria-label', 'Entrar');
+            link.innerHTML = defaultLinkMarkup;
+            logoutButton?.remove();
+            logoutButton = null;
+            return;
+        }
 
         const name = account.name.trim();
         const initials = name.split(/\s+/).slice(0, 2).map(part => part[0]).join('').toUpperCase();
@@ -46,6 +55,28 @@
         label.className = 'nav-label';
         label.textContent = name;
         link.append(label);
+
+        if (!logoutButton) {
+            logoutButton = document.createElement('button');
+            logoutButton.className = 'logout-account';
+            logoutButton.type = 'button';
+            logoutButton.setAttribute('aria-label', 'Sair da conta');
+            logoutButton.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5M15 12H3m9-8h7a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-7"/></svg><span class="nav-label">Sair da conta</span>';
+            logoutButton.addEventListener('click', async () => {
+                logoutButton.disabled = true;
+                localStorage.removeItem(storageKey);
+                renderAccount(null);
+
+                try {
+                    await fetch('/logout', { credentials: 'same-origin' });
+                } catch {
+                    // A navegação e a limpeza local ainda funcionam sem resposta do servidor.
+                } finally {
+                    window.location.assign('login.html?logout=1');
+                }
+            });
+            link.closest('.nav-menu').append(logoutButton);
+        }
     }
 
     renderAccount(readAccount());
