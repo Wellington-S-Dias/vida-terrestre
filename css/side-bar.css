@@ -95,6 +95,50 @@ body:has(.side-bar:focus-within) {
     margin-top: auto;
 }
 
+.logout-account {
+    width: 100%;
+    min-width: 0;
+    height: 50px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--text-primary, #D8EAF2);
+    font: inherit;
+    text-align: left;
+    white-space: nowrap;
+    opacity: 0.82;
+    cursor: pointer;
+    transition: opacity 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.logout-account svg {
+    width: 24px;
+    height: 24px;
+    flex: 0 0 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.logout-account:hover,
+.logout-account:focus-visible {
+    color: #ff7474;
+    background: rgba(220, 45, 55, 0.14);
+    opacity: 1;
+    outline: none;
+}
+
+.logout-account:focus-visible {
+    outline: 2px solid #ff7474;
+    outline-offset: 2px;
+}
+
 .nav-menu a:hover,
 .nav-menu a:focus-visible {
     opacity: 1;
@@ -181,6 +225,16 @@ body:has(.side-bar:focus-within) {
         gap: 8px;
         border-radius: 999px;
         color: var(--text-primary, #D8EAF2);
+        opacity: 1;
+    }
+    .logout-account {
+        flex: 1 1 0;
+        width: auto;
+        justify-content: center;
+        height: 48px;
+        padding: 0 7px;
+        gap: 8px;
+        border-radius: 999px;
         opacity: 1;
     }
     .nav-menu a:hover,
