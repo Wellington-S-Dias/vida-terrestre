@@ -24,6 +24,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '..')));
 
+app.use(session({
+    secret: 'vida-terrestre-secret',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 // ============================================================
 // MYSQL
 // ============================================================
@@ -116,9 +124,14 @@ app.post('/login', (req, res) => {
     const usuario = req.body;
 
     Usuarios.login(usuario, (message) => {
+        if (message.error) return res.status(401).json(message);
 
-        res.json(message);
-
+        req.login(message.usuario, error => {
+            if (error) {
+                return res.status(500).json({ error: 'Não foi possível iniciar a sessão.' });
+            }
+            res.json(message);
+        });
     });
 
 });
@@ -162,30 +175,11 @@ app.get('/logout', (req, res) => {
 
         }
 
-        res.redirect('/login.html');
+        res.redirect('/login.html?logout=1');
 
     });
 
 });
-
-
-// ============================================================
-// SESSÃO
-// ============================================================
-
-app.use(session({
-    secret: 'vida-terrestre-secret',
-    resave: false,
-    saveUninitialized: false
-}));
-
-
-// ============================================================
-// PASSPORT
-// ============================================================
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 
 // ============================================================
