@@ -52,6 +52,16 @@ body {
   overflow: hidden;
 }
 
+.account-banner::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 38%;
+    background: linear-gradient(to bottom, transparent, var(--bg-primary));
+    pointer-events: none;
+    z-index: 2;
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -99,6 +109,12 @@ body {
 
 .account-info {
   flex-direction: column;
+}
+
+.account-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .account-info h2 {
