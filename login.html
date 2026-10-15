@@ -88,122 +88,64 @@
             <p>Participe da comunidade</p>
           </div>
         </div>
-      </div>
 
-      <div class="login-right">
-        <div class="login-card">
-          <img
-            src="./src/images/Arara-Azul(Logo-Principal).png"
-            alt="Logo"
-            class="card-logo"
-          />
+        <div class="login-right">
+            <div class="login-card">
+                <img src="./src/images/Arara-Azul(Logo-Principal).png" alt="Logo" class="card-logo">
 
-          <!-- Alternador de Abas -->
-          <div class="tab-container">
-            <div class="glider"></div>
-            <button class="tab-btn active" onclick="switchTab('entrar', this)">
-              Entrar
-            </button>
-            <button class="tab-btn" onclick="switchTab('cadastrar', this)">
-              Cadastrar
-            </button>
-          </div>
+                <!-- Alternador de Abas -->
+                <div class="tab-container">
+                    <div class="glider"></div>
+                    <button class="tab-btn active" onclick="switchTab('entrar', this)">Entrar</button>
+                    <button class="tab-btn" onclick="switchTab('cadastrar', this)">Cadastrar</button>
+                </div>
 
-          <!-- Container do Slider (Transição Suave) -->
-          <div class="forms-wrapper">
-            <div class="forms-slider" id="formsSlider">
-              <!-- Card de Login -->
-              <div id="card-entrar" class="card-form">
-                <form id="form_Login" class="login-form">
-                  <input
-                    id="email_L"
-                    class="inp-info"
-                    type="email"
-                    placeholder="E-mail"
-                    required
-                  />
-                  <input
-                    id="password_L"
-                    class="inp-info"
-                    type="password"
-                    placeholder="Senha"
-                    required
-                  />
+                <!-- Container do Slider (Transição Suave) -->
+                <div class="forms-wrapper">
+                    <div class="forms-slider" id="formsSlider">
+                        <!-- Card de Login -->
+                        <div id="form_Login" class="card-form" >
+                            <form id="form_Login" class="login-form">
+                                <input id="email_L" class="inp-info" type="email" placeholder="E-mail" required>
+                                <input id="password_L" class="inp-info" type="password" placeholder="Senha" required>
 
-                  <div class="checkbox-row">
-                    <label class="checkbox">
-                      <input type="checkbox" name="lembra" />
-                      <span>Lembrar de mim</span>
-                    </label>
-                    <a href="#" class="forgot-pass">Esqueceu a senha?</a>
-                  </div>
+                                <div class="checkbox-row">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="lembra">
+                                        <span>Lembrar de mim</span>
+                                    </label>
+                                    <a href="#" class="forgot-pass">Esqueceu a senha?</a>
+                                </div>
+                                
+                                <button class="btn-primary" type="submit">Entrar</button>
 
-                  <button class="btn-primary" type="submit">Entrar</button>
+                                <div class="divider">
+                                    <span>ou</span>
+                                </div>
 
-                  <div class="divider">
-                    <span>ou</span>
-                  </div>
+                                <a  class="btn-outline" href="/auth/google"><img src="/src/images/icons/google-icon.png" alt="Google" class="google">Continuar com o Google</a>
+                                <a  class="btn-outline" href="/auth/github"><img src="/src/images/icons/github-icon.png" alt="Github" class="github">Continuar com o Github</a>
+                            </form>
+                        </div>
 
-                  <a class="btn-outline" href="/auth/google"
-                    ><img
-                      src="/src/images/icons/google-icon.png"
-                      alt="Google"
-                      class="google"
-                    />Continuar com o Google</a
-                  >
-                  <a class="btn-outline" href="/auth/github"
-                    ><img
-                      src="/src/images/icons/github-icon.png"
-                      alt="Github"
-                      class="github"
-                    />Continuar com o Github</a
-                  >
-                </form>
-              </div>
+                        <!-- Card de Cadastro -->
+                        <div id="card-cadastrar" class="card-form">
+                            <form id="form_Cadastro">
+                                <input class="inp-info" id="name_C" type="text" placeholder="Nome completo" required>
+                                <input class="inp-info" id="email_C" type="email" placeholder="E-mail" required>
+                                <input class="inp-info" id="password_C" type="password" placeholder="Senha" required>
+                                <input class="inp-info" id="password2_C" type="password" placeholder="Confirme a senha" required>
 
-              <!-- Card de Cadastro -->
-              <div id="card-cadastrar" class="card-form">
-                <form id="form_Cadastro">
-                  <input
-                    class="inp-info"
-                    id="name_C"
-                    type="text"
-                    placeholder="Nome completo"
-                    required
-                  />
-                  <input
-                    class="inp-info"
-                    id="email_C"
-                    type="email"
-                    placeholder="E-mail"
-                    required
-                  />
-                  <input
-                    class="inp-info"
-                    id="password_C"
-                    type="password"
-                    placeholder="Senha"
-                    required
-                  />
-                  <input
-                    class="inp-info"
-                    id="password2_C"
-                    type="password"
-                    placeholder="Confirme a senha"
-                    required
-                  />
+                                <label class="checkbox terms">
+                                    <input id="termos" type="checkbox" name="termos" required>
+                                    <span>Li e aceito os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a></span>
+                                </label>
 
-                  <label class="checkbox terms">
-                    <input id="termos" type="checkbox" name="termos" required />
-                    <span
-                      >Li e aceito os <a href="#">Termos de Uso</a> e a
-                      <a href="#">Política de Privacidade</a></span
-                    >
-                  </label>
-
-                  <button class="btn-primary" type="submit">Cadastrar</button>
-                </form>
-              </div>
+                                <button class="btn-primary" type="submit">Cadastrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
           </div>
         </div>
