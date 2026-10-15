@@ -27,7 +27,13 @@ app.use(express.static(path.join(__dirname, '..')));
 app.use(session({
     secret: 'vida-terrestre-secret',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: 'auto',
+        maxAge: 7 * 24 * 60 * 60 * 1000
+    }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -48,6 +54,39 @@ const db = mysql.createConnection({
 
 });
 
+let profileSchemaReady = false;
+
+function ensureProfileColumns(columns) {
+    db.query('SHOW COLUMNS FROM usuario', (error, results) => {
+        if (error) {
+            console.error('Erro ao verificar as colunas do perfil:', error);
+            return;
+        }
+
+        const existingColumns = new Set(results.map(column => column.Field));
+        const addMissingColumn = index => {
+            if (index >= columns.length) {
+                console.log('Colunas do perfil verificadas.');
+                profileSchemaReady = true;
+                return;
+            }
+
+            const [name, definition] = columns[index];
+            if (existingColumns.has(name)) return addMissingColumn(index + 1);
+
+            db.query(`ALTER TABLE usuario ADD COLUMN ${name} ${definition}`, alterError => {
+                if (alterError) {
+                    console.error(`Erro ao criar a coluna ${name}:`, alterError);
+                    return;
+                }
+                addMissingColumn(index + 1);
+            });
+        };
+
+        addMissingColumn(0);
+    });
+}
+
 
 db.connect(erro => {
 
@@ -62,9 +101,13 @@ db.connect(erro => {
     }
 
     console.log('MySQL conectado!');
+    ensureProfileColumns([
+        ['banner', 'TEXT NULL'],
+        ['photo', 'TEXT NULL'],
+        ['quote', 'VARCHAR(180) NULL']
+    ]);
 
 });
-
 
 // ============================================================
 // GET ANIMAIS
@@ -143,6 +186,8 @@ app.post('/login', (req, res) => {
 
 app.get('/usuario', (req, res) => {
 
+    res.set('Cache-Control', 'no-store');
+
     if (!req.isAuthenticated()) {
 
         return res.status(401).json({
@@ -151,15 +196,64 @@ app.get('/usuario', (req, res) => {
 
     }
 
-    res.json({
-        logado: true,
-        usuario: req.user
-    });
+    const { id, name, email, banner, photo, quote } = req.user;
+    res.json({ logado: true, usuario: { id, name, email, banner, photo, quote } });
 
 });
 
+app.put('/usuario/perfil', (req, res) => {
+    if (!req.isAuthenticated()) {
+        return res.status(401).json({ erro: 'Entre na sua conta para salvar o perfil.' });
+    }
+    if (!profileSchemaReady) {
+        return res.status(503).json({ erro: 'O banco de dados ainda está preparando o perfil. Tente novamente em instantes.' });
+    }
 
-// ============================================================
+    const name = typeof req.body.name === 'string' ? req.body.name.trim() : '';
+    const banner = typeof req.body.banner === 'string' ? req.body.banner.trim() : '';
+    const photo = typeof req.body.photo === 'string' ? req.body.photo.trim() : '';
+    const quote = typeof req.body.quote === 'string' ? req.body.quote.trim() : '';
+
+    if (!name || name.length > 50) {
+        return res.status(400).json({ erro: 'O nome deve ter entre 1 e 50 caracteres.' });
+    }
+    if (quote.length > 180 || banner.length > 2048 || photo.length > 2048) {
+        return res.status(400).json({ erro: 'A frase ou uma das URLs ultrapassa o limite permitido.' });
+    }
+
+    const validImageUrl = value => {
+        if (!value) return true;
+        try {
+            return ['http:', 'https:'].includes(new URL(value).protocol);
+        } catch {
+            return false;
+        }
+    };
+    if (!validImageUrl(banner) || !validImageUrl(photo)) {
+        return res.status(400).json({ erro: 'Use URLs de imagem iniciadas por http:// ou https://.' });
+    }
+
+    db.query(
+        'UPDATE usuario SET name = ?, banner = ?, photo = ?, quote = ? WHERE id = ?',
+        [name, banner || null, photo || null, quote || null, req.user.id],
+        error => {
+            if (error) {
+                console.error('Erro ao salvar o perfil:', error);
+                return res.status(500).json({ erro: 'Não foi possível salvar as alterações do perfil.' });
+            }
+
+            const updatedUser = { ...req.user, name, banner: banner || null, photo: photo || null, quote: quote || null };
+            req.login(updatedUser, loginError => {
+                if (loginError) {
+                    console.error('Erro ao atualizar a sessão do perfil:', loginError);
+                    return res.status(500).json({ erro: 'Perfil salvo, mas não foi possível atualizar a sessão.' });
+                }
+                res.json({ usuario: { id: updatedUser.id, name, email: updatedUser.email, banner: updatedUser.banner, photo: updatedUser.photo, quote: updatedUser.quote } });
+            });
+        }
+    );
+});
+
 // LOGOUT
 // ============================================================
 
@@ -186,6 +280,16 @@ app.get('/logout', (req, res) => {
 // GOOGLE LOGIN
 // ============================================================
 
+function finishOAuthUser(user, avatarUrl, done) {
+    if (!avatarUrl || user.photo) return done(null, user);
+
+    db.query("UPDATE usuario SET photo = ? WHERE id = ? AND (photo IS NULL OR photo = '')", [avatarUrl, user.id], error => {
+        if (error) return done(error);
+        user.photo = avatarUrl;
+        done(null, user);
+    });
+}
+
 passport.use(new GoogleStrategy({
 
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -199,6 +303,7 @@ passport.use(new GoogleStrategy({
     const googleId = profile.id;
     const name = profile.displayName;
     const email = profile.emails?.[0]?.value;
+    const avatarUrl = profile.photos?.[0]?.value || null;
 
     console.log('Usuário recebido do Google:');
     console.log({
@@ -239,7 +344,7 @@ passport.use(new GoogleStrategy({
                     'Usuário Google já existe.'
                 );
 
-                return done(null, resultados[0]);
+                return finishOAuthUser(resultados[0], avatarUrl, done);
             }
 
 
@@ -301,7 +406,7 @@ passport.use(new GoogleStrategy({
                                     'Google vinculado à conta existente!'
                                 );
 
-                                return done(null, usuario);
+                                return finishOAuthUser(usuario, avatarUrl, done);
 
                             }
                         );
@@ -322,7 +427,9 @@ passport.use(new GoogleStrategy({
 
                         password: null,
 
-                        google_id: googleId
+                        google_id: googleId,
+
+                        photo: avatarUrl
 
                     };
 
@@ -390,6 +497,7 @@ passport.use(new GitHubStrategy({
         const name =
             profile.displayName ||
             profile.username;
+        const avatarUrl = profile.photos?.[0]?.value || null;
 
 
         // ========================================================
@@ -467,10 +575,7 @@ passport.use(new GitHubStrategy({
                         'Usuário GitHub já existe.'
                     );
 
-                    return done(
-                        null,
-                        resultados[0]
-                    );
+                    return finishOAuthUser(resultados[0], avatarUrl, done);
 
                 }
 
@@ -537,10 +642,7 @@ passport.use(new GitHubStrategy({
                                     );
 
 
-                                    return done(
-                                        null,
-                                        usuario
-                                    );
+                                    return finishOAuthUser(usuario, avatarUrl, done);
 
                                 }
                             );
@@ -561,6 +663,8 @@ passport.use(new GitHubStrategy({
                             email: email,
 
                             password: null,
+
+                            photo: avatarUrl,
 
                             google_id: null,
 
@@ -631,12 +735,40 @@ passport.use(new GitHubStrategy({
 // ============================================================
 
 passport.serializeUser((user, done) => {
-    done(null, user);
+    done(null, user.id);
 });
 
-passport.deserializeUser((user, done) => {
-    done(null, user);
+passport.deserializeUser((userId, done) => {
+    db.query(
+        'SELECT id, name, email, banner, photo, quote FROM usuario WHERE id = ?',
+        [userId],
+        (error, results) => {
+            if (error) return done(error);
+            done(null, results[0] || false);
+        }
+    );
 });
+
+function completeOAuthLogin(req, res, provider) {
+    if (!req.user) {
+        return res.redirect('/login.html?auth_error=missing_user');
+    }
+
+    req.login(req.user, loginError => {
+        if (loginError) {
+            console.error(`Erro ao iniciar a sessão do ${provider}:`, loginError);
+            return res.redirect('/login.html?auth_error=session');
+        }
+
+        req.session.save(sessionError => {
+            if (sessionError) {
+                console.error(`Erro ao salvar a sessão do ${provider}:`, sessionError);
+                return res.redirect('/login.html?auth_error=session');
+            }
+            res.redirect(`/conta.html?login=${provider.toLowerCase()}`);
+        });
+    });
+}
 
 
 // ============================================================
@@ -662,8 +794,7 @@ app.get(
     (req, res) => {
 
         console.log('Login Google realizado!');
-
-        res.redirect('/');
+        completeOAuthLogin(req, res, 'Google');
     }
 );
 
@@ -687,8 +818,7 @@ app.get(
         console.log(
             'Login GitHub realizado!'
         );
-
-        res.redirect('/');
+        completeOAuthLogin(req, res, 'GitHub');
     }
 );
 // ============================================================

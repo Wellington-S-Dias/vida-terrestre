@@ -32,24 +32,15 @@
         }
 
         const name = account.name.trim();
-        const initials = name.split(/\s+/).slice(0, 2).map(part => part[0]).join('').toUpperCase();
         link.href = 'conta.html';
         link.setAttribute('aria-label', `Conta de ${name}`);
         link.replaceChildren();
 
-        if (account.photo) {
-            const avatar = document.createElement('img');
-            avatar.className = 'account-avatar';
-            avatar.src = account.photo;
-            avatar.alt = '';
-            link.append(avatar);
-        } else {
-            const avatar = document.createElement('span');
-            avatar.className = 'account-avatar';
-            avatar.setAttribute('aria-hidden', 'true');
-            avatar.textContent = initials;
-            link.append(avatar);
-        }
+        const avatar = document.createElement('img');
+        avatar.className = 'account-avatar';
+        avatar.src = account.photo || '/src/images/Tuiuiú(Pantanal).png';
+        avatar.alt = '';
+        link.append(avatar);
 
         const label = document.createElement('span');
         label.className = 'nav-label';
@@ -82,7 +73,8 @@
     renderAccount(readAccount());
 
     // Busca também logins Google/GitHub, cuja conta fica na sessão do servidor.
-    fetch('/usuario', { credentials: 'same-origin' })
+    function loadAuthenticatedAccount() {
+        return fetch('/usuario', { credentials: 'same-origin', cache: 'no-store' })
         .then(response => response.ok ? response.json() : null)
         .then(data => {
             const user = data?.usuario;
@@ -91,16 +83,24 @@
             const account = {
                 name: user.name || user.displayName || user.username || user.email?.split('@')[0],
                 email: user.email || user.emails?.[0]?.value || '',
-                photo: user.photo || user.photos?.[0]?.value || user._json?.avatar_url || ''
+                banner: user.banner || '',
+                photo: user.photo || user.photos?.[0]?.value || user._json?.avatar_url || '',
+                quote: user.quote || ''
             };
             if (!account.name) return;
 
             localStorage.setItem(storageKey, JSON.stringify(account));
             renderAccount(account);
+            window.dispatchEvent(new CustomEvent('account-updated', { detail: account }));
         })
         .catch(() => {});
+    }
+
+    loadAuthenticatedAccount();
+    window.addEventListener('pageshow', loadAuthenticatedAccount);
 
     window.addEventListener('storage', event => {
         if (event.key === storageKey) renderAccount(readAccount());
     });
+    window.addEventListener('account-updated', event => renderAccount(event.detail || readAccount()));
 })();

@@ -165,6 +165,7 @@ body:has(.side-bar:focus-within) {
     display: grid;
     place-items: center;
     border-radius: 50%;
+    object-fit: cover;
     background: #0B72C9;
     color: #fff;
     font-size: 11px;
