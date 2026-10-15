@@ -1,33 +1,32 @@
-
 const sections = [
-    {
-        title: "Animais",
-        text: "O mundo é repleto de animais diversos, cada um com seu papel no equilíbrio da vida.",
-        videos: [
-            "https://res.cloudinary.com/fvbohhhk/video/upload/w_1280,h_720,c_limit,q_auto,vc_h264/arara-azul_index.mp4"
-        ]
-    },
-    {
-        title: "Paisagens",
-        text: "Poucos param para perceber as belezas naturais da Terra e tudo aquilo que elas sustentam.",
-        videos: [
-            "https://res.cloudinary.com/fvbohhhk/video/upload/w_1280,h_720,c_limit,q_auto,vc_h264/lencois-maranhenses.mp4"
-        ]
-    },
-    {
-        title: "Habitats",
-        text: "Cada espécie depende de um habitat capaz de oferecer as condições necessárias para sua sobrevivência.",
-        videos: [
-            "https://res.cloudinary.com/fvbohhhk/video/upload/w_1280,h_720,c_limit,q_auto,vc_h264/floresta.mp4"
-        ]
-    },
-    {
-        title: "Conservação",
-        text: "Preservar a vida terrestre é garantir que todas essas formas de vida continuem existindo no futuro.",
-        videos: [
-            "https://res.cloudinary.com/fvbohhhk/video/upload/w_1280,h_720,c_limit,q_auto,vc_h264/reflorestamento.mp4"
-        ]
-    }
+  {
+    title: "Animais",
+    text: "O mundo é repleto de animais diversos, cada um com seu papel no equilíbrio da vida.",
+    videos: [
+      "https://res.cloudinary.com/fvbohhhk/video/upload/w_1280,h_720,c_limit,q_auto,vc_h264/arara-azul_index.mp4",
+    ],
+  },
+  {
+    title: "Paisagens",
+    text: "Poucos param para perceber as belezas naturais da Terra e tudo aquilo que elas sustentam.",
+    videos: [
+      "https://res.cloudinary.com/fvbohhhk/video/upload/w_1280,h_720,c_limit,q_auto,vc_h264/lencois-maranhenses.mp4",
+    ],
+  },
+  {
+    title: "Habitats",
+    text: "Cada espécie depende de um habitat capaz de oferecer as condições necessárias para sua sobrevivência.",
+    videos: [
+      "https://res.cloudinary.com/fvbohhhk/video/upload/w_1280,h_720,c_limit,q_auto,vc_h264/floresta.mp4",
+    ],
+  },
+  {
+    title: "Conservação",
+    text: "Preservar a vida terrestre é garantir que todas essas formas de vida continuem existindo no futuro.",
+    videos: [
+      "https://res.cloudinary.com/fvbohhhk/video/upload/w_1280,h_720,c_limit,q_auto,vc_h264/reflorestamento.mp4",
+    ],
+  },
 ];
 
 const videos = document.querySelectorAll(".hero-video");
@@ -54,261 +53,247 @@ let preparedVideoSrc = null;
 let preparedVideoIndex = -1;
 
 function getRandomVideo(section) {
-    return section.videos[
-        Math.floor(Math.random() * section.videos.length)
-    ];
+  return section.videos[Math.floor(Math.random() * section.videos.length)];
 }
 
 function updateSectionContent(index) {
-    const section = sections[index];
+  const section = sections[index];
 
-    if (title) title.textContent = section.title;
-    if (text) text.textContent = section.text;
+  if (title) title.textContent = section.title;
+  if (text) text.textContent = section.text;
 
-    if (slideNumber) {
-        slideNumber.textContent =
-            String(index + 1).padStart(2, "0");
-    }
+  if (slideNumber) {
+    slideNumber.textContent = String(index + 1).padStart(2, "0");
+  }
 }
 
 function startProgress() {
-    if (!progressBar) return;
+  if (!progressBar) return;
 
-    progressBar.style.transition = "none";
-    progressBar.style.width = "0%";
+  progressBar.style.transition = "none";
+  progressBar.style.width = "0%";
 
-    // Força o navegador a aplicar o reset.
-    void progressBar.offsetWidth;
+  // Força o navegador a aplicar o reset.
+  void progressBar.offsetWidth;
 
-    progressBar.style.transition =
-        `width ${sectionDuration}ms linear`;
+  progressBar.style.transition = `width ${sectionDuration}ms linear`;
 
-    progressBar.style.width = "100%";
+  progressBar.style.width = "100%";
 }
 
 function clearTimers() {
-    clearTimeout(sectionTimer);
-    clearTimeout(preloadTimer);
+  clearTimeout(sectionTimer);
+  clearTimeout(preloadTimer);
 }
 
 function clearPreparedVideo() {
-    preparedSectionIndex = -1;
-    preparedVideoSrc = null;
-    preparedVideoIndex = -1;
+  preparedSectionIndex = -1;
+  preparedVideoSrc = null;
+  preparedVideoIndex = -1;
 }
 
 function prepareNextVideo() {
-    if (currentSectionIndex < 0 || videos.length < 2) return;
+  if (currentSectionIndex < 0 || videos.length < 2) return;
 
-    const nextSectionIndex =
-        (currentSectionIndex + 1) % sections.length;
+  const nextSectionIndex = (currentSectionIndex + 1) % sections.length;
 
-    // Evita preparar novamente a mesma seção.
-    if (preparedSectionIndex === nextSectionIndex) return;
+  // Evita preparar novamente a mesma seção.
+  if (preparedSectionIndex === nextSectionIndex) return;
 
-    const nextSection = sections[nextSectionIndex];
-    const nextVideoIndex =
-        currentVideoIndex === 0 ? 1 : 0;
+  const nextSection = sections[nextSectionIndex];
+  const nextVideoIndex = currentVideoIndex === 0 ? 1 : 0;
 
-    const nextVideo = videos[nextVideoIndex];
-    const src = getRandomVideo(nextSection);
+  const nextVideo = videos[nextVideoIndex];
+  const src = getRandomVideo(nextSection);
 
-    nextVideo.pause();
-    nextVideo.classList.remove("active");
+  nextVideo.pause();
+  nextVideo.classList.remove("active");
 
-    preparedSectionIndex = nextSectionIndex;
-    preparedVideoSrc = src;
-    preparedVideoIndex = nextVideoIndex;
+  preparedSectionIndex = nextSectionIndex;
+  preparedVideoSrc = src;
+  preparedVideoIndex = nextVideoIndex;
 
-    if (nextVideo.getAttribute("src") !== src) {
-        nextVideo.src = src;
-        nextVideo.load();
-    }
+  if (nextVideo.getAttribute("src") !== src) {
+    nextVideo.src = src;
+    nextVideo.load();
+  }
 
-    // O carregamento começa antes da transição.
-    nextVideo.preload = "auto";
+  // O carregamento começa antes da transição.
+  nextVideo.preload = "auto";
 }
 
 function waitUntilPlayable(video, id) {
-    return new Promise((resolve, reject) => {
-        if (id !== transitionId) {
-            reject(new Error("Transição cancelada"));
-            return;
-        }
+  return new Promise((resolve, reject) => {
+    if (id !== transitionId) {
+      reject(new Error("Transição cancelada"));
+      return;
+    }
 
-        if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
-            resolve();
-            return;
-        }
+    if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+      resolve();
+      return;
+    }
 
-        let timeout;
+    let timeout;
 
-        function cleanup() {
-            video.removeEventListener("canplay", onReady);
-            video.removeEventListener("error", onError);
-            clearTimeout(timeout);
-        }
+    function cleanup() {
+      video.removeEventListener("canplay", onReady);
+      video.removeEventListener("error", onError);
+      clearTimeout(timeout);
+    }
 
-        function onReady() {
-            cleanup();
-            resolve();
-        }
+    function onReady() {
+      cleanup();
+      resolve();
+    }
 
-        function onError() {
-            cleanup();
-            reject(new Error("Falha ao carregar o vídeo"));
-        }
+    function onError() {
+      cleanup();
+      reject(new Error("Falha ao carregar o vídeo"));
+    }
 
-        video.addEventListener("canplay", onReady);
-        video.addEventListener("error", onError);
+    video.addEventListener("canplay", onReady);
+    video.addEventListener("error", onError);
 
-        timeout = setTimeout(() => {
-            cleanup();
-            reject(new Error("O vídeo demorou demais para carregar"));
-        }, 25000);
+    timeout = setTimeout(() => {
+      cleanup();
+      reject(new Error("O vídeo demorou demais para carregar"));
+    }, 25000);
 
-        // Evita perder um evento que já ocorreu.
-        if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
-            cleanup();
-            resolve();
-        }
-    });
+    // Evita perder um evento que já ocorreu.
+    if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+      cleanup();
+      resolve();
+    }
+  });
 }
 
 function scheduleNextSection() {
-    clearTimers();
+  clearTimers();
 
-    // Prepara o próximo vídeo três segundos antes.
-    preloadTimer = setTimeout(() => {
-        prepareNextVideo();
-    }, Math.max(
-        0,
-        sectionDuration - transitionDuration - preloadLeadTime
-    ));
+  // Prepara o próximo vídeo três segundos antes.
+  preloadTimer = setTimeout(
+    () => {
+      prepareNextVideo();
+    },
+    Math.max(0, sectionDuration - transitionDuration - preloadLeadTime),
+  );
 
-    // Começa o crossfade pouco antes de a barra chegar ao fim.
-    sectionTimer = setTimeout(() => {
-        const nextIndex =
-            (currentSectionIndex + 1) % sections.length;
+  // Começa o crossfade pouco antes de a barra chegar ao fim.
+  sectionTimer = setTimeout(
+    () => {
+      const nextIndex = (currentSectionIndex + 1) % sections.length;
 
-        loadSection(nextIndex);
-    }, Math.max(0, sectionDuration - transitionDuration));
+      loadSection(nextIndex);
+    },
+    Math.max(0, sectionDuration - transitionDuration),
+  );
 }
 
 async function loadSection(index) {
-    clearTimers();
+  clearTimers();
 
-    const id = ++transitionId;
-    const section = sections[index];
+  const id = ++transitionId;
+  const section = sections[index];
 
-    if (!section || videos.length < 2) return;
+  if (!section || videos.length < 2) return;
 
-    let nextVideoIndex;
-    let src;
+  let nextVideoIndex;
+  let src;
 
-    // Reutiliza o vídeo que já começou a ser carregado.
-    if (preparedSectionIndex === index && preparedVideoSrc) {
-        nextVideoIndex = preparedVideoIndex;
-        src = preparedVideoSrc;
-    } else {
-        nextVideoIndex =
-            currentVideoIndex === 0 ? 1 : 0;
+  // Reutiliza o vídeo que já começou a ser carregado.
+  if (preparedSectionIndex === index && preparedVideoSrc) {
+    nextVideoIndex = preparedVideoIndex;
+    src = preparedVideoSrc;
+  } else {
+    nextVideoIndex = currentVideoIndex === 0 ? 1 : 0;
 
-        src = getRandomVideo(section);
+    src = getRandomVideo(section);
+  }
+
+  const nextVideo = videos[nextVideoIndex];
+
+  const previousVideo =
+    currentVideoIndex >= 0 ? videos[currentVideoIndex] : null;
+
+  nextVideo.pause();
+  nextVideo.classList.remove("active");
+
+  // Invalida o estado preparado para a próxima seção.
+  clearPreparedVideo();
+
+  if (nextVideo.getAttribute("src") !== src) {
+    nextVideo.src = src;
+    nextVideo.load();
+  }
+
+  try {
+    await waitUntilPlayable(nextVideo, id);
+
+    if (id !== transitionId) return;
+
+    nextVideo.currentTime = 0;
+
+    // Aguarda o navegador confirmar o início da reprodução.
+    await nextVideo.play();
+
+    if (id !== transitionId) {
+      nextVideo.pause();
+      return;
     }
 
-    const nextVideo = videos[nextVideoIndex];
+    // Atualiza o texto somente quando o vídeo iniciar.
+    currentSectionIndex = index;
+    currentVideoIndex = nextVideoIndex;
 
-    const previousVideo =
-        currentVideoIndex >= 0
-            ? videos[currentVideoIndex]
-            : null;
+    updateSectionContent(index);
+    startProgress();
 
-    nextVideo.pause();
-    nextVideo.classList.remove("active");
+    nextVideo.classList.add("active");
 
-    // Invalida o estado preparado para a próxima seção.
-    clearPreparedVideo();
-
-    if (nextVideo.getAttribute("src") !== src) {
-        nextVideo.src = src;
-        nextVideo.load();
+    if (previousVideo && previousVideo !== nextVideo) {
+      setTimeout(() => {
+        previousVideo.classList.remove("active");
+        previousVideo.pause();
+      }, transitionDuration);
     }
 
-    try {
-        await waitUntilPlayable(nextVideo, id);
+    // A próxima janela começa quando o crossfade atual termina,
+    // mantendo cada seção com sectionDuration entre os inícios.
+    setTimeout(scheduleNextSection, transitionDuration);
+  } catch (error) {
+    if (id !== transitionId) return;
 
-        if (id !== transitionId) return;
-
-        nextVideo.currentTime = 0;
-
-        // Aguarda o navegador confirmar o início da reprodução.
-        await nextVideo.play();
-
-        if (id !== transitionId) {
-            nextVideo.pause();
-            return;
-        }
-
-        // Atualiza o texto somente quando o vídeo iniciar.
-        currentSectionIndex = index;
-        currentVideoIndex = nextVideoIndex;
-
-        updateSectionContent(index);
-        startProgress();
-
-        nextVideo.classList.add("active");
-
-        if (previousVideo && previousVideo !== nextVideo) {
-            setTimeout(() => {
-                previousVideo.classList.remove("active");
-                previousVideo.pause();
-            }, transitionDuration);
-        }
-
-        // A próxima janela começa quando o crossfade atual termina,
-        // mantendo cada seção com sectionDuration entre os inícios.
-        setTimeout(scheduleNextSection, transitionDuration);
-
-    } catch (error) {
-        if (id !== transitionId) return;
-
-        if (error.name !== "AbortError") {
-            console.error("Erro ao trocar vídeo:", error);
-        }
-
-        // Tenta novamente sem avançar o texto.
-        sectionTimer = setTimeout(() => {
-            if (id === transitionId) {
-                loadSection(index);
-            }
-        }, 1000);
+    if (error.name !== "AbortError") {
+      console.error("Erro ao trocar vídeo:", error);
     }
+
+    // Tenta novamente sem avançar o texto.
+    sectionTimer = setTimeout(() => {
+      if (id === transitionId) {
+        loadSection(index);
+      }
+    }, 1000);
+  }
 }
 
 function initializeHome() {
-    if (videos.length < 2 || sections.length === 0) {
-        console.error(
-            "O slider precisa de dois elementos .hero-video."
-        );
-        return;
-    }
+  if (videos.length < 2 || sections.length === 0) {
+    console.error("O slider precisa de dois elementos .hero-video.");
+    return;
+  }
 
-    videos.forEach(video => {
-        video.muted = true;
-        video.playsInline = true;
-        video.preload = "auto";
-    });
+  videos.forEach((video) => {
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = "auto";
+  });
 
-    loadSection(0);
+  loadSection(0);
 }
 
 if (document.readyState === "loading") {
-    document.addEventListener(
-        "DOMContentLoaded",
-        initializeHome,
-        { once: true }
-    );
+  document.addEventListener("DOMContentLoaded", initializeHome, { once: true });
 } else {
-    initializeHome();
+  initializeHome();
 }

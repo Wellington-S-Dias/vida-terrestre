@@ -1,128 +1,118 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+  const botoesBioma = document.querySelectorAll(".biome-btn");
+  const imagemLogo = document.querySelector(".header-logo img");
 
-    const botoesBioma = document.querySelectorAll('.biome-btn');
-    const imagemLogo = document.querySelector('.header-logo img');
+  let videoAtivo = document.getElementById("video-bg-1");
+  let proximoVideo = document.getElementById("video-bg-2");
 
-    let videoAtivo = document.getElementById('video-bg-1');
-    let proximoVideo = document.getElementById('video-bg-2');
+  if (!botoesBioma.length) return;
 
-    if (!botoesBioma.length) return;
+  let estaTransicionando = false;
 
-    let estaTransicionando = false;
+  botoesBioma.forEach((botao) => {
+    botao.addEventListener("click", () => {
+      if (estaTransicionando) return;
 
-    botoesBioma.forEach(botao => {
+      const bioma = botao.getAttribute("data-biome");
+      const novaFonteVideo = botao.getAttribute("data-video");
+      const novaFonteLogo = botao.getAttribute("data-logo");
 
-        botao.addEventListener('click', () => {
+      // A troca de tema não depende do carregamento do vídeo: URLs locais
+      // indisponíveis não podem bloquear os próximos cliques.
+      estaTransicionando = Boolean(
+        novaFonteVideo && videoAtivo && proximoVideo,
+      );
 
-            if (estaTransicionando) return;
+      // =========================
+      // BOTÃO ATIVO
+      // =========================
 
-            const bioma = botao.getAttribute('data-biome');
-            const novaFonteVideo = botao.getAttribute('data-video');
-            const novaFonteLogo = botao.getAttribute('data-logo');
+      botoesBioma.forEach((item) => {
+        item.classList.remove("active");
+      });
 
-            // A troca de tema não depende do carregamento do vídeo: URLs locais
-            // indisponíveis não podem bloquear os próximos cliques.
-            estaTransicionando = Boolean(novaFonteVideo && videoAtivo && proximoVideo);
+      botao.classList.add("active");
 
-            // =========================
-            // BOTÃO ATIVO
-            // =========================
+      // =========================
+      // BIOMA NO BODY
+      // =========================
 
-            botoesBioma.forEach(item => {
-                item.classList.remove('active');
-            });
+      document.body.setAttribute(
+        "data-biome",
+        bioma === "todos" ? "default" : bioma || "default",
+      );
 
-            botao.classList.add('active');
+      // =========================
+      // TROCAR LOGO
+      // =========================
 
-            // =========================
-            // BIOMA NO BODY
-            // =========================
+      if (novaFonteLogo && imagemLogo) {
+        imagemLogo.style.transition = "opacity 0.15s ease";
+        imagemLogo.style.opacity = "0";
 
-            document.body.setAttribute('data-biome', bioma === 'todos' ? 'default' : (bioma || 'default'));
+        setTimeout(() => {
+          imagemLogo.src = novaFonteLogo;
+          imagemLogo.style.opacity = "1";
+        }, 150);
+      }
 
-            // =========================
-            // TROCAR LOGO
-            // =========================
+      // =========================
+      // TROCAR VÍDEO
+      // =========================
 
-            if (novaFonteLogo && imagemLogo) {
+      if (!novaFonteVideo || !videoAtivo || !proximoVideo) return;
 
-                imagemLogo.style.transition = 'opacity 0.15s ease';
-                imagemLogo.style.opacity = '0';
+      proximoVideo.src = novaFonteVideo;
 
-                setTimeout(() => {
-                    imagemLogo.src = novaFonteLogo;
-                    imagemLogo.style.opacity = '1';
-                }, 150);
-            }
+      // Garante que o vídeo começa escondido
+      proximoVideo.classList.remove("active");
 
-            // =========================
-            // TROCAR VÍDEO
-            // =========================
+      proximoVideo.load();
 
-            if (!novaFonteVideo || !videoAtivo || !proximoVideo) return;
+      const trocarVideo = () => {
+        window.clearTimeout(tempoLimiteVideo);
 
-            proximoVideo.src = novaFonteVideo;
+        proximoVideo.removeEventListener("loadeddata", trocarVideo);
 
-            // Garante que o vídeo começa escondido
-            proximoVideo.classList.remove('active');
+        proximoVideo
+          .play()
+          .then(() => {
+            // Mostra o novo vídeo
+            proximoVideo.classList.add("active");
 
-            proximoVideo.load();
+            // Esconde o antigo
+            videoAtivo.classList.remove("active");
 
-            const trocarVideo = () => {
-                window.clearTimeout(tempoLimiteVideo);
+            // Troca as referências
+            const temporario = videoAtivo;
 
-                proximoVideo.removeEventListener(
-                    'loadeddata',
-                    trocarVideo
-                );
+            videoAtivo = proximoVideo;
+            proximoVideo = temporario;
 
-                proximoVideo
-                    .play()
-                    .then(() => {
+            estaTransicionando = false;
+          })
+          .catch((erro) => {
+            console.error("Erro ao reproduzir vídeo:", erro);
 
-                        // Mostra o novo vídeo
-                        proximoVideo.classList.add('active');
+            window.clearTimeout(tempoLimiteVideo);
+            estaTransicionando = false;
+          });
+      };
 
-                        // Esconde o antigo
-                        videoAtivo.classList.remove('active');
-
-                        // Troca as referências
-                        const temporario = videoAtivo;
-
-                        videoAtivo = proximoVideo;
-                        proximoVideo = temporario;
-
-                        estaTransicionando = false;
-                    })
-                    .catch(erro => {
-
-                        console.error(
-                            'Erro ao reproduzir vídeo:',
-                            erro
-                        );
-
-                        window.clearTimeout(tempoLimiteVideo);
-                        estaTransicionando = false;
-                    });
-            };
-
-            const falhaVideo = () => {
-                window.clearTimeout(tempoLimiteVideo);
-                proximoVideo.removeEventListener('loadeddata', trocarVideo);
-                proximoVideo.removeEventListener('error', falhaVideo);
-                estaTransicionando = false;
-            };
-            proximoVideo.addEventListener('loadeddata', trocarVideo, { once: true });
-            proximoVideo.addEventListener('error', falhaVideo, { once: true });
-            // Safari e arquivos ausentes podem não emitir loadeddata/error.
-            const tempoLimiteVideo = window.setTimeout(() => {
-                proximoVideo.removeEventListener('loadeddata', trocarVideo);
-                proximoVideo.removeEventListener('error', falhaVideo);
-                estaTransicionando = false;
-            }, 8000);
-
-        });
-
+      const falhaVideo = () => {
+        window.clearTimeout(tempoLimiteVideo);
+        proximoVideo.removeEventListener("loadeddata", trocarVideo);
+        proximoVideo.removeEventListener("error", falhaVideo);
+        estaTransicionando = false;
+      };
+      proximoVideo.addEventListener("loadeddata", trocarVideo, { once: true });
+      proximoVideo.addEventListener("error", falhaVideo, { once: true });
+      // Safari e arquivos ausentes podem não emitir loadeddata/error.
+      const tempoLimiteVideo = window.setTimeout(() => {
+        proximoVideo.removeEventListener("loadeddata", trocarVideo);
+        proximoVideo.removeEventListener("error", falhaVideo);
+        estaTransicionando = false;
+      }, 8000);
     });
-
+  });
 });
