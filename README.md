@@ -143,22 +143,21 @@ O objetivo é apresentar o conteúdo ambiental de maneira visual, organizada e a
 ## Estrutura do projeto
 
 ```text
-Vida-Terrestre/
-│
-├── src/
-│   ├── images/
-│   └── videos/
-│
-├── CSS/
-│   └── layout.css
-│
-├── JS/
-│   └── main.js
-│   └── slider.js
-│
+vida-terrestre/
+├── css/                 # Estilos das páginas
+├── js/                  # JavaScript executado no navegador
+├── scripts/             # Ferramentas de manutenção e importação
+├── server/              # Aplicação Express e arquivos do banco
+│   └── database/
+├── src/images/          # Imagens e ícones usados pelo site
 ├── index.html
-└── README.md
+├── explore.html
+├── login.html
+└── conta.html
 ```
+
+Para iniciar os endpoints de login e autenticação localmente, configure as
+variáveis do banco e OAuth no arquivo `.env` e execute `npm start`.
 
 ---
 

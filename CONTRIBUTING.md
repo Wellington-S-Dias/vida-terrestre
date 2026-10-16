@@ -2,64 +2,30 @@
 
 Obrigado por contribuir com o projeto **Vida Terrestre**.
 
-Este documento estabelece as principais regras e procedimentos para o desenvolvimento colaborativo do projeto, garantindo que as alterações realizadas pelos integrantes sejam organizadas, rastreáveis e compatíveis entre si.
+## Sobre o projeto
 
----
+O Vida Terrestre é uma plataforma educativa sobre a fauna brasileira, a biodiversidade e a conservação ambiental, desenvolvida como Projeto Integrador do curso de Desenvolvimento Web da Faculdade Senac Criciúma.
 
-## 1. Sobre o projeto
+## Tecnologias
 
-O **Vida Terrestre** é uma plataforma web educativa desenvolvida como parte do Projeto Integrador do curso de Desenvolvimento Web da Faculdade Senac Criciúma.
+- HTML5, CSS3 e JavaScript
+- Node.js, Express e MySQL para os recursos de autenticação e dados
+- Git e GitHub
 
-O projeto possui como foco a fauna brasileira, biodiversidade, preservação ambiental e conscientização sobre a importância dos ecossistemas terrestres, estando relacionado à **ODS 15 – Vida Terrestre**, estabelecida pela Organização das Nações Unidas (ONU).
-
----
-
-## 2. Integrantes
-
-O projeto é desenvolvido pelos seguintes integrantes:
-
-- Augusto Rabelo Borges
-- Davi Cypriano Búrigo
-- Gustavo Fontana Colombo
-- Wellington Sergio Dias
-
----
-
-## 3. Tecnologias utilizadas
-
-O projeto utiliza principalmente:
-
-- HTML5
-- CSS3
-- JavaScript
-- Git
-- GitHub
-
----
-
-## 4. Estrutura do projeto
-
-A estrutura principal do projeto segue a organização:
+## Estrutura do projeto
 
 ```text
 vida-terrestre/
-│
-├── .gitignore
-├── CONTRIBUTING.md
-├── README.md
+├── css/                 # Estilos das páginas
+├── js/                  # JavaScript executado no navegador
+├── scripts/             # Ferramentas de manutenção
+├── server/              # Aplicação Express e banco de dados
+│   └── database/
+├── src/images/          # Imagens e ícones
 ├── index.html
-│
-├── Css/
-│   └── arquivos CSS
-│
-├── JS/
-│   └── arquivos JavaScript
-│
-├── src/
-│   ├── images/
-│   │   └── imagens utilizadas pelo projeto
-│   └── videos/
-│       └── vídeos utilizados pelo projeto
-│
-└── Assets/
-    └── arquivos locais e recursos do projeto
+├── explore.html
+├── login.html
+└── conta.html
+```
+
+Mantenha arquivos do navegador em `js/` e `css/`, código do servidor em `server/` e ferramentas de manutenção em `scripts/`. Não envie `.env`, `node_modules/` ou relatórios gerados para o repositório.

@@ -122,19 +122,22 @@ function pontuarFoto(observacao, foto) {
   )
     return null;
 
+  // Use o original: a variante `large` do iNaturalist pode ter menos pixels
+  // que as dimensões originais usadas pelos filtros abaixo.
   const url = String(foto.url || "").replace(
-    /square\.(jpg|jpeg|png)$/i,
-    "large.$1",
+    /\/(?:square|small|medium|large)\.(jpg|jpeg|png|webp)(?=[?#]|$)/i,
+    "/original.$1",
   );
   if (!/^https:\/\//i.test(url)) return null;
 
   let pontos = 100;
   pontos += Math.min(40, Math.floor((largura * altura) / 50000));
-  pontos += Math.min(20, Number(observacao.identifications_count || 0) * 2);
+  pontos += Math.min(30, Number(observacao.identifications_count || 0) * 2);
   pontos += Number(foto.position === 0) * 5;
 
   return {
     url,
+    urlMiniatura: String(foto.url || ""),
     pontos,
     largura,
     altura,
@@ -221,7 +224,7 @@ async function buscarMelhoresImagens(animal, taxon) {
     taxon_id: String(taxon.id),
   });
   const dados = await consultarApi(`${API}/observations?${parametros}`);
-  const candidatas = [];
+  const candidatasPorUrl = new Map();
 
   for (const observacao of dados.results || []) {
     if (observacao.quality_grade !== "research" || observacao.captive) continue;
@@ -235,12 +238,16 @@ async function buscarMelhoresImagens(animal, taxon) {
         candidata.taxonNome = taxon.name;
         candidata.animalId = animal.id;
         candidata.animalCientifico = animal.nome_cientifico;
-        candidatas.push(candidata);
+        const anterior = candidatasPorUrl.get(candidata.url);
+        if (!anterior || candidata.pontos > anterior.pontos) {
+          candidatasPorUrl.set(candidata.url, candidata);
+        }
       }
     }
   }
 
-  candidatas.sort((a, b) => b.pontos - a.pontos);
+  const candidatas = [...candidatasPorUrl.values()];
+  candidatas.sort((a, b) => b.pontos - a.pontos || b.largura * b.altura - a.largura * a.altura);
   return candidatas.slice(0, MAX_CANDIDATAS_POR_ANIMAL);
 }
 
@@ -279,7 +286,7 @@ function criarGaleria(itens, geradoEm) {
             taxonId: imagem.taxonId,
             imagem,
           });
-          return `<label class="candidato">${recomendada}<img src="${escaparHtml(imagem.url)}" alt="Candidata ${indice + 1} de ${escaparHtml(animal.nome)}" loading="lazy"><p>${imagem.largura} × ${imagem.altura} px · ${escaparHtml(imagem.licenca)}</p><a href="${escaparHtml(imagem.observacaoUrl)}" target="_blank" rel="noreferrer">Conferir observação</a><p>${escaparHtml(imagem.credito)}</p><input required type="radio" name="animal-${animal.id}" value="${indiceCandidato}"><strong>Escolher esta foto</strong></label>`;
+          return `<label class="candidato">${recomendada}<img src="${escaparHtml(imagem.urlMiniatura || imagem.url)}" alt="Candidata ${indice + 1} de ${escaparHtml(animal.nome)}" loading="lazy"><p>${imagem.largura} × ${imagem.altura} px no original · ${escaparHtml(imagem.licenca)}</p><a href="${escaparHtml(imagem.observacaoUrl)}" target="_blank" rel="noreferrer">Conferir identificação e observação</a><p>${escaparHtml(imagem.credito)}</p><input required type="radio" name="animal-${animal.id}" value="${indiceCandidato}"><strong>Escolher esta foto</strong></label>`;
         })
         .join("");
 
@@ -322,8 +329,20 @@ function validarSelecao(selecao) {
   ) {
     throw new Error("A URL da observação de origem não é válida.");
   }
-  if (Number(imagem.largura) < 1200 || Number(imagem.altura) < 700) {
+  const largura = Number(imagem.largura);
+  const altura = Number(imagem.altura);
+  if (
+    !Number.isFinite(largura) ||
+    !Number.isFinite(altura) ||
+    Math.min(largura, altura) < 700 ||
+    Math.max(largura, altura) < 1200
+  ) {
     throw new Error("A foto selecionada não atende à resolução mínima.");
+  }
+  if (!/\/original\.(jpg|jpeg|png|webp)(?:[?#]|$)/i.test(url.pathname + url.search + url.hash)) {
+    throw new Error(
+      "A foto selecionada não é a versão original. Gere uma nova galeria para usar a imagem em resolução completa.",
+    );
   }
 }
 
