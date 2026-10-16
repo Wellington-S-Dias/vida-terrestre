@@ -105,6 +105,10 @@ npm.cmd run importar:imagens -- --aplicar --selecoes "$env:USERPROFILE\Downloads
 
 Animais que já possuem imagem não aparecem na galeria. Para revisar/substituir também as imagens existentes, use `--forcar` tanto na busca quanto ao aplicar as seleções. O importador encontra a espécie pelo nome científico e taxon atual do iNaturalist; não usa o `taxon_id` do banco. Exige observação identificada exatamente como a espécie, qualidade de pesquisa, ao menos duas identificações, licença aceita e resolução alta. Aliases conhecidos: `Chelonoidis carbonaria` → `Chelonoidis carbonarius` e `Aburria jacutinga` → `Pipile jacutinga`. Registros sem correspondência são ignorados. Use `--limite 10` ou `--animal 1` para limitar a busca. A fonte, licença e crédito ficam nos campos `imagem_fonte` e `imagem_credito`. Falhas temporárias de rede são repetidas até quatro vezes.
 
+## Perfil personalizável
+
+Na página `conta.html`, usuários autenticados podem alterar nome, bio, foto e banner. As imagens são redimensionadas no navegador antes de serem salvas no banco. Em bancos já existentes, execute uma vez `js/database/migrations/001_profile_bio.sql` antes de usar a edição de perfil; instalações novas recebem as colunas atualizadas pelo dump `js/database/vida_terrestre.sql`.
+
 ## Tecnologias
 
 O projeto utiliza as seguintes tecnologias e ferramentas:
