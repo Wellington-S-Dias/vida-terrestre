@@ -4,6 +4,7 @@ const path = require("path");
 
 const mysql = require("mysql2");
 const Usuarios = require("./database/Usuarios");
+const MySQLSessionStore = require("./database/MySQLSessionStore");
 
 const express = require("express");
 const session = require("express-session");
@@ -14,6 +15,14 @@ const GitHubStrategy = require("passport-github2").Strategy;
 const axios = require("axios");
 
 const app = express();
+const sessionPool = mysql.createPool({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "vida_terrestre",
+  connectionLimit: 5,
+});
+const sessionStore = new MySQLSessionStore(sessionPool);
 
 // ============================================================
 // CONFIGURAÇÕES
@@ -26,8 +35,13 @@ app.use(express.static(path.join(__dirname, "..")));
 app.use(
   session({
     secret: "vida-terrestre-secret",
+    store: sessionStore,
     resave: false,
     saveUninitialized: false,
+    rolling: true,
+    cookie: {
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    },
   }),
 );
 app.use(passport.initialize());

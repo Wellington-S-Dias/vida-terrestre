@@ -210,6 +210,11 @@
   render(storedProfile, Boolean(storedProfile.name));
   fetch("/usuario/perfil", { credentials: "same-origin" })
     .then(async (response) => {
+      if (response.status === 401) {
+        localStorage.removeItem(storageKey);
+        render({ name: "", bio: "", photo: "", banner: "" }, false);
+        return null;
+      }
       if (!response.ok) return null;
       return response.json();
     })

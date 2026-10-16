@@ -89,7 +89,14 @@
 
   // Busca também logins Google/GitHub, cuja conta fica na sessão do servidor.
   fetch("/usuario", { credentials: "same-origin" })
-    .then((response) => (response.ok ? response.json() : null))
+    .then((response) => {
+      if (response.status === 401) {
+        localStorage.removeItem(storageKey);
+        renderAccount(null);
+        return null;
+      }
+      return response.ok ? response.json() : null;
+    })
     .then((data) => {
       const user = data?.usuario;
       if (!data?.logado || !user) return;
