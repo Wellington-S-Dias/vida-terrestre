@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "start": "node server/app.js",
     "importar:imagens": "node scripts/importar-imagens-animais.js"
   },
   "dependencies": {
