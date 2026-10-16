@@ -114,4 +114,8 @@
   window.addEventListener("storage", (event) => {
     if (event.key === storageKey) renderAccount(readAccount());
   });
+
+  window.addEventListener("account-updated", (event) => {
+    renderAccount(event.detail || readAccount());
+  });
 })();

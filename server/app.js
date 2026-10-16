@@ -19,7 +19,7 @@ const app = express();
 // CONFIGURAÇÕES
 // ============================================================
 
-app.use(express.json());
+app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "..")));
 
@@ -123,10 +123,108 @@ app.get("/usuario", (req, res) => {
     });
   }
 
-  res.json({
-    logado: true,
-    usuario: req.user,
-  });
+  if (!req.user?.email) {
+    return res.json({
+      logado: true,
+      usuario: { name: req.user?.name || "", email: "", photo: "", bio: "" },
+    });
+  }
+
+  db.query(
+    "SELECT name, email, photo, banner, bio FROM usuario WHERE email = ? LIMIT 1",
+    [req.user.email],
+    (erro, resultados) => {
+      if (erro) {
+        console.error("Erro ao buscar dados do usuário:", erro);
+        return res.status(500).json({ erro: "Não foi possível carregar a conta." });
+      }
+      const usuario = resultados[0] || req.user;
+      res.json({
+        logado: true,
+        usuario: {
+          name: usuario.name || "",
+          email: usuario.email || "",
+          photo: usuario.photo || "",
+          banner: usuario.banner || "",
+          bio: usuario.bio || "",
+        },
+      });
+    },
+  );
+});
+
+// ============================================================
+// PERFIL DO USUÁRIO
+// ============================================================
+
+function validarImagemPerfil(valor) {
+  if (valor === "") return true;
+  if (typeof valor !== "string" || valor.length > 8_000_000) return false;
+  if (/^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(valor)) {
+    return true;
+  }
+  try {
+    return new URL(valor).protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+app.get("/usuario/perfil", (req, res) => {
+  if (!req.isAuthenticated() || !req.user?.email) {
+    return res.status(401).json({ erro: "Entre na sua conta para ver o perfil." });
+  }
+
+  db.query(
+    "SELECT name, email, banner, photo, bio FROM usuario WHERE email = ? LIMIT 1",
+    [req.user.email],
+    (erro, resultados) => {
+      if (erro) {
+        console.error("Erro ao buscar perfil:", erro);
+        return res.status(500).json({ erro: "Não foi possível carregar o perfil." });
+      }
+      if (!resultados.length) {
+        return res.status(404).json({ erro: "A conta não foi encontrada." });
+      }
+      res.json({ perfil: resultados[0] });
+    },
+  );
+});
+
+app.put("/usuario/perfil", (req, res) => {
+  if (!req.isAuthenticated() || !req.user?.email) {
+    return res.status(401).json({ erro: "Entre na sua conta para salvar o perfil." });
+  }
+
+  const name = String(req.body?.name || "").trim();
+  const bio = String(req.body?.bio || "").trim();
+  const photo = req.body?.photo;
+  const banner = req.body?.banner;
+  if (!name || name.length > 50) {
+    return res.status(400).json({ erro: "O nome deve ter entre 1 e 50 caracteres." });
+  }
+  if (bio.length > 500) {
+    return res.status(400).json({ erro: "A bio pode ter no máximo 500 caracteres." });
+  }
+  if (!validarImagemPerfil(photo) || !validarImagemPerfil(banner)) {
+    return res.status(400).json({ erro: "Envie uma imagem válida ou um endereço HTTPS." });
+  }
+
+  db.query(
+    "UPDATE usuario SET name = ?, bio = ?, photo = ?, banner = ? WHERE email = ?",
+    [name, bio, photo || "", banner || "", req.user.email],
+    (erro) => {
+      if (erro) {
+        console.error("Erro ao salvar perfil:", erro);
+        return res.status(500).json({ erro: "Não foi possível salvar. Confira se a migração do perfil foi aplicada." });
+      }
+      Object.assign(req.user, { name, bio, photo: photo || "", banner: banner || "" });
+      res.json({
+        mensagem: "Perfil atualizado.",
+        perfil: { name, email: req.user.email, bio, photo: photo || "", banner: banner || "" },
+      });
+    },
+  );
 });
 
 // ============================================================

@@ -172,11 +172,18 @@ body:has(.side-bar:focus-within) {
   flex: 0 0 30px;
   display: grid;
   place-items: center;
+  overflow: hidden;
   border-radius: 50%;
   background: #0b72c9;
   color: #fff;
   font-size: 11px;
   font-weight: 700;
+}
+
+img.account-avatar {
+  display: block;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.45);
 }
 
 .nav-label {
