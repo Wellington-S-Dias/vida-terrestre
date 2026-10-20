@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minha conta | Vida Terrestre</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="./src/images/Arara-Azul(Logo-Principal).png"
+    />
+    <link rel="stylesheet" href="./css/side-bar.css" />
+    <link rel="stylesheet" href="./css/conta.css" />
+    <link rel="stylesheet" href="./css/foliage.css" />
+    <link rel="stylesheet" href="./css/palette.css" />
+  </head>
+  <body>
+    <header class="side-bar">
+      <div class="side-bar-logo">
+        <a href="index.html" aria-label="Vida Terrestre — início"
+          ><img
+            src="./src/images/Arara-Azul(Logo-Principal).png"
+            alt="Logotipo Vida Terrestre"
+        /></a>
+      </div>
+      <nav class="nav-menu">
+        <a href="index.html" aria-label="Início"
+          ><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"
+            /></svg
+          ><span class="nav-label">Início</span></a
+        >
+        <a href="explore.html" aria-label="Explorar"
+          ><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="10.8" cy="10.8" r="6.8" />
+            <path d="m16 16 5 5M8 10.8h5.6M10.8 8v5.6" /></svg
+          ><span class="nav-label">Explorar</span></a
+        >
+        <a class="entrar" href="conta.html" aria-label="Minha conta"
+          ><span class="nav-label">Minha conta</span></a
+        >
+      </nav>
+    </header>
+
+    <main>
+      <section class="account">
+        <div class="account-banner">
+          <img
+            id="account-banner-image"
+            src="https://images.pexels.com/photos/33519268/pexels-photo-33519268/free-photo-of-floresta-boreal-sereno-com-vegetacao-luxuriante.png?auto=compress&w=1260&h=750&dpr=2"
+            alt=""
+          />
+
+          <div class="hero-overlay"></div>
+        </div>
+        <div class="account-content">
+          <div class="profile-image">
+            <img id="account-photo" src="/src/images/Tuiuiú(Pantanal).png" alt="Foto de perfil" />
+          </div>
+          <div class="account-info">
+            <div class="account-title">
+              <h2 id="account-name">Minha Conta</h2>
+              <button class="edit-profile-button" id="edit-profile-button" type="button">
+                <span aria-hidden="true">✎</span> Editar perfil
+              </button>
+            </div>
+            <p id="account-bio">Conte um pouco sobre você e sua conexão com a natureza.</p>
+            <div class="progress">
+              <img src="/src/images/icons/biodiversidade.png" alt="" />
+              <p>nível do usuário</p>
+              <p>Nível: 0</p>
+            </div>
+            <div class="level-bar">
+              <div class="level-bar-progress" style="width: 0%"></div>
+              <p>0/1000</p>
+            </div>
+          </div>
+        </div>
+
+        <dialog class="profile-dialog" id="profile-dialog" aria-labelledby="profile-dialog-title">
+          <form class="profile-form" id="profile-form">
+            <div class="profile-dialog-heading">
+              <div>
+                <p class="profile-eyebrow">SUA CONTA</p>
+                <h2 id="profile-dialog-title">Personalizar perfil</h2>
+              </div>
+              <button class="dialog-close" id="close-profile-dialog" type="button" aria-label="Fechar">×</button>
+            </div>
+
+            <label class="profile-field">
+              <span>Nome de usuário</span>
+              <input name="name" type="text" maxlength="50" autocomplete="nickname" required>
+            </label>
+
+            <label class="profile-field">
+              <span>Bio</span>
+              <textarea name="bio" maxlength="500" rows="3" placeholder="Conte um pouco sobre você..."></textarea>
+              <small class="field-hint">Até 500 caracteres.</small>
+            </label>
+
+            <div class="profile-image-field">
+              <div class="profile-image-preview" id="photo-preview-wrap">
+                <img id="photo-preview" alt="Prévia da foto de perfil">
+              </div>
+              <div class="profile-image-controls">
+                <label class="profile-field">
+                  <span>Foto de perfil</span>
+                  <input name="photoFile" id="photo-file" type="file" accept="image/*">
+                </label>
+                <label class="profile-field">
+                  <span>Ou cole a URL da foto</span>
+                  <input name="photoUrl" id="photo-url" type="url" inputmode="url" placeholder="https://...">
+                </label>
+                <button class="reset-image-button" id="reset-photo" type="button">Usar foto padrão</button>
+              </div>
+            </div>
+
+            <div class="profile-banner-field">
+              <img id="banner-preview" alt="Prévia do banner">
+              <label class="profile-field">
+                <span>Banner do perfil</span>
+                <input name="bannerFile" id="banner-file" type="file" accept="image/*">
+              </label>
+              <label class="profile-field">
+                <span>Ou cole a URL do banner</span>
+                <input name="bannerUrl" id="banner-url" type="url" inputmode="url" placeholder="https://...">
+              </label>
+              <button class="reset-image-button" id="reset-banner" type="button">Usar banner padrão</button>
+            </div>
+
+            <p class="profile-form-message" id="profile-form-message" role="status" hidden></p>
+            <div class="profile-form-actions">
+              <button class="profile-cancel-button" id="cancel-profile-edit" type="button">Cancelar</button>
+              <button class="profile-save-button" type="submit">Salvar perfil</button>
+            </div>
+          </form>
+        </dialog>
+
+        <div class="account-data">
+          <div class="data">
+            <div class="user-data">
+              <img src="./src/images/icons/esp-vistas.png" alt="" />
+              <p>Espécies visualizadas</p>
+              <h1>0</h1>
+            </div>
+            <div class="user-data">
+              <img src="./src/images/icons/cards.png" alt="" />
+              <p>Cards colecionados</p>
+              <h1><span>0</span><small> / 250</small></h1>
+            </div>
+            <div class="user-data">
+              <img src="./src/images/icons/postagens.png" alt="" />
+              <p>Publicações</p>
+              <h1>0</h1>
+            </div>
+            <div class="user-data">
+              <img src="./src/images/icons/sequencia.png" alt="" />
+              <p>Dias ativos</p>
+              <h1>0</h1>
+            </div>
+          </div>
+        </div>
+
+        <div class="inventario-data">
+          <div class="inventario">
+            <div class="inventario-heading">
+              <div>
+                <h2>Meu inventário</h2>
+                <p>Suas cartas de espécies colecionadas</p>
+              </div>
+              <a href="explore.html">Explorar espécies</a>
+            </div>
+            <div class="profile-empty-state" role="status">
+              <span class="empty-state-icon" aria-hidden="true">◇</span>
+              <p>Seu inventário está vazio. Explore as espécies para começar sua coleção.</p>
+            </div>
+          </div>
+
+          <div class="inventario-progress">
+            <h2>Minha coleção</h2>
+            <div class="dados">
+              <div class="simulacao" aria-label="0 de 250 cartas coletadas">
+                <span>0</span>
+              </div>
+              <div class="dados-text">
+                <h3>0 <small>/ 250</small></h3>
+                <p class="cc">cartas coletadas</p>
+
+                <div class="categorias">
+                  <div class="categoria">
+                    <span class="bolinha comum"></span>
+                    <span>Comuns</span>
+                    <span class="quantidade">0</span>
+                  </div>
+
+                  <div class="categoria">
+                    <span class="bolinha rara"></span>
+                    <span>Raras</span>
+                    <span class="quantidade">0</span>
+                  </div>
+
+                  <div class="categoria">
+                    <span class="bolinha epica"></span>
+                    <span>Épicas</span>
+                    <span class="quantidade">0</span>
+                  </div>
+
+                  <div class="categoria">
+                    <span class="bolinha lendaria"></span>
+                    <span>Lendárias</span>
+                    <span class="quantidade">0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="historico">
+          <div class="m-atividades">
+            <div class="atividades-heading">
+              <h1>Minhas atividades</h1>
+              <p>Suas descobertas aparecerão aqui.</p>
+            </div>
+            <div class="atividades-card-grid" hidden>
+              <div class="atividades-cards">
+                <div class="atividades-card-img">
+                  <img
+                    src="/src/images/Arara-Azul(Logo-Principal).png"
+                    alt=""
+                  />
+                </div>
+                <div class="atividades-card-text">
+                  <h3>Postou uma foto da ariranha</h3>
+                  <p>em Mamifero • 2h atrás</p>
+                </div>
+                <a href="">→</a>
+              </div>
+
+              <hr class="separar" />
+
+              <div class="atividades-cards">
+                <div class="atividades-card-img">
+                  <img
+                    src="/src/images/Arara-Azul(Logo-Principal).png"
+                    alt=""
+                  />
+                </div>
+                <div class="atividades-card-text">
+                  <h3>Postou uma foto da ariranha</h3>
+                  <p>em Mamifero • 2h atrás</p>
+                </div>
+                <a href="">→</a>
+              </div>
+
+              <hr class="separar" />
+
+              <div class="atividades-cards">
+                <div class="atividades-card-img">
+                  <img
+                    src="/src/images/Arara-Azul(Logo-Principal).png"
+                    alt=""
+                  />
+                </div>
+                <div class="atividades-card-text">
+                  <h3>Postou uma foto da ariranha</h3>
+                  <p>em Mamifero • 2h atrás</p>
+                </div>
+                <a href="">→</a>
+              </div>
+            </div>
+            <p class="profile-empty-state">Nenhuma atividade registrada ainda.</p>
+          </div>
+
+          <div class="areas-favoritas">
+            <div class="areas-heading">
+              <h1>Suas áreas favoritas</h1>
+              <p>Onde você mais explora</p>
+            </div>
+            <div class="area-card-grid" hidden>
+              <div class="area-card">
+                <div class="area-card-img">
+                  <img
+                    src="/src/images/Arara-Azul(Logo-Principal).png"
+                    alt=""
+                  />
+                </div>
+                <div class="area-card-text">
+                  <h3>Floresta amazônica</h3>
+                  <div class="quantidade-bar">
+                    <div class="quantidade-bar-data"></div>
+                    <p>0%</p>
+                  </div>
+                </div>
+              </div>
+              <div class="area-card">
+                <div class="area-card-img">
+                  <img
+                    src="/src/images/Arara-Azul(Logo-Principal).png"
+                    alt=""
+                  />
+                </div>
+                <div class="area-card-text">
+                  <h3>Floresta amazônica</h3>
+                  <div class="quantidade-bar">
+                    <div class="quantidade-bar-data"></div>
+                    <p>0%</p>
+                  </div>
+                </div>
+              </div>
+              <div class="area-card">
+                <div class="area-card-img">
+                  <img
+                    src="/src/images/Arara-Azul(Logo-Principal).png"
+                    alt=""
+                  />
+                </div>
+                <div class="area-card-text">
+                  <h3>Floresta amazônica</h3>
+                  <div class="quantidade-bar">
+                    <div class="quantidade-bar-data"></div>
+                    <p>0%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="profile-empty-state">Suas áreas favoritas aparecerão aqui quando você começar a explorar.</p>
+          </div>
+
+          <div class="conquistas">
+            <div class="conquistas-heading">
+              <h1>Conquistas</h1>
+            </div>
+            <div class="conquistas-card-grid" hidden>
+              <div class="card-conquista">
+                <img
+                  src="/src/images/Tamanduá-Bandeira(Cerrado).png"
+                  alt="Primeira espécie"
+                />
+                <p>Primeira espécie</p>
+              </div>
+
+              <div class="card-conquista">
+                <img
+                  src="/src/images/Lobo-Guara(Caatinga).png"
+                  alt="Primeira espécie"
+                />
+                <p>Primeira espécie</p>
+              </div>
+
+              <div class="card-conquista">
+                <img
+                  src="/src/images/Tuiuiú(Pantanal).png"
+                  alt="Primeira espécie"
+                />
+                <p>Primeira espécie</p>
+              </div>
+
+              <div class="card-conquista">
+                <img
+                  src="/src/images/Onça-Pintada (Amazônia).png"
+                  alt="Primeira espécie"
+                />
+                <p>Primeira espécie</p>
+              </div>
+            </div>
+            <p class="profile-empty-state">Nenhuma conquista desbloqueada ainda.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./js/sidebar-account.js"></script>
+    <script src="./js/account-profile.js"></script>
+    <script src="./js/foliage.js"></script>
+  </body>
+</html>
