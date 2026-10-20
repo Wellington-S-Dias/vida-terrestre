@@ -1,227 +1,165 @@
 <p align="center">
-  <img src="src/images/Arara-Azul(Logo-Principal).png" alt="Logo Vida Terrestre" width="220">
+  <img src="src/images/Arara-Azul(Logo-Principal).png" alt="Logo Vida Terrestre" width="180">
 </p>
 
-<h1 align="center">🌎 Vida Terrestre</h1>
+<h1 align="center">Vida Terrestre</h1>
+
+<p align="center"><strong>Uma plataforma educativa sobre a fauna, os biomas brasileiros e a conservação da biodiversidade.</strong></p>
 
 <p align="center">
-  <strong>Educação, biodiversidade e conservação dos ecossistemas terrestres.</strong>
+  <a href="https://wellington-s-dias.github.io/vida-terrestre/">Visitar a versão estática</a>
 </p>
-
-<p align="center">
-Plataforma web educativa dedicada à pesquisa, divulgação e conscientização sobre a fauna, os habitats e a conservação dos ecossistemas terrestres brasileiros.
-</p>
-
-<p align="center">
-  <a href="https://wellington-s-dias.github.io/vida-terrestre/">🌐 Acessar o projeto</a>
-</p>
-
----
 
 ## Sobre o projeto
 
-O **Vida Terrestre** é uma plataforma web educativa desenvolvida como parte do **Projeto Integrador do curso de Desenvolvimento Web da Faculdade Senac Criciúma**.
+Vida Terrestre é um projeto acadêmico desenvolvido como Projeto Integrador do curso de Desenvolvimento Web da Faculdade Senac Criciúma. O site reúne conteúdo educativo sobre espécies da fauna brasileira, seus habitats, biomas, características e ameaças à conservação. A proposta se relaciona ao Objetivo de Desenvolvimento Sustentável 15 da ONU, sobre vida terrestre e proteção da biodiversidade.
 
-O projeto foi desenvolvido com o objetivo de ampliar o acesso a informações sobre a biodiversidade brasileira por meio de uma experiência digital informativa, interativa e acessível.
+## O que o projeto oferece
 
-A plataforma apresenta conteúdos relacionados à **fauna, habitats, biodiversidade e conservação ambiental**, com ênfase inicial nas espécies e nos ecossistemas brasileiros.
+- **Página inicial** com apresentação do projeto, conteúdo visual e navegação para as demais páginas.
+- **Exploração de espécies** com busca por nome, filtros por região, classe e status de conservação, navegação por bioma e detalhes sobre cada animal.
+- **Conta de usuário** com cadastro e login por senha, Google ou GitHub, além de edição de nome, biografia, foto e banner.
+- **Catálogo e dados** guardados em MySQL, incluindo espécies, biomas e metadados de crédito e licença das imagens importadas.
+- **Importador de imagens** que consulta observações do iNaturalist, prepara uma galeria para revisão humana e grava no banco somente as fotos selecionadas.
 
-Além da finalidade educativa, o projeto busca promover a conscientização sobre a importância da preservação ambiental e da participação da sociedade na conservação da biodiversidade.
-
----
-
-## Objetivos
-
-O **Vida Terrestre** tem como objetivos:
-
-* Promover a conscientização sobre a biodiversidade brasileira.
-* Apresentar informações sobre espécies, habitats e ecossistemas.
-* Incentivar a preservação dos ecossistemas terrestres.
-* Facilitar o acesso a informações relacionadas ao meio ambiente.
-* Estimular o interesse pela pesquisa e pelo conhecimento da fauna brasileira.
-* Utilizar a tecnologia como instrumento de educação ambiental.
-* Contribuir para a disseminação de conhecimentos relacionados ao desenvolvimento sustentável.
-
----
-
-## ODS 15 — Vida Terrestre
-
-O projeto está alinhado ao **Objetivo de Desenvolvimento Sustentável 15 (ODS 15)**, estabelecido pela **Organização das Nações Unidas (ONU)**.
-
-A ODS 15 tem como foco:
-
-> **Proteger, restaurar e promover o uso sustentável dos ecossistemas terrestres, gerir de forma sustentável as florestas, combater a desertificação, deter e reverter a degradação da terra e deter a perda de biodiversidade.**
-
-O **Vida Terrestre** utiliza a tecnologia e a educação como instrumentos de apoio à conscientização ambiental, disponibilizando informações destinadas a ampliar o conhecimento sobre a biodiversidade e a importância de sua preservação.
-
----
-
-## Funcionalidades
-
-A plataforma foi desenvolvida com foco em uma experiência digital organizada, interativa e informativa.
-
-Entre os principais recursos estão:
-
-* **Exploração da fauna brasileira**
-* **Sistema de pesquisa de espécies**
-* **Informações sobre habitats**
-* **Conteúdo visual e audiovisual**
-* **Dados relacionados à biodiversidade**
-* **Conteúdos relacionados à conservação ambiental**
-* **Interface adaptada a diferentes dispositivos**
-* **Identidade visual relacionada à natureza e à biodiversidade**
-
-> 🚧 Novas funcionalidades e conteúdos ainda estão sendo desenvolvidos.
-
----
-
-## Funcionalidades planejadas
-
-Como parte do planejamento e da evolução da plataforma, estão previstas funcionalidades destinadas a ampliar os recursos informativos, interativos e educativos do projeto. Algumas propostas ainda se encontram em fase de análise ou dependem da evolução técnica da aplicação.
-
-* **Notícias e acontecimentos atuais:** desenvolvimento de uma seção destinada à apresentação de notícias e informações recentes relacionadas ao meio ambiente e à biodiversidade.
-* **Espaço colaborativo sobre a fauna:** possibilidade de criação de uma área na qual os usuários possam publicar fotografias e informações sobre animais, incluindo habitat, locais de observação, características e situação de conservação, além de interagir com outras publicações.
-* **Sistema de inventário e cartas:** implementação de um sistema de gamificação baseado em cartas de espécies, inventário e pontuação, com o objetivo de incentivar a exploração dos conteúdos da plataforma.
-* **Mapa interativo da fauna:** desenvolvimento de um mapa capaz de apresentar informações sobre espécies associadas à região selecionada pelo usuário.
-* **Seção de espécies ameaçadas de extinção:** criação de uma área específica para apresentar espécies ameaçadas, sua distribuição, características e principais fatores de risco.
-
-> Algumas dessas funcionalidades constituem propostas futuras e poderão ser implementadas de acordo com a viabilidade técnica e a evolução do projeto.
-
----
-
-## Importar imagens de animais
-
-O importador consulta observações licenciadas do iNaturalist, descarta fotos abaixo de 1200 × 700 px e mostra até seis candidatas por espécie. Por padrão, a galeria inclui apenas animais que ainda não têm imagem. Rode:
-
-```bash
-npm.cmd run importar:imagens
-```
-
-Abra a galeria HTML em `relatorios-imagens/`, escolha uma foto para cada animal com candidatas e use o botão para baixar `imagens-aprovadas.json`. Depois grave somente as imagens escolhidas:
-
-```powershell
-npm.cmd run importar:imagens -- --aplicar --selecoes "$env:USERPROFILE\Downloads\imagens-aprovadas.json"
-```
-
-Animais que já possuem imagem não aparecem na galeria. Para revisar/substituir também as imagens existentes, use `--forcar` tanto na busca quanto ao aplicar as seleções. O importador encontra a espécie pelo nome científico e taxon atual do iNaturalist; não usa o `taxon_id` do banco. Exige observação identificada exatamente como a espécie, qualidade de pesquisa, ao menos duas identificações, licença aceita e resolução alta. Aliases conhecidos: `Chelonoidis carbonaria` → `Chelonoidis carbonarius` e `Aburria jacutinga` → `Pipile jacutinga`. Registros sem correspondência são ignorados. Use `--limite 10` ou `--animal 1` para limitar a busca. A fonte, licença e crédito ficam nos campos `imagem_fonte` e `imagem_credito`. Falhas temporárias de rede são repetidas até quatro vezes.
-
-## Perfil personalizável
-
-Na página `conta.html`, usuários autenticados podem alterar nome, bio, foto e banner. As imagens são redimensionadas no navegador antes de serem salvas no banco. Em bancos já existentes, execute uma vez `js/database/migrations/001_profile_bio.sql` antes de usar a edição de perfil; instalações novas recebem as colunas atualizadas pelo dump `js/database/vida_terrestre.sql`.
+As áreas de notícias, comunidade, inventário, coleção e conquistas aparecem em partes da interface, mas não têm todos os fluxos de produto implementados. Consulte a aplicação antes de tratá-las como funcionalidades disponíveis.
 
 ## Tecnologias
 
-O projeto utiliza as seguintes tecnologias e ferramentas:
+- HTML, CSS e JavaScript no navegador
+- Node.js e Express no servidor
+- MySQL/MariaDB para dados e sessões
+- Passport para autenticação local e OAuth do Google e GitHub
+- Axios para integrações HTTP e iNaturalist como fonte consultada pelo importador
 
-| Tecnologia       | Utilização                              |
-| ---------------- | --------------------------------------- |
-| **HTML5**        | Estrutura e organização das páginas     |
-| **CSS3**         | Estilização, layout e identidade visual |
-| **JavaScript**   | Interatividade e funcionalidades        |
-| **Git**          | Controle de versão                      |
-| **GitHub**       | Hospedagem e gerenciamento do código    |
-| **GitHub Pages** | Publicação da aplicação web             |
-
----
-
-## Identidade visual
-
-A identidade visual do **Vida Terrestre** foi desenvolvida com o propósito de estabelecer uma relação visual com a natureza e a biodiversidade.
-
-A interface utiliza elementos visuais inspirados em:
-
-* Vegetação
-* Fauna
-* Ecossistemas
-* Florestas
-* Elementos naturais
-
-O objetivo é apresentar o conteúdo ambiental de maneira visual, organizada e adequada à proposta educativa da plataforma.
-
----
-
-## Estrutura do projeto
+## Estrutura
 
 ```text
-vida-terrestre/
-├── css/                 # Estilos das páginas
-├── js/                  # JavaScript executado no navegador
-├── scripts/             # Ferramentas de manutenção e importação
-├── server/              # Aplicação Express e arquivos do banco
+.
+├── conta.html                         # Perfil, inventário e áreas da conta
+├── explore.html                       # Busca e exploração de espécies
+├── index.html                         # Página inicial
+├── login.html                         # Cadastro e autenticação
+├── css/                               # Estilos das páginas e componentes
+├── js/                                # Interações no navegador
+│   └── database/migrations/           # Migrações SQL para instalações existentes
+├── scripts/                           # Ferramentas de manutenção
+├── server/
+│   ├── app.js                          # Servidor Express e rotas da API
 │   └── database/
-├── src/images/          # Imagens e ícones usados pelo site
-├── index.html
-├── explore.html
-├── login.html
-└── conta.html
+│       ├── Usuarios.js                 # Cadastro e login por senha
+│       └── vida_terrestre.sql          # Dump de estrutura e dados iniciais
+├── src/images/                        # Imagens e ícones
+├── CONTRIBUTING.md                    # Orientações para contribuições
+└── package.json                       # Dependências e comandos npm
 ```
 
-Para iniciar os endpoints de login e autenticação localmente, configure as
-variáveis do banco e OAuth no arquivo `.env` e execute `npm start`.
+## Executar localmente
 
----
+### Requisitos
 
-## Acesso ao projeto
+- Node.js e npm
+- MySQL ou MariaDB
+- Credenciais OAuth do Google e/ou GitHub, caso queira testar esses provedores
 
-O projeto está disponível para acesso por meio do **GitHub Pages**.
+### 1. Instale as dependências
 
-<p align="center">
-  <a href="https://wellington-s-dias.github.io/vida-terrestre/">
-    <strong>ACESSAR O PROJETO</strong>
-  </a>
-</p>
+```bash
+npm install
+```
 
----
+### 2. Prepare o banco de dados
 
-## Status do projeto
+O servidor espera um banco chamado `vida_terrestre` em `localhost`, com usuário `root` e senha vazia. Esses valores estão definidos diretamente em `server/app.js` e `server/database/Usuarios.js`. Ajuste os dois arquivos se sua configuração local for diferente.
 
-**Em desenvolvimento.**
+O dump `server/database/vida_terrestre.sql` contém o esquema e os dados iniciais. **Ele executa `DROP DATABASE IF EXISTS vida_terrestre` antes de recriar o banco.** Importe-o somente em uma instalação descartável ou depois de fazer backup de quaisquer dados que queira manter.
 
-O projeto encontra-se em desenvolvimento e poderá receber novas funcionalidades, conteúdos, aprimoramentos de interface e otimizações ao longo de sua evolução.
+Por exemplo, com o cliente MySQL disponível no terminal:
 
----
+```bash
+mysql -u root -p < server/database/vida_terrestre.sql
+```
 
-## Equipe
+Se a conta local não tiver senha, remova `-p`. O comando precisa de permissão para criar e remover o banco.
 
-Projeto desenvolvido como atividade acadêmica do **curso de Desenvolvimento Web da Faculdade Senac Criciúma**.
+O dump atual já inclui os campos `bio`, `photo` e `banner`. Para atualizar um banco antigo que ainda possui a coluna `quote`, aplique **uma única vez** a migração `js/database/migrations/001_profile_bio.sql` antes de editar perfis. Essa migração renomeia `quote` para `bio` e amplia as colunas de imagem.
 
-### Integrantes
+### 3. Configure as variáveis de ambiente
 
-* **Augusto Rabelo Borges**
-* **Davi Cypriano Búrigo**
-* **Gustavo Fontana Colombo**
-* **Wellington Sergio Dias**
+Crie um arquivo `.env` na raiz do projeto. As credenciais são opcionais se você for testar apenas login por senha; configure os provedores que pretende usar:
 
----
+```dotenv
+SESSION_SECRET=troque-por-um-segredo-local
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+```
 
-## Contexto acadêmico
+Cadastre nos provedores OAuth os endereços de retorno locais:
 
-**Projeto Integrador — Desenvolvimento Web**
+- Google: `http://localhost:3000/auth/google/callback`
+- GitHub: `http://localhost:3000/auth/github/callback`
 
-**Faculdade Senac Criciúma**
+O servidor usa esses nomes de variável para as credenciais OAuth. O importador de imagens também permite configurar `DB_HOST`, `DB_USER`, `DB_PASSWORD` e `DB_NAME`; seus padrões são `localhost`, `root`, vazio e `vida_terrestre`, respectivamente.
 
-**Tema:** Biodiversidade e conservação dos ecossistemas terrestres
+### 4. Inicie o servidor
 
-**ODS relacionada:** ODS 15 — Vida Terrestre
+```bash
+npm start
+```
 
----
+Abra <http://localhost:3000>. O servidor publica os arquivos do site e atende a API na mesma origem. A tabela `sessions` é criada automaticamente após a conexão com o banco.
 
-## Finalidade
+## Rotas principais
 
-Este projeto foi desenvolvido **para fins educacionais e acadêmicos**, como parte das atividades do curso de Desenvolvimento Web.
+| Método | Rota | Uso |
+| --- | --- | --- |
+| `GET` | `/animais_completos` | Lista os registros da tabela `animais`. |
+| `POST` | `/cadastro` | Cria conta com nome, e-mail e senha. |
+| `POST` | `/login` | Autentica uma conta local e inicia a sessão. |
+| `GET` | `/usuario` | Retorna o estado da sessão e os dados básicos da conta. |
+| `GET` | `/usuario/perfil` | Lê o perfil do usuário autenticado. |
+| `PUT` | `/usuario/perfil` | Atualiza nome, bio, foto e banner do usuário autenticado. |
+| `GET` | `/logout` | Encerra a sessão. |
+| `GET` | `/auth/google` | Inicia a autenticação Google. |
+| `GET` | `/auth/github` | Inicia a autenticação GitHub. |
 
-Seu desenvolvimento tem como finalidade aplicar conhecimentos relacionados a **HTML, CSS, JavaScript, controle de versão, publicação web e desenvolvimento de interfaces**, integrando tecnologia, desenvolvimento web e educação ambiental.
+## Importar imagens de animais
 
----
+O importador consulta a API do iNaturalist, seleciona observações de qualidade de pesquisa, verifica licença e resolução e produz uma galeria HTML com até seis candidatas por animal. A execução padrão não altera o banco; uma pessoa precisa revisar a galeria e escolher as imagens.
 
-## Ideias
+1. Gere a galeria:
 
-- Deixar o Header Fixo na página de explorar
-- Pensar em uma paleta de cores fixa pro site
--
+   ```bash
+   npm run importar:imagens
+   ```
 
-<p align="center">
-  <strong>Vida Terrestre</strong>
-  <br>
-  Educação e conscientização para a conservação da biodiversidade.
-</p>
+2. Abra o arquivo HTML gerado na pasta `relatorios-imagens/`, revise as observações e baixe `imagens-aprovadas.json`.
+
+3. Grave as seleções no banco:
+
+   ```powershell
+   npm run importar:imagens -- --aplicar --selecoes "$env:USERPROFILE\Downloads\imagens-aprovadas.json"
+   ```
+
+Por padrão, somente animais sem imagem são incluídos. Use `--forcar` tanto ao gerar a galeria quanto ao aplicar as seleções para revisar ou substituir imagens já existentes. `--limite N` limita a quantidade de animais e `--animal ID` processa somente um registro. O script guarda fonte e crédito nos campos `imagem_fonte` e `imagem_credito`; aceita licenças Creative Commons listadas no código, exige ao menos 1200 × 700 px e tenta novamente falhas temporárias da API até quatro vezes. Consulte `node scripts/importar-imagens-animais.js --ajuda` para as opções disponíveis.
+
+## Publicação
+
+O link do GitHub Pages publica arquivos estáticos. As páginas que dependem do servidor — por exemplo, busca de animais via API, sessão, login e edição de perfil — precisam de uma instância Node.js e MySQL acessível; elas não passam a funcionar no Pages apenas com a publicação dos arquivos. As URLs OAuth e a estratégia de sessão no código estão configuradas para `localhost:3000`, então uma publicação com backend requer adaptar essas configurações ao domínio e HTTPS do ambiente de hospedagem.
+
+## Contribuição
+
+Leia [CONTRIBUTING.md](CONTRIBUTING.md) antes de propor alterações. Não inclua `.env`, credenciais, `node_modules/` ou relatórios gerados no controle de versão.
+
+## Equipe e contexto acadêmico
+
+Projeto Integrador do curso de Desenvolvimento Web da Faculdade Senac Criciúma.
+
+- Augusto Rabelo Borges
+- Davi Cypriano Búrigo
+- Gustavo Fontana Colombo
+- Wellington Sergio Dias
+
+Projeto desenvolvido para fins educativos e acadêmicos.
