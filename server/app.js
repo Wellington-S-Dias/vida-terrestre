@@ -23,6 +23,10 @@ app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "..")));
 
+app.get("/biomas", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "biomes.html"));
+});
+
 // ============================================================
 // MYSQL
 // ============================================================
