@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const botoesBioma = document.querySelectorAll(".biome-btn");
   const imagemLogo = document.querySelector(".side-bar-logo img");
 
-  let videoAtivo = document.getElementById("video-bg-1");
-  let proximoVideo = document.getElementById("video-bg-2");
+  let imagemAtiva = document.getElementById("image-bg-1");
+  let proximaImagem = document.getElementById("image-bg-2");
 
   if (!botoesBioma.length) return;
 
@@ -12,17 +12,17 @@ document.addEventListener("DOMContentLoaded", () => {
   if (botaoTodos) {
     botaoTodos.classList.add("active");
     botaoTodos.setAttribute("aria-pressed", "true");
+    const imagemInicial = botaoTodos.getAttribute("data-image");
+    if (imagemInicial && imagemAtiva) {
+      imagemAtiva.style.backgroundImage = `url("${imagemInicial}")`;
+    }
   }
-
-  let estaTransicionando = false;
 
   botoesBioma.forEach((botao) => {
     botao.addEventListener("click", () => {
       const bioma = botao.getAttribute("data-biome");
-      const novaFonteVideo = botao.getAttribute("data-video");
+      const novaFonteImagem = botao.getAttribute("data-image");
       const novaFonteLogo = botao.getAttribute("data-logo");
-      const podeTrocarVideo = !estaTransicionando;
-
       // =========================
       // BOTÃO ATIVO
       // =========================
@@ -59,66 +59,18 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // =========================
-      // TROCAR VÍDEO
+      // TROCAR IMAGEM DE FUNDO
       // =========================
 
-      if (!novaFonteVideo || !videoAtivo || !proximoVideo || !podeTrocarVideo) return;
+      if (!novaFonteImagem || !imagemAtiva || !proximaImagem) return;
 
-      // As cores e a logo já mudaram; a trava só impede duas trocas de vídeo
-      // simultâneas enquanto o novo arquivo carrega.
-      estaTransicionando = true;
+      proximaImagem.style.backgroundImage = `url("${novaFonteImagem}")`;
+      proximaImagem.classList.add("active");
+      imagemAtiva.classList.remove("active");
 
-      proximoVideo.src = novaFonteVideo;
-
-      // Garante que o vídeo começa escondido
-      proximoVideo.classList.remove("active");
-
-      proximoVideo.load();
-
-      const trocarVideo = () => {
-        window.clearTimeout(tempoLimiteVideo);
-
-        proximoVideo.removeEventListener("loadeddata", trocarVideo);
-
-        proximoVideo
-          .play()
-          .then(() => {
-            // Mostra o novo vídeo
-            proximoVideo.classList.add("active");
-
-            // Esconde o antigo
-            videoAtivo.classList.remove("active");
-
-            // Troca as referências
-            const temporario = videoAtivo;
-
-            videoAtivo = proximoVideo;
-            proximoVideo = temporario;
-
-            estaTransicionando = false;
-          })
-          .catch((erro) => {
-            console.error("Erro ao reproduzir vídeo:", erro);
-
-            window.clearTimeout(tempoLimiteVideo);
-            estaTransicionando = false;
-          });
-      };
-
-      const falhaVideo = () => {
-        window.clearTimeout(tempoLimiteVideo);
-        proximoVideo.removeEventListener("loadeddata", trocarVideo);
-        proximoVideo.removeEventListener("error", falhaVideo);
-        estaTransicionando = false;
-      };
-      proximoVideo.addEventListener("loadeddata", trocarVideo, { once: true });
-      proximoVideo.addEventListener("error", falhaVideo, { once: true });
-      // Safari e arquivos ausentes podem não emitir loadeddata/error.
-      const tempoLimiteVideo = window.setTimeout(() => {
-        proximoVideo.removeEventListener("loadeddata", trocarVideo);
-        proximoVideo.removeEventListener("error", falhaVideo);
-        estaTransicionando = false;
-      }, 8000);
+      const temporaria = imagemAtiva;
+      imagemAtiva = proximaImagem;
+      proximaImagem = temporaria;
     });
   });
 });
