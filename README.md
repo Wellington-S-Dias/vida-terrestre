@@ -109,7 +109,7 @@ O servidor usa esses nomes de variável para as credenciais OAuth. O importador 
 npm start
 ```
 
-Abra <http://localhost:3000>. O servidor publica os arquivos do site e atende a API na mesma origem. A tabela `sessions` é criada automaticamente após a conexão com o banco.
+Abra <http://localhost:3000>. O servidor publica os arquivos do site e atende a API na mesma origem. A tabela `vida_terrestre_sessions` é criada automaticamente após a conexão com o banco.
 
 ## Rotas principais
 

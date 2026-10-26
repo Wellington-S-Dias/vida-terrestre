@@ -49,7 +49,7 @@ class MySQLSessionStore extends session.Store {
 
   get(sessionId, callback) {
     this.connection.query(
-      "SELECT data FROM sessions WHERE session_id = ? AND expires > ? LIMIT 1",
+      "SELECT data FROM vida_terrestre_sessions WHERE session_id = ? AND expires > ? LIMIT 1",
       [sessionId, Math.floor(Date.now() / 1000)],
       (error, rows) => {
         if (error) return callback(error);
@@ -66,7 +66,7 @@ class MySQLSessionStore extends session.Store {
   set(sessionId, sessionData, callback = () => {}) {
     const expiresAt = this.getExpiration(sessionData);
     this.connection.query(
-      `INSERT INTO sessions (session_id, expires, data)
+      `INSERT INTO vida_terrestre_sessions (session_id, expires, data)
        VALUES (?, ?, ?)
        ON DUPLICATE KEY UPDATE expires = VALUES(expires), data = VALUES(data)`,
       [sessionId, expiresAt, JSON.stringify(sessionData)],
@@ -76,7 +76,7 @@ class MySQLSessionStore extends session.Store {
 
   touch(sessionId, sessionData, callback = () => {}) {
     this.connection.query(
-      "UPDATE sessions SET expires = ? WHERE session_id = ?",
+      "UPDATE vida_terrestre_sessions SET expires = ? WHERE session_id = ?",
       [this.getExpiration(sessionData), sessionId],
       callback,
     );
@@ -84,7 +84,7 @@ class MySQLSessionStore extends session.Store {
 
   destroy(sessionId, callback = () => {}) {
     this.connection.query(
-      "DELETE FROM sessions WHERE session_id = ?",
+      "DELETE FROM vida_terrestre_sessions WHERE session_id = ?",
       [sessionId],
       callback,
     );
@@ -117,12 +117,12 @@ db.connect((erro) => {
   }
 
   db.query(
-    `CREATE TABLE IF NOT EXISTS sessions (
+    `CREATE TABLE IF NOT EXISTS vida_terrestre_sessions (
       session_id VARCHAR(128) COLLATE utf8mb4_bin NOT NULL,
       expires INT UNSIGNED NOT NULL,
       data MEDIUMTEXT,
       PRIMARY KEY (session_id),
-      INDEX sessions_expires_idx (expires)
+      INDEX vida_terrestre_sessions_expires_idx (expires)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin`,
     (tableError) => {
       if (tableError) {
@@ -132,7 +132,7 @@ db.connect((erro) => {
 
       console.log("MySQL conectado e sessões persistentes habilitadas.");
       const cleanupTimer = setInterval(() => {
-        db.query("DELETE FROM sessions WHERE expires <= ?", [Math.floor(Date.now() / 1000)]);
+        db.query("DELETE FROM vida_terrestre_sessions WHERE expires <= ?", [Math.floor(Date.now() / 1000)]);
       }, 15 * 60 * 1000);
       cleanupTimer.unref();
 
