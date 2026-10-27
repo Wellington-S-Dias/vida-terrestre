@@ -426,6 +426,28 @@ body[data-biome="mata-atlantica"] { --biome-accent: #477d78; }
 body[data-biome="pantanal"] { --biome-accent: #568fa0; }
 body[data-biome="pampa"] { --biome-accent: #8a9960; }
 
+body[data-biome="default"] .side-bar {
+  background: rgba(7, 26, 49, 0.96);
+  border-color: rgba(120, 184, 42, 0.2);
+}
+
+body[data-biome="default"] .nav-menu a {
+  color: var(--text-primary);
+}
+
+body[data-biome="default"] .nav-menu a:hover,
+body[data-biome="default"] .nav-menu a:focus-visible {
+  color: #a1d449;
+  background: rgba(120, 184, 42, 0.16);
+}
+
+body[data-biome="default"] .nav-menu a.is-current,
+body[data-biome="default"] .nav-menu a.is-current:hover,
+body[data-biome="default"] .nav-menu a.is-current:focus-visible {
+  color: #020817;
+  background: #5f9b22;
+}
+
 @media (max-width: 1040px) {
   .biomes-page {
     grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);

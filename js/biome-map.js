@@ -8,9 +8,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     container.innerHTML = await response.text();
 
     const biomas = {
+      inicio: {
+        nome: "Explore os biomas brasileiros",
+        chamada: "Selecione uma região no mapa para descobrir mais.",
+        imagem: "./src/images/index/padrao.jpg",
+        imagemInferior: "./src/images/index/padrao.jpg",
+        descricao: "O Brasil reúne seis biomas, cada um com paisagens, clima e espécies próprias. Selecione uma região no mapa para conhecer melhor sua natureza.",
+        clima: "Do tropical úmido ao subtropical, varia entre as regiões do país.",
+        vegetacao: "Florestas, savanas, campos e áreas alagáveis compõem diferentes paisagens.",
+        fauna: "Uma grande variedade de espécies vive nos biomas brasileiros.",
+        ocorrencia: "Os seis biomas se distribuem por todas as regiões do Brasil.",
+        curiosidade: "Cada bioma combina condições próprias de clima, solo, vegetação e fauna.",
+      },
       amazonia: {
         nome: "Amazônia",
         chamada: "Floresta, rios e vida em abundância.",
+        logo: "./src/images/Onça-Pintada (Amazônia).png",
         imagem: "./src/images/index/amazônia.png",
         imagemInferior: "./src/images/biomes/amazonia1.jpg",
         descricao: "A Amazônia é a maior floresta tropical do mundo e ocupa grande parte do Norte do Brasil. Seus rios e florestas sustentam uma das maiores diversidades de espécies do planeta.",
@@ -23,6 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       cerrado: {
         nome: "Cerrado",
         chamada: "Savana brasileira de vida extraordinária.",
+        logo: "./src/images/Tamanduá-Bandeira(Cerrado).png",
         imagem: "./src/images/index/cerrado.jpg",
         imagemInferior: "./src/images/biomes/cerrado1.webp",
         descricao: "O Cerrado é uma savana muito rica em espécies, formada por campos, árvores retorcidas e matas próximas aos rios. Suas paisagens mudam bastante entre a estação seca e a chuvosa.",
@@ -35,6 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       caatinga: {
         nome: "Caatinga",
         chamada: "Resistência e adaptação no semiárido.",
+        logo: "./src/images/Lobo-Guara(Caatinga).png",
         imagem: "./src/images/index/caatinga.jpg",
         imagemInferior: "./src/images/biomes/caatinga.jpg",
         descricao: "Exclusiva do Brasil, a Caatinga ocupa grande parte do Nordeste. Plantas e animais apresentam adaptações para enfrentar as altas temperaturas e a irregularidade das chuvas.",
@@ -47,6 +62,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       "mata-atlantica": {
         nome: "Mata Atlântica",
         chamada: "Diversidade, água e vida em abundância.",
+        logo: "./src/images/Mico-Leão-Dourado(Mata Atlântica).png",
         imagem: "./src/images/index/mata_atlantica.jpg",
         imagemInferior: "./src/images/biomes/mataatlantica2.webp",
         descricao: "A Mata Atlântica é um dos biomas mais ricos em biodiversidade do planeta. Originalmente, cobria grande parte da costa brasileira, mas hoje resta apenas uma parte de sua cobertura original. Mesmo assim, ainda abriga milhares de espécies de plantas e animais, muitas delas endêmicas.",
@@ -59,6 +75,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       pantanal: {
         nome: "Pantanal",
         chamada: "O ritmo das águas move a vida.",
+        logo: "./src/images/Tuiuiú(Pantanal).png",
         imagem: "./src/images/index/pantanal.jpeg",
         imagemInferior: "./src/images/biomes/pantanal1.webp",
         descricao: "O Pantanal é uma das maiores planícies alagáveis do planeta. O ciclo anual de cheias e secas transforma a paisagem e cria condições para uma fauna muito abundante.",
@@ -71,6 +88,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       pampa: {
         nome: "Pampa",
         chamada: "Campos naturais e horizontes do Sul.",
+        logo: "./src/images/Veado-Campeiro (Pampa).png",
         imagem: "./src/images/index/pampa.webp",
         imagemInferior: "./src/images/biomes/pampa1.jpg",
         descricao: "O Pampa brasileiro é formado principalmente por campos naturais, com gramíneas, plantas rasteiras e áreas úmidas. Essa paisagem aberta abriga uma biodiversidade própria.",
@@ -83,7 +101,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
     const titulo = document.getElementById("biome-title");
     const svg = container.querySelector("svg");
+    const imagemLogo = document.querySelector(".side-bar-logo img");
     const regioes = container.querySelectorAll("svg path[id]");
+    let temporizadorLogo;
     const posicoesRotulos = {
       amazonia: [390, 298],
       cerrado: [609, 503],
@@ -103,11 +123,20 @@ document.addEventListener("DOMContentLoaded", async () => {
       rotulo.textContent = biomas[codigo].nome;
       svg.append(rotulo);
     });
-    const selecionar = (codigo) => {
+    const selecionar = (codigo, atualizarTema = true) => {
       const bioma = biomas[codigo];
       if (!bioma) return;
-      document.body.dataset.biome = codigo;
+      document.body.dataset.biome = atualizarTema ? codigo : "default";
       titulo.textContent = bioma.nome;
+      if (bioma.logo && imagemLogo && imagemLogo.getAttribute("src") !== bioma.logo) {
+        window.clearTimeout(temporizadorLogo);
+        imagemLogo.style.opacity = "0";
+        temporizadorLogo = window.setTimeout(() => {
+          imagemLogo.src = bioma.logo;
+          imagemLogo.alt = `Mascote do bioma ${bioma.nome}`;
+          imagemLogo.style.opacity = "1";
+        }, 150);
+      }
       document.getElementById("biome-tagline").textContent = bioma.chamada;
       document.getElementById("biome-description").textContent = bioma.descricao;
       document.getElementById("biome-climate").textContent = bioma.clima;
@@ -147,7 +176,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       });
     });
-    selecionar("mata-atlantica");
+    selecionar("inicio", false);
   } catch (error) {
     container.textContent = "O mapa dos biomas não pôde ser carregado.";
     console.error(error);
