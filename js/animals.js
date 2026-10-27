@@ -109,14 +109,20 @@ function configurarDrawerFiltros() {
 
   if (!btnFiltros || !drawer) return;
 
+  // Mantém o painel e o overlay fora de qualquer camada do conteúdo principal.
+  if (overlay) document.body.appendChild(overlay);
+  document.body.appendChild(drawer);
+
   // Controle de abertura/fechamento
   const abrir = () => {
     drawer.classList.add("open");
-    overlay.classList.add("active");
+    if (overlay) overlay.classList.add("active");
+    document.body.classList.add("filters-open");
   };
   const fechar = () => {
     drawer.classList.remove("open");
-    overlay.classList.remove("active");
+    if (overlay) overlay.classList.remove("active");
+    document.body.classList.remove("filters-open");
   };
 
   btnFiltros.addEventListener("click", abrir);
