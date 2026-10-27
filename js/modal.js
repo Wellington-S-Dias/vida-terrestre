@@ -58,6 +58,9 @@ function openModal(animal) {
     modalThreats.textContent = animal.ameacas || "Não informado";
   }
 
+  window.dispatchEvent(new CustomEvent("animal-opened", { detail: animal }));
+  fetch("/usuario/especie-visualizada", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ animalId: animal.id }) }).catch(() => {});
+
   animalModal.classList.remove("hidden");
   animalModal.setAttribute("aria-hidden", "false");
 }
@@ -115,6 +118,13 @@ function renderCards(animals) {
                 </span>
             </div>
         `;
+
+    if (Number(animal.id) % 2 === 0 || Number(animal.id) % 5 === 0) {
+      const quizBadge = document.createElement("span");
+      quizBadge.className = "quiz-available-badge";
+      quizBadge.textContent = "Quiz • ganhe uma carta";
+      card.append(quizBadge);
+    }
 
     card.addEventListener("click", () => {
       openModal(animal);

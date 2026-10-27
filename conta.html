@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./css/conta.css" />
     <link rel="stylesheet" href="./css/foliage.css" />
     <link rel="stylesheet" href="./css/palette.css" />
+    <link rel="stylesheet" href="./css/footer.css" />
   </head>
   <body>
     <header class="side-bar">
@@ -150,7 +151,7 @@
             <div class="user-data">
               <img src="./src/images/icons/cards.png" alt="" />
               <p>Cards colecionados</p>
-              <h1><span>0</span><small> / 250</small></h1>
+              <h1><span>0</span><small> / 15</small></h1>
             </div>
             <div class="user-data">
               <img src="./src/images/icons/postagens.png" alt="" />
@@ -176,18 +177,18 @@
             </div>
             <div class="profile-empty-state" role="status">
               <span class="empty-state-icon" aria-hidden="true">◇</span>
-              <p>Seu inventário está vazio. Explore as espécies para começar sua coleção.</p>
+              <p>Seu inventário está vazio. Acerte um quiz de espécie para ganhar sua primeira carta.</p>
             </div>
           </div>
 
           <div class="inventario-progress">
             <h2>Minha coleção</h2>
             <div class="dados">
-              <div class="simulacao" aria-label="0 de 250 cartas coletadas">
+              <div class="simulacao" aria-label="0 de 15 cartas coletadas">
                 <span>0</span>
               </div>
               <div class="dados-text">
-                <h3>0 <small>/ 250</small></h3>
+                <h3>0 <small>/ 15</small></h3>
                 <p class="cc">cartas coletadas</p>
 
                 <div class="categorias">
@@ -274,6 +275,7 @@
               </div>
             </div>
             <p class="profile-empty-state">Nenhuma atividade registrada ainda.</p>
+            <button class="view-all-activities" id="view-all-activities" type="button" hidden>Ver todas</button>
           </div>
 
           <div class="areas-favoritas">
@@ -368,14 +370,78 @@
                 <p>Primeira espécie</p>
               </div>
             </div>
+            <button class="view-all-activities view-all-achievements" id="view-all-achievements" type="button" hidden>Ver todas</button>
             <p class="profile-empty-state">Nenhuma conquista desbloqueada ainda.</p>
           </div>
         </div>
       </section>
     </main>
 
+    <dialog class="activities-dialog" id="activities-dialog" aria-labelledby="activities-dialog-title">
+      <div class="activities-dialog-header">
+        <div>
+          <p class="profile-eyebrow">SEU HISTÓRICO</p>
+          <h2 id="activities-dialog-title">Todas as atividades</h2>
+        </div>
+        <button class="dialog-close" id="close-activities-dialog" type="button" aria-label="Fechar atividades">×</button>
+      </div>
+      <div class="all-activities-list" id="all-activities-list"></div>
+      <p class="all-activities-message" id="all-activities-message" role="status"></p>
+    </dialog>
+
+    <dialog class="activities-dialog achievements-dialog" id="achievements-dialog" aria-labelledby="achievements-dialog-title">
+      <div class="activities-dialog-header">
+        <div>
+          <p class="profile-eyebrow">SUAS CONQUISTAS</p>
+          <h2 id="achievements-dialog-title">Conquistas desbloqueadas</h2>
+        </div>
+        <button class="dialog-close" id="close-achievements-dialog" type="button" aria-label="Fechar conquistas">×</button>
+      </div>
+      <div class="all-achievements-list" id="all-achievements-list"></div>
+    </dialog>
+
+    <footer class="footer" id="footer">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a class="footer-logo" href="index.html#main" aria-label="Vida Terrestre — início">
+            <img src="./src/images/Arara-Azul(Logo-Principal).png" alt="Vida Terrestre" />
+          </a>
+          <p class="footer-tagline">Conectando você à natureza.</p>
+          <p class="footer-description">Conheça a biodiversidade brasileira e descubra por que proteger cada espécie importa.</p>
+        </div>
+        <nav class="footer-links" aria-label="Navegação do rodapé">
+          <h2>Explore</h2>
+          <a href="index.html#main">Início</a>
+          <a href="explore.html">Espécies</a>
+          <a href="biomes.html">Biomas</a>
+          <a href="index.html#sobre-projeto">Conservação</a>
+        </nav>
+        <nav class="footer-links" aria-label="Sobre o projeto">
+          <h2>Sobre o projeto</h2>
+          <a href="index.html#sobre-projeto">Nossa missão</a>
+          <a href="https://brasil.un.org/pt-br/sdgs/15" target="_blank" rel="noopener noreferrer">ODS 15</a>
+          <a href="#footer-creditos">Projeto acadêmico</a>
+        </nav>
+        <div class="footer-social">
+          <h2>Acompanhe e compartilhe</h2>
+          <div class="footer-social-links">
+            <a href="mailto:?subject=Vida%20Terrestre" aria-label="Compartilhar por e-mail" title="Compartilhar por e-mail"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></a>
+            <a href="https://wa.me/?text=Conhe%C3%A7a%20o%20Vida%20Terrestre" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar pelo WhatsApp" title="Compartilhar pelo WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5Z"/><path d="M9 8.5c.3-.5.6-.5.9-.1l.8 1.2c.2.3.1.6-.2.9l-.5.5c.6 1.2 1.5 2.1 2.8 2.7l.5-.6c.2-.3.5-.3.8-.2l1.2.6c.4.2.5.5.3.9-.4.8-1.2 1.2-2.1 1-2.8-.7-5.4-3.2-5.8-5.7-.1-.5.5-1.2 1.3-1.2Z"/></svg></a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Abrir Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom" id="footer-creditos">
+        <div class="footer-project-note">
+          <svg class="footer-leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 3.2C11.4 3.1 5.2 5.5 3.4 11.1c-1.1 3.4 1 6.4 4.3 6.4 5.9 0 10.8-6.4 13.1-14.3Z"/><path d="M3 22c3.2-5.1 7.3-9.2 13-13"/></svg>
+          <div><strong>Preservar hoje. Garantir o amanhã.</strong><span>Projeto acadêmico · ODS 15</span></div>
+        </div>
+        <p>© 2026 Vida Terrestre. Todos os direitos reservados.</p>
+      </div>
+    </footer>
     <script src="./js/sidebar-account.js"></script>
     <script src="./js/account-profile.js"></script>
+    <script src="./js/account-progress.js?v=4"></script>
     <script src="./js/foliage.js"></script>
   </body>
 </html>

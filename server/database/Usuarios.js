@@ -38,7 +38,7 @@ class Usuarios {
     if (!email || !password) {
       return callback({ error: "Preencha todos os campos corretamente" });
     }
-    var sql = "select name,email,password from usuario where email=?";
+    var sql = "select id,name,email,password from usuario where email=?";
     connection.query(sql, email, (error, results) => {
       if (error) throw error;
 
@@ -50,7 +50,7 @@ class Usuarios {
       if (user.email == usuario.email && passwordVali) {
         return callback({
           message: "Logado com sucesso!",
-          usuario: { name: user.name, email: user.email },
+          usuario: { id: user.id, name: user.name, email: user.email },
         });
       }
       return callback({ error: "Usuário ou senha incorreta" });
