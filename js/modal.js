@@ -5,11 +5,15 @@ const modalImg = document.getElementById("modal-image");
 const modalTitle = document.getElementById("modal-title");
 const modalScientific = document.getElementById("modal-scientific");
 const modalStatus = document.getElementById("modal-status");
+const modalDietType = document.getElementById("modal-diet-type");
+const modalSize = document.getElementById("modal-size");
+const modalTraits = document.getElementById("modal-traits");
 const modalHabitat = document.getElementById("modal-habitat");
 const modalBehavior = document.getElementById("modal-behavior");
-const modalDistribution = document.getElementById("modal-distribution");
 const modalDiet = document.getElementById("modal-diet");
 const modalThreats = document.getElementById("modal-threats");
+const modalConservationStatus = document.getElementById("modal-conservation-status");
+const modalProtection = document.getElementById("modal-protection");
 
 function openModal(animal) {
   if (!animalModal) {
@@ -38,16 +42,31 @@ function openModal(animal) {
     modalStatus.className = `status-badge ${statusClass}`.trim();
   }
 
+  if (modalDietType) {
+    modalDietType.textContent = animal.dieta_tipo || "Dieta não informada";
+    modalDietType.classList.toggle("unavailable", !animal.dieta_tipo);
+  }
+
+  if (modalSize) {
+    const porte = animal.porte || animal.tamanho;
+    const grupo = animal.tipo || "Grupo não informado";
+    modalSize.textContent = porte
+      ? `${porte}${grupo ? ` (${grupo})` : ""}`
+      : `Porte não informado. Grupo: ${grupo}.`;
+  }
+
+  if (modalTraits) {
+    modalTraits.textContent = animal.caracteristicas_fisicas || animal.curiosidade || "Características específicas não informadas.";
+  }
+
   if (modalHabitat) {
-    modalHabitat.textContent = animal.habitat || "Não informado";
+    const habitat = animal.habitat || "Habitat não informado.";
+    const adaptacao = animal.adaptacao || "Adaptação específica não informada.";
+    modalHabitat.textContent = `${habitat} ${adaptacao}`;
   }
 
   if (modalBehavior) {
     modalBehavior.textContent = animal.comportamento || "Não informado";
-  }
-
-  if (modalDistribution) {
-    modalDistribution.textContent = animal.regiao || "Não informado";
   }
 
   if (modalDiet) {
@@ -55,8 +74,23 @@ function openModal(animal) {
   }
 
   if (modalThreats) {
-    modalThreats.textContent = animal.ameacas || "Não informado";
+    modalThreats.textContent = animal.ameacas || "Ameaças específicas não informadas.";
   }
+
+  if (modalConservationStatus) {
+    modalConservationStatus.textContent = animal.status || "Status de conservação não informado.";
+  }
+
+  if (modalProtection) {
+    modalProtection.textContent = animal.orientacao_conservacao || "Orientações de conservação não cadastradas.";
+  }
+
+  document.querySelectorAll(".tab-btn").forEach((button) => {
+    button.classList.toggle("active", button.dataset.tab === "physical");
+  });
+  document.querySelectorAll(".tab-pane").forEach((pane) => {
+    pane.classList.toggle("active", pane.id === "tab-physical");
+  });
 
   animalModal.classList.remove("hidden");
   animalModal.setAttribute("aria-hidden", "false");
