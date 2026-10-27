@@ -74,6 +74,8 @@ O servidor espera um banco chamado `vida_terrestre` em `localhost`, com usuário
 
 O dump `server/database/vida_terrestre.sql` contém o esquema e os dados iniciais. **Ele executa `DROP DATABASE IF EXISTS vida_terrestre` antes de recriar o banco.** Importe-o somente em uma instalação descartável ou depois de fazer backup de quaisquer dados que queira manter.
 
+Em bancos já existentes, a tabela de sessões é criada automaticamente ao iniciar o servidor. Se aparecer `Table 'vida_terrestre.vida_terrestre_sessions' doesn't exist`, reinicie o servidor ou execute uma vez `server/database/migrations/003_create_sessions.sql` no banco `vida_terrestre`.
+
 Por exemplo, com o cliente MySQL disponível no terminal:
 
 ```bash

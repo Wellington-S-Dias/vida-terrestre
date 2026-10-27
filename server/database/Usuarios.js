@@ -15,47 +15,95 @@ class Usuarios {
 
   static async addUsuario(usuario, callback) {
     const connection = Usuarios.connect();
-    var { name, email, password } = usuario;
+    const name = String(usuario.name || "").trim().replace(/\s+/g, " ");
+    const email = String(usuario.email || "").trim().toLowerCase();
+    const password = usuario.password;
 
-    if (!name || !email || !password) {
-      return callback({ error: "Preencha todos os campo corretamente" });
+    if (!name || !email || !password || name.length > 50 || email.length > 255) {
+      connection.end();
+      return callback({ error: "Preencha todos os campos corretamente." });
     }
 
-    usuario.password = await bcrypt.hash(usuario.password, 10);
-    var sql = "insert into usuario set ?";
-    connection.query(sql, usuario, (error, results) => {
-      if (error) throw error;
+    try {
+      connection.query(
+        "SELECT id FROM usuario WHERE LOWER(email) = ? OR LOWER(name) = ? LIMIT 1",
+        [email, name.toLowerCase()],
+        async (lookupError, rows) => {
+          if (lookupError) {
+            connection.end();
+            console.error("Erro ao verificar cadastro:", lookupError);
+            return callback({ error: "Não foi possível verificar os dados. Tente novamente." });
+          }
+          if (rows.length) {
+            connection.end();
+            return callback({ error: "Este e-mail ou nome de usuário já está em uso." });
+          }
 
-      callback({ message: "Usuário cadastrado com sucesso!" });
-    });
-    connection.end();
+          try {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            connection.query(
+              "INSERT INTO usuario (name, email, password) VALUES (?, ?, ?)",
+              [name, email, hashedPassword],
+              (insertError) => {
+                connection.end();
+                if (insertError) {
+                  if (insertError.code === "ER_DUP_ENTRY") {
+                    return callback({ error: "Este e-mail ou nome de usuário já está em uso." });
+                  }
+                  console.error("Erro ao cadastrar usuário:", insertError);
+                  return callback({ error: "Não foi possível concluir o cadastro. Tente novamente." });
+                }
+                return callback({ message: "Usuário cadastrado com sucesso!" });
+              },
+            );
+          } catch (error) {
+            connection.end();
+            console.error("Erro ao proteger a senha:", error);
+            return callback({ error: "Não foi possível concluir o cadastro. Tente novamente." });
+          }
+        },
+      );
+    } catch (error) {
+      connection.end();
+      console.error("Erro ao cadastrar usuário:", error);
+      return callback({ error: "Não foi possível concluir o cadastro. Tente novamente." });
+    }
   }
 
   static login(usuario, callback) {
     const connection = Usuarios.connect();
-    var { email, password } = usuario;
+    const email = String(usuario?.email || "").trim().toLowerCase();
+    const password = usuario?.password;
 
     if (!email || !password) {
+      connection.end();
       return callback({ error: "Preencha todos os campos corretamente" });
     }
-    var sql = "select name,email,password from usuario where email=?";
-    connection.query(sql, email, (error, results) => {
-      if (error) throw error;
+    connection.query("select name,email,password from usuario where LOWER(email)=? LIMIT 1", email, async (error, results) => {
+      if (error) {
+        connection.end();
+        console.error("Erro ao buscar usuário:", error);
+        return callback({ error: "Não foi possível entrar. Tente novamente." });
+      }
 
       if (results.length == 0) {
+        connection.end();
         return callback({ error: "Usuário não Cadastrado" });
       }
       var user = results[0];
-      const passwordVali = bcrypt.compareSync(usuario.password, user.password);
-      if (user.email == usuario.email && passwordVali) {
+      connection.end();
+      try {
+        const passwordValid = user.password && await bcrypt.compare(password, user.password);
+        if (!passwordValid) return callback({ error: "Usuário ou senha incorreta" });
         return callback({
           message: "Logado com sucesso!",
           usuario: { name: user.name, email: user.email },
         });
+      } catch (compareError) {
+        console.error("Erro ao validar senha:", compareError);
+        return callback({ error: "Não foi possível entrar. Tente novamente." });
       }
-      return callback({ error: "Usuário ou senha incorreta" });
     });
-    connection.end();
   }
 
   static newPassword(senha, callback) {
