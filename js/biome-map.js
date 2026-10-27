@@ -156,6 +156,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       svg.querySelectorAll(".biome-map-label").forEach((rotulo) => {
         rotulo.classList.toggle("is-selected", rotulo.dataset.biomeLabel === codigo);
       });
+      if (codigo !== "inicio") {
+        window.dispatchEvent(new CustomEvent("biome-selected", { detail: { code: codigo, name: bioma.nome } }));
+      }
     };
     if (svg) {
       svg.setAttribute("role", "group");

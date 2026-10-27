@@ -150,6 +150,13 @@ function renderCards(animals) {
             </div>
         `;
 
+    if (Number(animal.id) % 2 === 0 || Number(animal.id) % 5 === 0) {
+      const quizBadge = document.createElement("span");
+      quizBadge.className = "quiz-available-badge";
+      quizBadge.textContent = "Quiz • ganhe uma carta";
+      card.append(quizBadge);
+    }
+
     card.addEventListener("click", () => {
       openModal(animal);
     });

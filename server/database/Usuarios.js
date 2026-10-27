@@ -97,7 +97,7 @@ class Usuarios {
         if (!passwordValid) return callback({ error: "Usuário ou senha incorreta" });
         return callback({
           message: "Logado com sucesso!",
-          usuario: { name: user.name, email: user.email },
+          usuario: { id: user.id, name: user.name, email: user.email },
         });
       } catch (compareError) {
         console.error("Erro ao validar senha:", compareError);

@@ -120,6 +120,8 @@ body {
 }
 
 .biomes-page {
+  position: relative;
+  z-index: 1;
   width: auto;
   min-height: 100vh;
   display: grid;
@@ -127,7 +129,7 @@ body {
   gap: 20px;
   align-items: stretch;
   padding: 0 0 0 30px;
-  background: #f3f2e9;
+  background: transparent;
 }
 
 .biome-explorer {
@@ -510,7 +512,7 @@ body {
   overflow: hidden;
   padding: 0 0 0 28px;
   gap: 12px;
-  background: #020817;
+  background: transparent;
 }
 
 .biome-explorer {

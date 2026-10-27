@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./css/side-bar.css" />
     <link rel="stylesheet" href="./css/foliage.css" />
     <link rel="stylesheet" href="./css/palette.css" />
+    <link rel="stylesheet" href="./css/footer.css" />
     <title>Vida Terrestre - Explorar</title>
   </head>
 
@@ -431,10 +432,79 @@
         </section>
       </div>
     </div>
+    <dialog class="animal-quiz-dialog" id="animal-quiz-dialog" aria-labelledby="animal-quiz-title">
+      <form id="animal-quiz-form">
+        <header class="animal-quiz-header">
+          <div>
+            <p class="animal-quiz-eyebrow">DESAFIO DA NATUREZA</p>
+            <h2 id="animal-quiz-title">Quiz da espécie</h2>
+            <p class="animal-quiz-intro">Acerte todas as perguntas para ganhar uma carta.</p>
+          </div>
+          <button type="button" class="animal-quiz-close" id="close-animal-quiz" aria-label="Fechar quiz">×</button>
+        </header>
+        <section class="animal-quiz-species-info" id="animal-quiz-species-info" aria-label="Informações da espécie">
+          <h3>Conheça a espécie</h3>
+          <dl>
+            <div><dt>Biomas</dt><dd id="quiz-animal-biome"></dd></div>
+            <div><dt>Habitat</dt><dd id="quiz-animal-habitat"></dd></div>
+            <div><dt>Alimentação</dt><dd id="quiz-animal-diet"></dd></div>
+          </dl>
+        </section>
+        <div id="animal-quiz-questions" class="animal-quiz-questions"></div>
+        <section class="animal-quiz-reward" id="animal-quiz-reward" hidden aria-live="polite">
+          <img id="animal-quiz-reward-image" alt="">
+          <div><p class="animal-quiz-eyebrow">NOVA CARTA</p><h3 id="animal-quiz-reward-name"></h3><p id="animal-quiz-reward-rarity"></p></div>
+        </section>
+        <p id="animal-quiz-message" class="animal-quiz-message" role="status" aria-live="polite"></p>
+        <footer class="animal-quiz-actions">
+          <button type="submit" class="animal-quiz-submit">Concluir quiz</button>
+        </footer>
+      </form>
+    </dialog>
 
+    <footer class="footer" id="footer">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a class="footer-logo" href="index.html#main" aria-label="Vida Terrestre — início">
+            <img src="./src/images/Arara-Azul(Logo-Principal).png" alt="Vida Terrestre" />
+          </a>
+          <p class="footer-tagline">Conectando você à natureza.</p>
+          <p class="footer-description">Conheça a biodiversidade brasileira e descubra por que proteger cada espécie importa.</p>
+        </div>
+        <nav class="footer-links" aria-label="Navegação do rodapé">
+          <h2>Explore</h2>
+          <a href="index.html#main">Início</a>
+          <a href="explore.html">Espécies</a>
+          <a href="biomes.html">Biomas</a>
+          <a href="index.html#sobre-projeto">Conservação</a>
+        </nav>
+        <nav class="footer-links" aria-label="Sobre o projeto">
+          <h2>Sobre o projeto</h2>
+          <a href="index.html#sobre-projeto">Nossa missão</a>
+          <a href="https://brasil.un.org/pt-br/sdgs/15" target="_blank" rel="noopener noreferrer">ODS 15</a>
+          <a href="#footer-creditos">Projeto acadêmico</a>
+        </nav>
+        <div class="footer-social">
+          <h2>Acompanhe e compartilhe</h2>
+          <div class="footer-social-links">
+            <a href="mailto:?subject=Vida%20Terrestre" aria-label="Compartilhar por e-mail" title="Compartilhar por e-mail"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></a>
+            <a href="https://wa.me/?text=Conhe%C3%A7a%20o%20Vida%20Terrestre" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar pelo WhatsApp" title="Compartilhar pelo WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5Z"/><path d="M9 8.5c.3-.5.6-.5.9-.1l.8 1.2c.2.3.1.6-.2.9l-.5.5c.6 1.2 1.5 2.1 2.8 2.7l.5-.6c.2-.3.5-.3.8-.2l1.2.6c.4.2.5.5.3.9-.4.8-1.2 1.2-2.1 1-2.8-.7-5.4-3.2-5.8-5.7-.1-.5.5-1.2 1.3-1.2Z"/></svg></a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Abrir Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom" id="footer-creditos">
+        <div class="footer-project-note">
+          <svg class="footer-leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 3.2C11.4 3.1 5.2 5.5 3.4 11.1c-1.1 3.4 1 6.4 4.3 6.4 5.9 0 10.8-6.4 13.1-14.3Z"/><path d="M3 22c3.2-5.1 7.3-9.2 13-13"/></svg>
+          <div><strong>Preservar hoje. Garantir o amanhã.</strong><span>Projeto acadêmico · ODS 15</span></div>
+        </div>
+        <p>© 2026 Vida Terrestre. Todos os direitos reservados.</p>
+      </div>
+    </footer>
     <script src="./js/biome-shift.js"></script>
     <script src="./js/animals.js"></script>
     <script src="./js/modal.js"></script>
+    <script src="./js/animal-quiz.js"></script>
     <script src="./js/sidebar-account.js"></script>
     <script src="./js/foliage.js"></script>
   </body>
