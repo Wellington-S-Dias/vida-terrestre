@@ -112,7 +112,7 @@
       <div id="filter-overlay" class="filter-overlay"></div>
       <!-- Painel Lateral (Drawer) -->
       <aside id="filter-drawer" class="filter-drawer">
-        <div class="drawer-side-bar">
+        <div class="drawer-header">
           <h2>Filtros Avançados</h2>
           <button id="btn-fechar" class="btn-fechar">&times;</button>
         </div>
@@ -365,52 +365,63 @@
 
           <p id="modal-scientific" class="scientific-name">Nome Científico</p>
 
-          <span id="modal-status" class="status-badge"></span>
+          <div class="modal-badges">
+            <span id="modal-status" class="status-badge"></span>
+            <span id="modal-diet-type" class="diet-badge"></span>
+          </div>
 
           <div class="tabs-nav">
-            <button class="tab-btn active" data-tab="info">Informações</button>
+            <button class="tab-btn active" data-tab="physical">Características</button>
 
-            <button class="tab-btn" data-tab="distribution">
-              Distribuição
-            </button>
+            <button class="tab-btn" data-tab="behavior">Alimentação e comportamento</button>
 
-            <button class="tab-btn" data-tab="threats">Ameaças</button>
+            <button class="tab-btn" data-tab="conservation">Conservação</button>
           </div>
 
           <div class="tab-content">
-            <div class="tab-pane active" id="tab-info">
+            <div class="tab-pane active" id="tab-physical">
               <div class="info-item">
-                <h3>Habitat</h3>
+                <h3>Porte / grupo</h3>
+                <p id="modal-size"></p>
+              </div>
 
+              <div class="info-item">
+                <h3>Características marcantes</h3>
+                <p id="modal-traits"></p>
+              </div>
+
+              <div class="info-item">
+                <h3>Habitat e adaptações</h3>
                 <p id="modal-habitat"></p>
               </div>
+            </div>
 
+            <div class="tab-pane" id="tab-behavior">
               <div class="info-item">
-                <h3>Comportamento</h3>
-
-                <p id="modal-behavior"></p>
-              </div>
-
-              <div class="info-item">
-                <h3>Alimentação</h3>
-
+                <h3>Dieta</h3>
                 <p id="modal-diet"></p>
               </div>
-            </div>
 
-            <div class="tab-pane" id="tab-distribution">
               <div class="info-item">
-                <h3>Distribuição Geográfica</h3>
-
-                <p id="modal-biome"></p>
+                <h3>Comportamento e hábitos</h3>
+                <p id="modal-behavior"></p>
               </div>
             </div>
 
-            <div class="tab-pane" id="tab-threats">
+            <div class="tab-pane" id="tab-conservation">
               <div class="info-item">
-                <h3>Principais Ameaças</h3>
+                <h3>Status de conservação</h3>
+                <p id="modal-conservation-status"></p>
+              </div>
 
+              <div class="info-item">
+                <h3>Ameaças</h3>
                 <p id="modal-threats"></p>
+              </div>
+
+              <div class="info-item">
+                <h3>Como ajudar a proteger</h3>
+                <p id="modal-protection"></p>
               </div>
             </div>
           </div>

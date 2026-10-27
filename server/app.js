@@ -170,11 +170,17 @@ app.get("/animais_completos", (req, res) => {
 // ============================================================
 
 app.post("/cadastro", (req, res) => {
-  const usuario = req.body;
+  const usuario = { ...req.body };
 
   Usuarios.addUsuario(usuario, (message) => {
-    res.status(201).json(message);
+    res.status(message.error ? 409 : 201).json(message);
   });
+});
+
+app.get("/auth/erro", (req, res) => {
+  const message = req.session?.messages?.pop();
+  if (!message) return res.json({ error: "Não foi possível entrar com essa conta." });
+  return res.json({ error: String(message) });
 });
 
 // ============================================================
@@ -344,8 +350,9 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       const googleId = profile.id;
-      const name = profile.displayName;
-      const email = profile.emails?.[0]?.value;
+      const name = String(profile.displayName || "").trim();
+      const email = String(profile.emails?.[0]?.value || "").trim().toLowerCase();
+      if (!name || !email) return done(new Error("O Google não forneceu um e-mail e nome válidos."));
 
       console.log("Usuário recebido do Google:");
       console.log({
@@ -384,7 +391,7 @@ passport.use(
           // ====================================================
 
           db.query(
-            "SELECT * FROM usuario WHERE email = ?",
+            "SELECT * FROM usuario WHERE LOWER(email) = ?",
             [email],
 
             (erro, resultados) => {
@@ -400,30 +407,8 @@ passport.use(
 
               if (resultados.length > 0) {
                 const usuario = resultados[0];
-
-                console.log("E-mail já cadastrado. Vinculando Google...");
-
-                db.query(
-                  "UPDATE usuario SET google_id = ? WHERE id = ?",
-
-                  [googleId, usuario.id],
-
-                  (erro) => {
-                    if (erro) {
-                      console.error("Erro ao vincular Google:", erro);
-
-                      return done(erro);
-                    }
-
-                    usuario.google_id = googleId;
-
-                    console.log("Google vinculado à conta existente!");
-
-                    return done(null, usuario);
-                  },
-                );
-
-                return;
+                if (usuario.google_id === googleId) return done(null, usuario);
+                return done(null, false, { message: "Este e-mail já está cadastrado. Entre com o método usado no cadastro." });
               }
 
               // ====================================================
@@ -449,7 +434,7 @@ passport.use(
                   if (erro) {
                     console.error("Erro ao criar usuário Google:", erro);
 
-                    return done(erro);
+                    return done(null, false, { message: erro.code === "ER_DUP_ENTRY" ? "Este e-mail ou nome de usuário já está em uso." : "Não foi possível criar sua conta Google." });
                   }
 
                   novoUsuario.id = resultado.insertId;
@@ -508,7 +493,7 @@ passport.use(
           );
         }
 
-        const email = emailPrincipal.email;
+        const email = String(emailPrincipal.email || "").trim().toLowerCase();
 
         console.log("Usuário recebido do GitHub:");
 
@@ -548,7 +533,7 @@ passport.use(
             // ==================================================
 
             db.query(
-              "SELECT * FROM usuario WHERE email = ?",
+              "SELECT * FROM usuario WHERE LOWER(email) = ?",
               [email],
 
               (erro, resultados) => {
@@ -564,28 +549,8 @@ passport.use(
 
                 if (resultados.length > 0) {
                   const usuario = resultados[0];
-
-                  db.query(
-                    "UPDATE usuario SET github_id = ? WHERE id = ?",
-
-                    [githubId, usuario.id],
-
-                    (erro) => {
-                      if (erro) {
-                        console.error("Erro ao vincular GitHub:", erro);
-
-                        return done(erro);
-                      }
-
-                      usuario.github_id = githubId;
-
-                      console.log("GitHub vinculado à conta existente!");
-
-                      return done(null, usuario);
-                    },
-                  );
-
-                  return;
+                  if (usuario.github_id === githubId) return done(null, usuario);
+                  return done(null, false, { message: "Este e-mail já está cadastrado. Entre com o método usado no cadastro." });
                 }
 
                 // ==========================================
@@ -613,7 +578,7 @@ passport.use(
                     if (erro) {
                       console.error("Erro ao criar usuário GitHub:", erro);
 
-                      return done(erro);
+                      return done(null, false, { message: erro.code === "ER_DUP_ENTRY" ? "Este e-mail ou nome de usuário já está em uso." : "Não foi possível criar sua conta GitHub." });
                     }
 
                     novoUsuario.id = resultado.insertId;
@@ -673,7 +638,8 @@ app.get(
   "/auth/google/callback",
 
   passport.authenticate("google", {
-    failureRedirect: "/login.html",
+    failureRedirect: "/login.html?authError=1",
+    failureMessage: true,
   }),
 
   (req, res) => {
@@ -695,7 +661,8 @@ app.get(
   "/auth/github/callback",
 
   passport.authenticate("github", {
-    failureRedirect: "/login.html",
+    failureRedirect: "/login.html?authError=1",
+    failureMessage: true,
   }),
 
   (req, res) => {

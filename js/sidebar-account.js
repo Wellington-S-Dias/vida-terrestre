@@ -69,6 +69,7 @@
       logoutButton.innerHTML =
         '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5M15 12H3m9-8h7a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-7"/></svg><span class="nav-label">Sair da conta</span>';
       logoutButton.addEventListener("click", async () => {
+        if (!window.confirm("Deseja realmente sair da conta?")) return;
         logoutButton.disabled = true;
         localStorage.removeItem(storageKey);
         renderAccount(null);

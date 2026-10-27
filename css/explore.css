@@ -255,11 +255,13 @@ body::before {
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
-  z-index: 99;
+  z-index: 9998;
+  pointer-events: none;
 }
 .filter-overlay.active {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 /* Painel Lateral (Drawer) */
@@ -273,7 +275,7 @@ body::before {
   color: var(--text-primary, #ffffff);
   display: flex;
   flex-direction: column;
-  z-index: 100;
+  z-index: 9999;
   transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
 }
@@ -281,15 +283,33 @@ body::before {
   right: 0;
 }
 
+body.filters-open .side-bar {
+  z-index: 9997;
+  pointer-events: none;
+}
+
 /* Estilos internos do Drawer */
 .drawer-header {
-  padding: 20px;
+  position: relative;
+  min-height: 84px;
+  padding: 20px 56px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   border-bottom: 1px solid var(--border-color, #2c373c);
 }
+
+.drawer-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
 .btn-fechar {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
   background: none;
   border: none;
   color: var(--text-secondary, #a0acaf);
@@ -298,12 +318,19 @@ body::before {
 }
 
 .drawer-body {
-  padding: 20px;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  padding: 24px;
   flex: 1;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.filtro-grupo {
+  width: 100%;
 }
 
 .filtro-titulo {
@@ -312,6 +339,7 @@ body::before {
   font-weight: 600;
   margin-bottom: 8px;
   color: var(--text-secondary, #a0acaf);
+  text-align: center;
 }
 
 .select-dark {
@@ -322,9 +350,12 @@ body::before {
   border: 1px solid var(--border-color, #2c373c);
   border-radius: 8px;
   outline: none;
+  text-align: center;
 }
 
 .radio-group {
+  width: fit-content;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -339,7 +370,10 @@ body::before {
 
 /* Footer com Ações */
 .drawer-footer {
-  padding: 20px;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  padding: 20px 24px 24px;
   border-top: 1px solid var(--border-color, #2c373c);
   display: flex;
   gap: 12px;
@@ -623,8 +657,10 @@ input[type="search"]::-webkit-search-cancel-button {
   }
   .modal-content {
     width: calc(100% - 24px);
-    max-height: 92dvh;
-    overflow-y: auto;
+    height: calc(100dvh - 24px);
+    min-height: 0;
+    max-height: none;
+    overflow: hidden;
     flex-direction: column;
   }
   .modal-image-container,
@@ -632,7 +668,13 @@ input[type="search"]::-webkit-search-cancel-button {
     width: 100%;
   }
   .modal-image-container {
-    height: 220px;
+    height: 190px;
+    flex: 0 0 190px;
+  }
+
+  .modal-info {
+    min-height: 0;
+    overflow-y: auto;
   }
 }
 
@@ -765,10 +807,11 @@ input[type="search"]::-webkit-search-cancel-button {
 .modal-content {
   background-color: var(--card-bg);
   color: #ffffff;
-  width: 90%;
+  width: min(1000px, calc(100vw - 32px));
   max-width: 1000px;
-  height: 90%;
-  max-height: 50vh;
+  height: min(620px, calc(100dvh - 32px));
+  min-height: 0;
+  overflow: hidden;
   border-radius: 16px;
   padding: 24px;
   display: flex;
@@ -792,7 +835,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .modal-image-container {
-  width: 40%;
+  width: 38%;
   flex-shrink: 0;
 }
 
@@ -804,14 +847,51 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .modal-info {
-  width: 60%;
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .modal-info h1 {
-  font-size: 24px;
+  font-size: 27px;
   margin: 0;
+}
+
+.modal-info > .scientific-name {
+  font-size: 1rem;
+}
+
+.modal-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.modal-badges .status-badge {
+  font-size: 0.85rem;
+}
+
+.diet-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 10px;
+  border: 1px solid rgba(125, 211, 160, 0.35);
+  border-radius: 999px;
+  background: rgba(45, 106, 71, 0.2);
+  color: #b7efc8;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.diet-badge.unavailable {
+  border-color: var(--border-color, #52615a);
+  background: transparent;
+  color: var(--text-secondary, #94a3b8);
 }
 
 /* ==========================================================================
@@ -828,6 +908,11 @@ input[type="search"]::-webkit-search-cancel-button {
   width: 100%;
 }
 
+.tab-pane#tab-behavior,
+.tab-pane#tab-conservation {
+  grid-template-columns: 1fr;
+}
+
 .tabs-nav {
   display: flex;
   gap: 24px;
@@ -841,7 +926,7 @@ input[type="search"]::-webkit-search-cancel-button {
   background: none;
   border: none;
   color: var(--text-secondary, #7a9997);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   cursor: pointer;
   padding: 6px 0;
@@ -876,17 +961,32 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .info-item h3 {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--text-primary, #e2e8f0);
   margin: 0;
 }
 
 .info-item p {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-secondary, #94a3b8);
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+  .tabs-nav {
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    font-size: 13px;
+  }
+
+  .tab-pane.active {
+    grid-template-columns: 1fr;
+  }
 }
 
 .hidden {
